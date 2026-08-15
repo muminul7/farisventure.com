@@ -12,12 +12,24 @@
 <meta property="og:image" content="assets/Logo.png">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="assets/Logo.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "Faris Venture",
+  "url": "https://farisventure.com",
+  "logo": "https://farisventure.com/assets/Logo.png",
+  "description": "A founder-backed halal investment venture deploying capital into vetted Bangladeshi SMEs through Shariah-compliant structures — Musharaka, Mudaraba, and Murabaha.",
+  "areaServed": "BD",
+  "email": "hello@farisventure.com"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#111315;--body:#5c6068;--muted:#8a8f98;--line:#eae9e5;--line-2:#ddDBd5;
+  --ink:#111315;--body:#5c6068;--muted:#71767e;--line:#eae9e5;--line-2:#ddDBd5;
   --green:#00bf63;--green-dark:#00954d;--blue:#024cff;--bg:#fbfaf8;--surface:#f4f2ee;
   --r-sm:8px;--r-md:14px;--r-lg:20px;--r-pill:999px;
   --shadow-sm:0 1px 2px rgba(30,25,15,.05),0 1px 1px rgba(30,25,15,.04);
@@ -109,6 +121,16 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
   .footer-grid{grid-template-columns:1fr!important;gap:28px!important}
   .container{padding-inline:24px!important}
   .nav{padding-left:24px!important;padding-right:24px!important}
+  .nav .btn-outline-dark{display:none!important}
+  [style*="margin-top:128px"]{margin-top:64px!important}
+  [style*="margin-bottom:160px"]{margin-bottom:80px!important}
+  [style*="padding-top:112px"]{padding-top:96px!important}
+  [style*="padding-bottom:140px"]{padding-bottom:80px!important}
+  .eyebrow-badge{font-size:11px!important;padding:7px 12px!important;border-radius:var(--r-md)!important;white-space:normal!important}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
 }
 </style>
 </head>
@@ -158,7 +180,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     <div id="hero-blob" class="hero-blob glow" style="top:-260px;left:50%;width:960px;height:560px;background:radial-gradient(closest-side,rgba(0,191,99,.12),transparent),radial-gradient(closest-side at 72% 30%,rgba(2,76,255,.10),transparent),radial-gradient(closest-side at 30% 60%,rgba(214,168,84,.10),transparent)"></div>
     <div id="cursor-glow" style="position:absolute;top:-110px;left:-110px;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(2,76,255,.10),transparent);pointer-events:none;transition:transform .35s cubic-bezier(.16,1,.3,1);will-change:transform"></div>
     <div class="container" style="position:relative;max-width:760px;display:flex;flex-direction:column;align-items:center;gap:24px">
-      <div style="display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--body);letter-spacing:.04em;font-weight:600;background:var(--surface);border:1px solid var(--line);padding:8px 16px;border-radius:var(--r-pill)" data-i18n="home.eyebrow">
+      <div class="eyebrow-badge" style="display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--body);letter-spacing:.04em;font-weight:600;background:var(--surface);border:1px solid var(--line);padding:8px 16px;border-radius:var(--r-pill);white-space:nowrap" data-i18n="home.eyebrow">
         <span style="width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0"></span>A FOUNDER-BACKED HALAL INVESTMENT VENTURE
       </div>
       <h1 class="serif" style="font-size:clamp(38px,6vw,64px);line-height:1.15;font-weight:500;letter-spacing:-.015em;color:var(--ink);margin:0" data-i18n="home.h1">Halal Investment in Bangladesh's SMEs</h1>
