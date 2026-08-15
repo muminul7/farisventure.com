@@ -373,13 +373,18 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 
     <div style="margin-top:68px">
       <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center">
-        <div>
+        <div style="border-left:2px solid var(--green);padding-left:24px">
           <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
-          <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
-          <a data-nav="portfolio" style="display:inline-flex;font-size:14px;font-weight:600;margin-top:14px" data-i18n="about.trackLink">See the full track record →</a>
+          <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%.</div>
+          <div class="serif" style="font-size:16px;line-height:1.7;color:var(--ink);margin-top:16px;font-weight:500" data-i18n="about.trackInsight">One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
+          <a data-nav="portfolio" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;margin-top:20px" data-i18n="about.trackLink">See the full track record →</a>
         </div>
         <div class="card reveal" style="padding:30px 28px;box-shadow:var(--shadow-md)">
-          <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700;margin-bottom:22px" data-i18n="about.chartEyebrow">PERFORMANCE BY YEAR</div>
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <div class="serif" id="stat-headline" style="font-size:38px;font-weight:500;color:var(--green-dark)">13.5%</div>
+            <div style="font-size:12.5px;color:var(--muted);line-height:1.5;max-width:140px" data-i18n="about.statHeadline">avg. annualized return, 2023–2025</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700;margin-top:24px;margin-bottom:18px;padding-top:20px;border-top:1px solid var(--line)" data-i18n="about.chartEyebrow">PERFORMANCE BY YEAR</div>
           <div id="roi-chart" style="height:150px"></div>
           <div style="margin-top:26px;padding-top:20px;border-top:1px solid var(--line)">
             <div style="font-size:11px;color:var(--muted);letter-spacing:.03em;margin-bottom:12px;font-weight:700" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
@@ -550,7 +555,9 @@ const I18N = {
     'about.p1': 'A defined maximum investment per deal', 'about.p2': 'No guaranteed return is ever promised',
     'about.p3': 'Only Shariah-compliant structures — no exceptions', 'about.p4': 'No investment without business verification',
     'about.trackH2': 'Track Record Before Faris Venture',
-    'about.trackBody': "Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.",
+    'about.trackBody': "Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%.",
+    'about.trackInsight': "One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.",
+    'about.statHeadline': 'avg. annualized return, 2023–2025',
     'about.trackLink': 'See the full track record →',
     'about.chartEyebrow': 'PERFORMANCE BY YEAR',
     'portfolio.eyebrow': 'PORTFOLIO', 'portfolio.h1': 'Our Investments',
@@ -617,7 +624,9 @@ const I18N = {
     'about.p1': 'প্রতি ডিলে সর্বোচ্চ বিনিয়োগের একটি নির্দিষ্ট সীমা', 'about.p2': 'নিশ্চিত রিটার্নের প্রতিশ্রুতি কখনোই দেওয়া হয় না',
     'about.p3': 'শুধুমাত্র শরিয়াহ-সম্মত কাঠামো — কোনো ব্যতিক্রম নয়', 'about.p4': 'ব্যবসা যাচাই ছাড়া কোনো বিনিয়োগ নয়',
     'about.trackH2': 'ফারিস ভেঞ্চারের আগের ট্র্যাক রেকর্ড',
-    'about.trackBody': '২০২৩ থেকে ২০২৫ সালের মধ্যে, ফাউন্ডার ৬টা ব্যবসায় ১০টা হালাল SME বিনিয়োগ সম্পন্ন করেছেন, যার মোট রিটার্ন প্রায় ১৩.৫%। ওই সময়ের একটা শিক্ষা সরাসরি ফারিস ভেঞ্চারের নিয়ম তৈরি করেছে: সবচেয়ে বড় একক টিকেট সবচেয়ে দুর্বল রিটার্ন দিয়েছিল। তাই এখানে কোনো ডিল ৳৭ লাখের বেশি হয় না।',
+    'about.trackBody': '২০২৩ থেকে ২০২৫ সালের মধ্যে, ফাউন্ডার ৬টা ব্যবসায় ১০টা হালাল SME বিনিয়োগ সম্পন্ন করেছেন, যার মোট রিটার্ন প্রায় ১৩.৫%।',
+    'about.trackInsight': 'ওই সময়ের একটা শিক্ষা সরাসরি ফারিস ভেঞ্চারের নিয়ম তৈরি করেছে: সবচেয়ে বড় একক টিকেট সবচেয়ে দুর্বল রিটার্ন দিয়েছিল। তাই এখানে কোনো ডিল ৳৭ লাখের বেশি হয় না।',
+    'about.statHeadline': 'গড় বার্ষিক রিটার্ন, ২০২৩–২০২৫',
     'about.trackLink': 'সম্পূর্ণ ট্র্যাক রেকর্ড দেখুন →',
     'about.chartEyebrow': 'বছরভিত্তিক পারফরম্যান্স',
     'portfolio.eyebrow': 'পোর্টফোলিও', 'portfolio.h1': 'আমাদের বিনিয়োগ',
