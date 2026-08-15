@@ -372,24 +372,26 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     </div>
 
     <div style="margin-top:68px">
-      <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center">
-        <div style="border-left:2px solid var(--green);padding-left:24px">
-          <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
-          <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%.</div>
-          <div class="serif" style="font-size:16px;line-height:1.7;color:var(--ink);margin-top:16px;font-weight:500" data-i18n="about.trackInsight">One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
-          <a data-nav="portfolio" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;margin-top:20px" data-i18n="about.trackLink">See the full track record →</a>
+      <div style="border-left:2px solid var(--green);padding-left:24px;max-width:580px">
+        <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
+        <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%.</div>
+        <div class="serif" style="font-size:16px;line-height:1.7;color:var(--ink);margin-top:16px;font-weight:500" data-i18n="about.trackInsight">One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
+        <a data-nav="portfolio" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;margin-top:20px" data-i18n="about.trackLink">See the full track record →</a>
+      </div>
+      <div class="card reveal" style="margin-top:36px;padding:32px">
+        <div class="g2" style="display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:start">
+          <div>
+            <div class="serif" id="stat-headline" style="font-size:42px;font-weight:500;color:var(--green-dark);line-height:1">13.5%</div>
+            <div style="font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:8px" data-i18n="about.statHeadline">avg. annualized return, 2023–2025</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700;margin-bottom:18px" data-i18n="about.chartEyebrow">PERFORMANCE BY YEAR</div>
+            <div id="roi-chart" style="height:140px"></div>
+          </div>
         </div>
-        <div class="card reveal" style="padding:30px 28px;box-shadow:var(--shadow-md)">
-          <div style="display:flex;align-items:baseline;gap:10px">
-            <div class="serif" id="stat-headline" style="font-size:38px;font-weight:500;color:var(--green-dark)">13.5%</div>
-            <div style="font-size:12.5px;color:var(--muted);line-height:1.5;max-width:140px" data-i18n="about.statHeadline">avg. annualized return, 2023–2025</div>
-          </div>
-          <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700;margin-top:24px;margin-bottom:18px;padding-top:20px;border-top:1px solid var(--line)" data-i18n="about.chartEyebrow">PERFORMANCE BY YEAR</div>
-          <div id="roi-chart" style="height:150px"></div>
-          <div style="margin-top:26px;padding-top:20px;border-top:1px solid var(--line)">
-            <div style="font-size:11px;color:var(--muted);letter-spacing:.03em;margin-bottom:12px;font-weight:700" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
-            <div id="sector-badges"></div>
-          </div>
+        <div style="margin-top:28px;padding-top:22px;border-top:1px solid var(--line)">
+          <div style="font-size:11px;color:var(--muted);letter-spacing:.03em;margin-bottom:12px;font-weight:700" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
+          <div id="sector-badges"></div>
         </div>
       </div>
     </div>
@@ -862,21 +864,36 @@ function renderSectorBadges() {
   trackRecord.forEach(t => { counts[t.category] = (counts[t.category] || 0) + 1; });
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
   const bn = (n) => currentLang === 'bn' ? String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : n;
+  const dealsWord = currentLang === 'bn' ? 'ডিল' : 'deals';
   const entries = Object.entries(counts);
-  const segments = entries.map(([cat, count]) => {
+
+  // Donut: r=15.9155 makes the circle's circumference exactly 100 (percentage units map 1:1)
+  const R = 15.9155, C = 2 * Math.PI * R;
+  let offset = 0;
+  const arcs = entries.map(([cat, count]) => {
     const pct = (count / total) * 100;
-    return `<div style="width:${pct}%;background:${CATEGORY_COLORS[cat]}" title="${CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en']}"></div>`;
+    const dash = `${(pct / 100) * C} ${C}`;
+    const el = `<circle cx="21" cy="21" r="${R}" fill="none" stroke="${CATEGORY_COLORS[cat]}" stroke-width="5.5" stroke-dasharray="${dash}" stroke-dashoffset="${-offset}" stroke-linecap="butt" transform="rotate(-90 21 21)"><title>${CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en']}</title></circle>`;
+    offset += (pct / 100) * C;
+    return el;
   }).join('');
+  const donut = `<svg viewBox="0 0 42 42" width="112" height="112" style="flex-shrink:0">
+    ${arcs}
+    <text x="21" y="19" text-anchor="middle" font-family="Newsreader,serif" font-size="9" font-weight="600" fill="var(--ink)">${bn(total)}</text>
+    <text x="21" y="27" text-anchor="middle" font-size="3.6" fill="var(--muted)" letter-spacing=".02em">${dealsWord}</text>
+  </svg>`;
+
   const legend = entries.map(([cat, count]) => {
     const label = CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en'];
     const color = CATEGORY_COLORS[cat];
-    return `<div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 0;border-bottom:1px solid var(--line)">
-      <span style="width:7px;height:7px;border-radius:50%;background:${color};flex-shrink:0"></span>
-      <span style="color:var(--body)">${label}</span>
-      <span style="color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums">${bn(count)}</span>
+    const pct = Math.round((count / total) * 100);
+    return `<div style="display:flex;align-items:center;gap:9px;font-size:13px;padding:7px 0">
+      <span style="width:8px;height:8px;border-radius:2px;background:${color};flex-shrink:0"></span>
+      <span style="color:var(--ink);font-weight:500">${label}</span>
+      <span style="color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums;font-size:12px">${bn(count)} · ${bn(pct)}%</span>
     </div>`;
   }).join('');
-  el.innerHTML = `<div style="display:flex;height:8px;border-radius:999px;overflow:hidden;gap:2px">${segments}</div><div style="margin-top:14px">${legend}</div>`;
+  el.innerHTML = `<div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap">${donut}<div style="flex:1;min-width:180px">${legend}</div></div>`;
 }
 
 let currentDealIndex = null;
