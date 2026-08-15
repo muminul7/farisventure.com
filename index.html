@@ -387,7 +387,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
           <div style="font-size:12.5px;color:var(--muted);line-height:1.5" data-i18n="about.statHeadline">avg. annualized return, 2023–2025</div>
         </div>
       </div>
-      <div class="card reveal" style="margin-top:20px;padding:32px;background:linear-gradient(160deg,#f7f5f0,#fff)">
+      <div class="card reveal" style="margin-top:20px;padding:32px">
         <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700;margin-bottom:18px" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
         <div id="sector-badges"></div>
       </div>
@@ -874,6 +874,9 @@ function renderRoiChart() {
 }
 
 // Home page: sector/category diversity — proportional bar + plain legend (from real trackRecord data)
+// Waffle/unit chart — each of the 10 real deals gets its own square, colored by
+// category. Literal one-square-per-deal representation instead of an abstract
+// donut/bar — makes "10 deals" concrete rather than a percentage abstraction.
 function renderSectorBadges() {
   const el = document.getElementById('sector-badges');
   if (!el) return;
@@ -881,36 +884,32 @@ function renderSectorBadges() {
   trackRecord.forEach(t => { counts[t.category] = (counts[t.category] || 0) + 1; });
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
   const bn = (n) => currentLang === 'bn' ? String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : n;
-  const dealsWord = currentLang === 'bn' ? 'ডিল' : 'deals';
   const entries = Object.entries(counts);
 
-  // Donut: r=15.9155 makes the circle's circumference exactly 100 (percentage units map 1:1)
-  const R = 15.9155, C = 2 * Math.PI * R;
-  let offset = 0;
-  const arcs = entries.map(([cat, count]) => {
-    const pct = (count / total) * 100;
-    const dash = `${(pct / 100) * C} ${C}`;
-    const el = `<circle cx="21" cy="21" r="${R}" fill="none" stroke="${CATEGORY_COLORS[cat]}" stroke-width="5.5" stroke-dasharray="${dash}" stroke-dashoffset="${-offset}" stroke-linecap="butt" transform="rotate(-90 21 21)"><title>${CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en']}</title></circle>`;
-    offset += (pct / 100) * C;
-    return el;
-  }).join('');
-  const donut = `<svg viewBox="0 0 42 42" width="112" height="112" style="flex-shrink:0">
-    ${arcs}
-    <text x="21" y="19" text-anchor="middle" font-family="Newsreader,serif" font-size="9" font-weight="600" fill="var(--ink)">${bn(total)}</text>
-    <text x="21" y="27" text-anchor="middle" font-size="3.6" fill="var(--muted)" letter-spacing=".02em">${dealsWord}</text>
-  </svg>`;
+  const squares = [];
+  entries.forEach(([cat, count]) => {
+    for (let i = 0; i < count; i++) squares.push(cat);
+  });
+  const waffle = squares.map((cat, i) => `<div class="waffle-sq" style="width:30px;height:30px;border-radius:7px;background:${CATEGORY_COLORS[cat]};transition:transform .25s var(--ease) ${i * 40}ms,box-shadow .25s ease;transform:scale(0)" data-i="${i}"><title>${CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en']}</title></div>`).join('');
 
   const legend = entries.map(([cat, count]) => {
     const label = CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en'];
     const color = CATEGORY_COLORS[cat];
     const pct = Math.round((count / total) * 100);
-    return `<div style="display:flex;align-items:center;gap:9px;font-size:13px;padding:7px 0">
-      <span style="width:8px;height:8px;border-radius:2px;background:${color};flex-shrink:0"></span>
+    return `<div style="display:flex;align-items:center;gap:9px;font-size:13px">
+      <span style="width:10px;height:10px;border-radius:3px;background:${color};flex-shrink:0"></span>
       <span style="color:var(--ink);font-weight:500">${label}</span>
-      <span style="color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums;font-size:12px">${bn(count)} · ${bn(pct)}%</span>
+      <span style="color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px">${bn(count)} · ${bn(pct)}%</span>
     </div>`;
   }).join('');
-  el.innerHTML = `<div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap">${donut}<div style="flex:1;min-width:180px">${legend}</div></div>`;
+
+  el.innerHTML = `
+    <div style="display:flex;flex-wrap:wrap;gap:8px">${waffle}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 28px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)">${legend}</div>
+  `;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    el.querySelectorAll('.waffle-sq').forEach(sq => { sq.style.transform = 'scale(1)'; });
+  }));
 }
 
 let currentDealIndex = null;
