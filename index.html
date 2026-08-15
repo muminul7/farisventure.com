@@ -529,15 +529,15 @@ const deals = [
 // Historical track record (2023–2025, before this fund) — sourced from the founder's
 // Investment Tracker in Notion. Profit amounts withheld by request; duration + ROI% only.
 const trackRecord = [
-  { year: 2023, nameEn: 'Shai Tea', nameBn: 'Shai Tea', round: null, durationEn: '20 months', durationBn: '২০ মাস', roi: 28.75 },
-  { year: 2023, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 1, durationEn: '3 months', durationBn: '৩ মাস', roi: 15.9 },
-  { year: 2024, nameEn: 'Muin Shop', nameBn: 'Muin Shop', round: null, durationEn: '2 months', durationBn: '২ মাস', roi: 6 },
-  { year: 2024, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 1, durationEn: '4 months', durationBn: '৪ মাস', roi: 6.2 },
-  { year: 2024, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 2, durationEn: '6 months', durationBn: '৬ মাস', roi: 13.94 },
-  { year: 2024, nameEn: 'Walidain', nameBn: 'Walidain', round: 1, durationEn: '4 months', durationBn: '৪ মাস', roi: 12.5 },
-  { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', round: 2, durationEn: '6 months', durationBn: '৬ মাস', roi: 20 },
-  { year: 2025, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 2, durationEn: '1 month', durationBn: '১ মাস', roi: 2 },
-  { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', round: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 10 },
+  { year: 2023, nameEn: 'Shai Tea', nameBn: 'Shai Tea', round: null, months: 20, durationEn: '20 months', durationBn: '২০ মাস', roi: 28.75 },
+  { year: 2023, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 1, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 15.9 },
+  { year: 2024, nameEn: 'Muin Shop', nameBn: 'Muin Shop', round: null, months: 2, durationEn: '2 months', durationBn: '২ মাস', roi: 6 },
+  { year: 2024, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 6.2 },
+  { year: 2024, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 13.94 },
+  { year: 2024, nameEn: 'Walidain', nameBn: 'Walidain', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 12.5 },
+  { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 20 },
+  { year: 2025, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 2, months: 1, durationEn: '1 month', durationBn: '১ মাস', roi: 2 },
+  { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', round: 3, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 10 },
 ];
 
 const faqs = [
@@ -603,25 +603,32 @@ function renderDeals() {
 function renderTrackRecord() {
   const el = document.getElementById('track-record');
   if (!el) return;
-  const roiWord = currentLang === 'bn' ? 'রিটার্ন' : 'Return';
   const roundWord = currentLang === 'bn' ? 'রাউন্ড' : 'Round';
   const dealsWord = currentLang === 'bn' ? 'ডিল' : 'deals';
-  const avgWord = currentLang === 'bn' ? 'গড় রিটার্ন' : 'avg return';
-  const bn = (n) => currentLang === 'bn' ? String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : n;
+  const avgWord = currentLang === 'bn' ? 'গড় বার্ষিক রিটার্ন' : 'avg annualized return';
+  const periodWord = currentLang === 'bn' ? 'ঐ মেয়াদে রিটার্ন' : 'Return for term';
+  const annualWord = currentLang === 'bn' ? 'বার্ষিক হারে (annualized)' : 'Annualized rate';
+  const toBnDigits = s => String(s).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  const bn = (n) => currentLang === 'bn' ? toBnDigits(n) : n;
+  const annualized = t => t.roi * (12 / t.months);
 
-  const years = [...new Set(trackRecord.map(t => t.year))].sort();
+  // Most recent year first, reading top-to-bottom — 2023 anchors the bottom of the line.
+  const years = [...new Set(trackRecord.map(t => t.year))].sort((a, b) => b - a);
   el.innerHTML = years.map((year, yi) => {
     const items = trackRecord.filter(t => t.year === year);
-    const avg = items.reduce((s, t) => s + t.roi, 0) / items.length;
+    const avgAnnual = items.reduce((s, t) => s + annualized(t), 0) / items.length;
     const cards = items.map(t => {
       const name = currentLang === 'bn' ? t.nameBn : t.nameEn;
       const duration = currentLang === 'bn' ? t.durationBn : t.durationEn;
-      return `<div class="card card-hov tl-card" style="padding:20px;min-width:180px;flex:1">
-        <div style="font-size:14.5px;font-weight:600">${name}</div>
-        ${t.round ? `<div style="font-size:12px;color:var(--muted);margin-top:2px">${roundWord} ${bn(t.round)}</div>` : ''}
-        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
-          <span style="font-size:12px;color:var(--muted)">${duration}</span>
-          <span class="serif" style="font-size:20px;font-weight:500;color:var(--green-dark)">${bn(t.roi)}%</span>
+      const ann = annualized(t).toFixed(1);
+      return `<div class="card card-hov tl-card" style="padding:20px;min-width:200px;flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+          <div style="font-size:14.5px;font-weight:600">${name}${t.round ? ` <span style="font-weight:500;color:var(--muted);font-size:12px">— ${roundWord} ${bn(t.round)}</span>` : ''}</div>
+          <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">${duration}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
+          <div><div style="font-size:11px;color:var(--muted)">${periodWord}</div><div style="font-size:15px;font-weight:600;margin-top:2px">${bn(t.roi)}%</div></div>
+          <div style="text-align:right"><div style="font-size:11px;color:var(--muted)">${annualWord}</div><div class="serif" style="font-size:20px;font-weight:500;margin-top:2px;color:var(--green-dark)">${bn(ann)}%</div></div>
         </div>
       </div>`;
     }).join('');
@@ -629,7 +636,7 @@ function renderTrackRecord() {
       <div class="tl-year-head">
         <div class="tl-dot"></div>
         <div class="serif tl-year-label">${bn(year)}</div>
-        <div class="tl-year-meta">${bn(items.length)} ${dealsWord} · ${avg.toFixed(1).replace(/[0-9]/g, d => currentLang==='bn' ? '০১২৩৪৫৬৭৮৯'[d] : d)}% ${avgWord}</div>
+        <div class="tl-year-meta">${bn(items.length)} ${dealsWord} · ${bn(avgAnnual.toFixed(1))}% ${avgWord}</div>
       </div>
       <div class="tl-cards">${cards}</div>
     </div>`;
