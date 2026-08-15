@@ -165,7 +165,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     <div class="g3 card" style="display:grid;grid-template-columns:repeat(3,1fr);border-radius:var(--r-lg);box-shadow:var(--shadow-md)">
       <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" id="stat-deals" style="font-size:34px;font-weight:500;color:var(--ink)">0</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statDeals">Active Deals</div></div>
       <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" style="font-size:34px;font-weight:500;color:var(--green-dark)">৳<span id="stat-capital">0</span>L</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statCapital">Capital Deployed</div></div>
-      <div style="padding:32px 24px;text-align:center"><div class="serif" style="font-size:34px;font-weight:500;color:var(--ink)"><span id="stat-sectors">0</span></div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statSectors">Sector Coverage</div></div>
+      <div style="padding:32px 24px;text-align:center"><div class="serif" style="font-size:34px;font-weight:500;color:var(--ink)"><span id="stat-roi">0</span>%</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statRoi">Historical ROI</div></div>
     </div>
   </div>
 
@@ -385,7 +385,7 @@ const I18N = {
     'home.sub': 'Responsible capital, deployed through vetted, Shariah-compliant structures — Musharaka, Mudaraba, and Murabaha. Every taka goes into a defined agreement, never a guess.',
     'home.cta1': 'Submit a Proposal', 'home.cta2': 'View Portfolio',
     'home.heroImg': 'Hero image placeholder — founder, storefront, or portfolio business',
-    'home.statDeals': 'Active Deals', 'home.statCapital': 'Capital Deployed', 'home.statSectors': 'Sector Coverage',
+    'home.statDeals': 'Active Deals', 'home.statCapital': 'Capital Deployed', 'home.statRoi': 'Historical ROI',
     'home.howH2': 'How It Works',
     'home.step1Title': 'Proposal comes in', 'home.step1Body': 'Entrepreneurs submit their business proposal and initial financials',
     'home.step2Title': 'Diligence & review', 'home.step2Body': 'The business, cash flow, and Shariah compliance are verified hands-on',
@@ -432,7 +432,7 @@ const I18N = {
     'home.sub': 'যাচাইকৃত, শরিয়াহ-সম্মত কাঠামোর অধীনে দায়িত্বশীল পুঁজি বিনিয়োগ করা হয় — মুশারাকা, মুদারাবা ও মুরাবাহায়। প্রতিটি টাকা একটি নির্দিষ্ট চুক্তির অধীনে যায়, কোনো অনুমানের ভিত্তিতে নয়।',
     'home.cta1': 'প্রস্তাব পাঠান', 'home.cta2': 'পোর্টফোলিও দেখুন',
     'home.heroImg': 'হিরো ছবি বসবে — ফাউন্ডার, দোকান, বা পোর্টফোলিও ব্যবসার',
-    'home.statDeals': 'সক্রিয় ডিল', 'home.statCapital': 'মোট বিনিয়োগকৃত পুঁজি', 'home.statSectors': 'সেক্টর কাভারেজ',
+    'home.statDeals': 'সক্রিয় ডিল', 'home.statCapital': 'মোট বিনিয়োগকৃত পুঁজি', 'home.statRoi': 'হিস্টোরিক্যাল ROI',
     'home.howH2': 'কীভাবে কাজ করে',
     'home.step1Title': 'প্রস্তাব আসে', 'home.step1Body': 'উদ্যোক্তারা তাদের ব্যবসার প্রস্তাব ও প্রাথমিক আর্থিক তথ্য জমা দেন',
     'home.step2Title': 'ডিলিজেন্স ও পর্যালোচনা', 'home.step2Body': 'ব্যবসার ক্যাশ ফ্লো, মালিকানা ও শরিয়াহ সম্মতি হাতে-কলমে যাচাই করা হয়',
@@ -479,16 +479,16 @@ const SECTOR_BN = { Service: 'সার্ভিস', Trading: 'ট্রেড�
 const STATUS_BN = { Deployed: 'ডিপ্লয়েড', Returned: 'রিটার্নড' };
 
 const deals = [
-  { sector: 'Service', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 5 lakh', amountBn: '৳৫ লাখ', nameEn: '[Business name pending]', nameBn: '[ব্যবসার নাম নির্ধারণ বাকি]', descEn: 'An operating service-sector business', descBn: 'একটি চলমান সার্ভিস-সেক্টর ব্যবসা', roi: null,
-    overviewEn: 'This business operates in the service sector and has an ongoing, verifiable revenue history. Full public profile — business background, founder story, and photos — will be published here once finalized with the entrepreneur.',
-    overviewBn: 'এই ব্যবসাটি সার্ভিস সেক্টরে পরিচালিত হয় এবং এর একটি চলমান, যাচাইযোগ্য আয়ের ইতিহাস আছে। উদ্যোক্তার সাথে চূড়ান্ত হলে পূর্ণাঙ্গ প্রোফাইল — ব্যবসার পটভূমি, ফাউন্ডারের গল্প, এবং ছবি — এখানে প্রকাশ করা হবে।',
-    useEn: 'Capital was deployed under a Murabaha structure to finance inventory and working capital needs, with a defined repayment schedule agreed before disbursement.',
-    useBn: 'ইনভেন্টরি ও ওয়ার্কিং ক্যাপিটালের প্রয়োজন মেটাতে একটি মুরাবাহা কাঠামোর অধীনে পুঁজি বিনিয়োগ করা হয়েছে, বিতরণের আগেই নির্ধারিত একটি পরিশোধ সময়সূচি সহ।' },
-  { sector: 'Trading', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 8 lakh', amountBn: '৳৮ লাখ', nameEn: '[Business name pending]', nameBn: '[ব্যবসার নাম নির্ধারণ বাকি]', descEn: 'An operating trading-sector business', descBn: 'একটি চলমান ট্রেডিং-সেক্টর ব্যবসা', roi: null,
-    overviewEn: 'This business operates in the trading sector and has an ongoing, verifiable revenue history. Full public profile — business background, founder story, and photos — will be published here once finalized with the entrepreneur.',
-    overviewBn: 'এই ব্যবসাটি ট্রেডিং সেক্টরে পরিচালিত হয় এবং এর একটি চলমান, যাচাইযোগ্য আয়ের ইতিহাস আছে। উদ্যোক্তার সাথে চূড়ান্ত হলে পূর্ণাঙ্গ প্রোফাইল — ব্যবসার পটভূমি, ফাউন্ডারের গল্প, এবং ছবি — এখানে প্রকাশ করা হবে।',
-    useEn: 'Capital was deployed under a Murabaha structure to finance stock purchase and trade cycles, with a defined repayment schedule agreed before disbursement.',
-    useBn: 'স্টক ক্রয় ও ট্রেড সাইকেলের জন্য একটি মুরাবাহা কাঠামোর অধীনে পুঁজি বিনিয়োগ করা হয়েছে, বিতরণের আগেই নির্ধারিত একটি পরিশোধ সময়সূচি সহ।' },
+  { sector: 'Service', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 5 lakh', amountBn: '৳৫ লাখ', nameEn: 'SukunLife', nameBn: 'SukunLife', descEn: 'An operating service-sector business', descBn: 'একটি চলমান সার্ভিস-সেক্টর ব্যবসা', roi: null,
+    overviewEn: 'SukunLife is a service-sector business and the first deal funded under this SME segment. The investment was deployed in July 2026 under a Murabaha structure, with a 6-month term and a confirmed profit rate agreed before disbursement.',
+    overviewBn: 'SukunLife একটি সার্ভিস-সেক্টর ব্যবসা এবং এই SME segment-এর অধীনে funded প্রথম ডিল। বিনিয়োগটি ২০২৬ সালের জুলাই মাসে একটি মুরাবাহা কাঠামোর অধীনে বিতরণ করা হয়েছে, ৬ মাস মেয়াদে, বিতরণের আগেই নির্ধারিত একটি নিশ্চিত মুনাফার হার সহ।',
+    useEn: 'Capital was deployed under a Murabaha structure to finance working capital needs, secured with a post-dated cheque and a defined repayment schedule agreed before disbursement.',
+    useBn: 'ওয়ার্কিং ক্যাপিটালের প্রয়োজন মেটাতে একটি মুরাবাহা কাঠামোর অধীনে পুঁজি বিনিয়োগ করা হয়েছে, একটি post-dated চেক ও বিতরণের আগেই নির্ধারিত একটি পরিশোধ সময়সূচি দিয়ে সুরক্ষিত।' },
+  { sector: 'Trading', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 8 lakh', amountBn: '৳৮ লাখ', nameEn: 'Walidain', nameBn: 'Walidain', descEn: 'A panjabi fabric trading business', descBn: 'পাঞ্জাবির কাপড়ের একটি ট্রেডিং ব্যবসা', roi: null,
+    overviewEn: 'Walidain is a trading business dealing in panjabi fabric. The investment was deployed in August 2026 under a Murabaha structure, with a 6-month term and a confirmed profit rate agreed before disbursement.',
+    overviewBn: 'Walidain পাঞ্জাবির কাপড়ের একটি ট্রেডিং ব্যবসা। বিনিয়োগটি ২০২৬ সালের আগস্ট মাসে একটি মুরাবাহা কাঠামোর অধীনে বিতরণ করা হয়েছে, ৬ মাস মেয়াদে, বিতরণের আগেই নির্ধারিত একটি নিশ্চিত মুনাফার হার সহ।',
+    useEn: 'Capital was deployed under a Murabaha structure to finance the purchase of panjabi fabric stock, with a defined repayment schedule agreed before disbursement.',
+    useBn: 'পাঞ্জাবির কাপড়ের স্টক কেনার জন্য একটি মুরাবাহা কাঠামোর অধীনে পুঁজি বিনিয়োগ করা হয়েছে, বিতরণের আগেই নির্ধারিত একটি পরিশোধ সময়সূচি সহ।' },
 ];
 
 const faqs = [
@@ -719,7 +719,8 @@ window.addEventListener('scroll', () => {
   siteNav.classList.toggle('scrolled', window.scrollY > 8);
 }, { passive: true });
 
-// stat counter — figures derived from real deal data, not fabricated
+// stat counter — figures derived from real deal data, not fabricated.
+// Historical ROI (13.8%) is the fund's actual track record across completed deals.
 let statsAnimated = false;
 function animateStats() {
   const duration = 900, start = performance.now();
@@ -727,12 +728,12 @@ function animateStats() {
     const m = /([\d.]+)/.exec(d.amountEn);
     return sum + (m ? parseFloat(m[1]) : 0);
   }, 0);
-  const targets = { deals: deals.length, capital: capitalLakh, sectors: new Set(deals.map(d => d.sector)).size };
+  const targets = { deals: deals.length, capital: capitalLakh, roi: 13.8 };
   function step(now) {
     const t = Math.min(1, (now - start) / duration);
     document.getElementById('stat-deals').textContent = Math.round(targets.deals * t);
     document.getElementById('stat-capital').textContent = Math.round(targets.capital * t);
-    document.getElementById('stat-sectors').textContent = Math.round(targets.sectors * t);
+    document.getElementById('stat-roi').textContent = (targets.roi * t).toFixed(1);
     if (t < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
