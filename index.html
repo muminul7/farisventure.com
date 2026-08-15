@@ -207,19 +207,6 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     </div>
   </div>
 
-  <div class="container" style="max-width:900px;margin-top:128px">
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div class="serif reveal" style="font-size:clamp(26px,3.4vw,34px);font-weight:500;letter-spacing:-.01em" data-i18n="home.trackH2">Track Record at a Glance</div>
-      <a style="font-weight:600;font-size:14px" data-nav="portfolio" data-i18n="home.trackViewAll">Full breakdown →</a>
-    </div>
-    <div class="card reveal" style="margin-top:32px;padding:32px">
-      <div id="roi-chart" style="display:flex;align-items:flex-end;gap:24px;height:180px"></div>
-      <div style="margin-top:28px;padding-top:22px;border-top:1px solid var(--line)">
-        <div style="font-size:12px;color:var(--muted);letter-spacing:.03em;margin-bottom:12px" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
-        <div id="sector-badges" style="display:flex;flex-wrap:wrap;gap:10px"></div>
-      </div>
-    </div>
-  </div>
 
   <div class="container" style="max-width:900px;margin-top:128px">
     <div class="serif reveal" style="font-size:clamp(26px,3.4vw,34px);font-weight:500;text-align:center;letter-spacing:-.01em" data-i18n="home.howH2">How It Works</div>
@@ -328,9 +315,20 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     </div>
 
     <div style="margin-top:68px">
-      <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
-      <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
-      <a data-nav="portfolio" style="display:inline-flex;font-size:14px;font-weight:600;margin-top:14px" data-i18n="about.trackLink">See the full track record →</a>
+      <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center">
+        <div>
+          <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
+          <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
+          <a data-nav="portfolio" style="display:inline-flex;font-size:14px;font-weight:600;margin-top:14px" data-i18n="about.trackLink">See the full track record →</a>
+        </div>
+        <div class="card reveal" style="padding:24px">
+          <div id="roi-chart" style="display:flex;align-items:flex-end;gap:14px;height:140px"></div>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">
+            <div style="font-size:11px;color:var(--muted);letter-spacing:.03em;margin-bottom:10px" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
+            <div id="sector-badges" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+          </div>
+        </div>
+      </div>
     </div>
     </div>
   </div>
