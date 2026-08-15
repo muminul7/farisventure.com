@@ -201,8 +201,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 
   <div id="stat-strip" class="container" style="max-width:820px;margin-top:52px;position:relative;z-index:2">
     <div class="g3 card" style="display:grid;grid-template-columns:repeat(3,1fr);border-radius:var(--r-lg);box-shadow:var(--shadow-md)">
-      <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" id="stat-deals" style="font-size:34px;font-weight:500;color:var(--ink)">0</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statDeals">Active Deals</div></div>
-      <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" style="font-size:34px;font-weight:500;color:var(--green-dark)">৳<span id="stat-capital">0</span>L</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statCapital">Capital Deployed</div></div>
+      <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" id="stat-deals" style="font-size:34px;font-weight:500;color:var(--ink)">0</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statDeals">Businesses Funded</div></div>
+      <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" style="font-size:34px;font-weight:500;color:var(--green-dark)">৳<span id="stat-capital">0</span>L</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statCapital">Total Capital Deployed</div></div>
       <div style="padding:32px 24px;text-align:center"><div class="serif" style="font-size:34px;font-weight:500;color:var(--ink)"><span id="stat-roi">0</span>%</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statRoi">Historical ROI</div></div>
     </div>
   </div>
@@ -456,7 +456,7 @@ const I18N = {
     'home.sub': 'Responsible capital, deployed through vetted, Shariah-compliant structures — Musharaka, Mudaraba, and Murabaha. Every taka goes into a defined agreement, never a guess.',
     'home.cta1': 'Submit a Proposal', 'home.cta2': 'View Portfolio',
     'home.heroImg': 'Hero image placeholder — founder, storefront, or portfolio business',
-    'home.statDeals': 'Active Deals', 'home.statCapital': 'Capital Deployed', 'home.statRoi': 'Historical ROI',
+    'home.statDeals': 'Businesses Funded', 'home.statCapital': 'Total Capital Deployed', 'home.statRoi': 'Historical ROI',
     'home.heroCaption': 'CAPITAL DEPLOYED, YEAR OVER YEAR',
     'home.trackH2': 'Track Record at a Glance', 'home.trackViewAll': 'Full breakdown →',
     'home.sectorsLabel': 'SECTORS FUNDED SINCE 2023',
@@ -513,7 +513,7 @@ const I18N = {
     'home.sub': 'যাচাইকৃত, শরিয়াহ-সম্মত কাঠামোর অধীনে দায়িত্বশীল পুঁজি বিনিয়োগ করা হয় — মুশারাকা, মুদারাবা ও মুরাবাহায়। প্রতিটি টাকা একটি নির্দিষ্ট চুক্তির অধীনে যায়, কোনো অনুমানের ভিত্তিতে নয়।',
     'home.cta1': 'প্রস্তাব পাঠান', 'home.cta2': 'পোর্টফোলিও দেখুন',
     'home.heroImg': 'হিরো ছবি বসবে — ফাউন্ডার, দোকান, বা পোর্টফোলিও ব্যবসার',
-    'home.statDeals': 'সক্রিয় ডিল', 'home.statCapital': 'মোট বিনিয়োগকৃত পুঁজি', 'home.statRoi': 'হিস্টোরিক্যাল ROI',
+    'home.statDeals': 'ফান্ডেড ব্যবসা', 'home.statCapital': 'মোট বিনিয়োগকৃত পুঁজি (সর্বমোট)', 'home.statRoi': 'হিস্টোরিক্যাল ROI',
     'home.heroCaption': 'বছরের পর বছর মোতাবেক বিনিয়োগকৃত পুঁজি',
     'home.trackH2': 'এক নজরে ট্র্যাক রেকর্ড', 'home.trackViewAll': 'সম্পূর্ণ বিবরণ →',
     'home.sectorsLabel': '২০২৩ থেকে যেসব সেক্টরে বিনিয়োগ হয়েছে',
@@ -928,18 +928,22 @@ window.addEventListener('scroll', () => {
 
 // stat counter — figures derived from real deal data, not fabricated.
 // Historical ROI (13.5%) is the fund's actual track record across completed deals.
+// HISTORICAL_CAPITAL_LAKH: sum of all completed (2023-2025) deals from the founder's
+// Investment Tracker in Notion — BDT 41,07,000 (pre-Onman total) + BDT 3,00,000 (Onman) = 44.07L.
+const HISTORICAL_CAPITAL_LAKH = 44.07;
 let statsAnimated = false;
 function animateStats() {
   const duration = 900, start = performance.now();
-  const capitalLakh = deals.reduce((sum, d) => {
+  const currentCapitalLakh = deals.reduce((sum, d) => {
     const m = /([\d.]+)/.exec(d.amountEn);
     return sum + (m ? parseFloat(m[1]) : 0);
   }, 0);
-  const targets = { deals: deals.length, capital: capitalLakh, roi: 13.5 };
+  const businessNames = new Set([...trackRecord.map(t => t.nameEn), ...deals.map(d => d.nameEn)]);
+  const targets = { deals: businessNames.size, capital: HISTORICAL_CAPITAL_LAKH + currentCapitalLakh, roi: 13.5 };
   function step(now) {
     const t = Math.min(1, (now - start) / duration);
     document.getElementById('stat-deals').textContent = Math.round(targets.deals * t);
-    document.getElementById('stat-capital').textContent = Math.round(targets.capital * t);
+    document.getElementById('stat-capital').textContent = (targets.capital * t).toFixed(1).replace(/\.0$/, '');
     document.getElementById('stat-roi').textContent = (targets.roi * t).toFixed(1);
     if (t < 1) requestAnimationFrame(step);
   }
