@@ -528,17 +528,25 @@ const deals = [
 
 // Historical track record (2023–2025, before this fund) — sourced from the founder's
 // Investment Tracker in Notion. Profit amounts withheld by request; duration + ROI% only.
+const CATEGORY_COLORS = { maleClothing: '#024cff', femaleClothing: '#c2438a', trading: '#00bf63', agro: '#7a5c2e' };
+const CATEGORY_LABELS = {
+  maleClothing: { en: 'Male Clothing', bn: 'পুরুষদের পোশাক' },
+  femaleClothing: { en: 'Female Clothing', bn: 'মহিলাদের পোশাক' },
+  trading: { en: 'Trading', bn: 'ট্রেডিং' },
+  agro: { en: 'Agro', bn: 'এগ্রো' },
+};
+
 const trackRecord = [
-  { year: 2023, nameEn: 'Shai Tea', nameBn: 'Shai Tea', round: null, months: 20, durationEn: '20 months', durationBn: '২০ মাস', roi: 28.75 },
-  { year: 2023, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 1, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 15.9 },
-  { year: 2023, nameEn: 'Onman', nameBn: 'Onman', round: null, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 9.33 },
-  { year: 2024, nameEn: 'Muin Shop', nameBn: 'Muin Shop', round: null, months: 2, durationEn: '2 months', durationBn: '২ মাস', roi: 6 },
-  { year: 2024, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 6.2 },
-  { year: 2024, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 13.94 },
-  { year: 2024, nameEn: 'Walidain', nameBn: 'Walidain', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 12.5 },
-  { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 20 },
-  { year: 2025, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 2, months: 1, durationEn: '1 month', durationBn: '১ মাস', roi: 2 },
-  { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', round: 3, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 10 },
+  { year: 2023, nameEn: 'Shai Tea', nameBn: 'Shai Tea', category: 'trading', round: null, months: 20, durationEn: '20 months', durationBn: '২০ মাস', roi: 28.75 },
+  { year: 2023, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', category: 'maleClothing', round: 1, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 15.9 },
+  { year: 2023, nameEn: 'Onman', nameBn: 'Onman', category: 'maleClothing', round: null, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 9.33 },
+  { year: 2024, nameEn: 'Muin Shop', nameBn: 'Muin Shop', category: 'femaleClothing', round: null, months: 2, durationEn: '2 months', durationBn: '২ মাস', roi: 6 },
+  { year: 2024, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', category: 'agro', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 6.2 },
+  { year: 2024, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', category: 'maleClothing', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 13.94 },
+  { year: 2024, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 12.5 },
+  { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 20 },
+  { year: 2025, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', category: 'agro', round: 2, months: 1, durationEn: '1 month', durationBn: '১ মাস', roi: 2 },
+  { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 3, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 10 },
 ];
 
 const faqs = [
@@ -622,9 +630,14 @@ function renderTrackRecord() {
       const name = currentLang === 'bn' ? t.nameBn : t.nameEn;
       const duration = currentLang === 'bn' ? t.durationBn : t.durationEn;
       const ann = annualized(t).toFixed(1);
+      const catLabel = CATEGORY_LABELS[t.category][currentLang === 'bn' ? 'bn' : 'en'];
+      const catColor = CATEGORY_COLORS[t.category];
       return `<div class="card card-hov tl-card" style="padding:20px;min-width:200px;flex:1">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
-          <div style="font-size:14.5px;font-weight:600">${name}${t.round ? ` <span style="font-weight:500;color:var(--muted);font-size:12px">— ${roundWord} ${bn(t.round)}</span>` : ''}</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div>
+            <div style="font-size:14.5px;font-weight:600">${name}${t.round ? ` <span style="font-weight:500;color:var(--muted);font-size:12px">— ${roundWord} ${bn(t.round)}</span>` : ''}</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:6px"><span style="width:7px;height:7px;border-radius:50%;background:${catColor};flex-shrink:0"></span><span style="font-size:11.5px;color:var(--muted)">${catLabel}</span></div>
+          </div>
           <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">${duration}</span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
