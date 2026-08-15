@@ -153,9 +153,10 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 
 <!-- HOME -->
 <div class="page" id="page-home">
-  <div style="position:relative;padding:132px 0 0;text-align:center;overflow:hidden;background:var(--bg)">
+  <div id="hero-section" style="position:relative;padding:132px 0 0;text-align:center;overflow:hidden;background:var(--bg)">
     <div class="dot-grid" style="mask-image:radial-gradient(ellipse 55% 45% at 50% 15%,#000 30%,transparent 80%)"></div>
-    <div class="hero-blob glow" style="top:-260px;left:50%;width:960px;height:560px;background:radial-gradient(closest-side,rgba(0,191,99,.12),transparent),radial-gradient(closest-side at 72% 30%,rgba(2,76,255,.10),transparent),radial-gradient(closest-side at 30% 60%,rgba(214,168,84,.10),transparent)"></div>
+    <div id="hero-blob" class="hero-blob glow" style="top:-260px;left:50%;width:960px;height:560px;background:radial-gradient(closest-side,rgba(0,191,99,.12),transparent),radial-gradient(closest-side at 72% 30%,rgba(2,76,255,.10),transparent),radial-gradient(closest-side at 30% 60%,rgba(214,168,84,.10),transparent)"></div>
+    <div id="cursor-glow" style="position:absolute;top:-110px;left:-110px;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(2,76,255,.10),transparent);pointer-events:none;transition:transform .35s cubic-bezier(.16,1,.3,1);will-change:transform"></div>
     <div class="container" style="position:relative;max-width:760px;display:flex;flex-direction:column;align-items:center;gap:24px">
       <div style="display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--body);letter-spacing:.04em;font-weight:600;background:var(--surface);border:1px solid var(--line);padding:8px 16px;border-radius:var(--r-pill)" data-i18n="home.eyebrow">
         <span style="width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0"></span>A FOUNDER-BACKED HALAL INVESTMENT VENTURE
@@ -168,8 +169,32 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
       </div>
     </div>
     <div class="container" style="position:relative;max-width:960px;margin-top:60px">
-      <div style="position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line);height:min(420px,50vw);background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px" data-i18n="home.heroImg">
-        Hero image placeholder — founder, storefront, or portfolio business
+      <div id="hero-art" style="position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line);height:min(420px,50vw);background:linear-gradient(135deg,#12151a,#1c2027);display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 960 420" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display:block">
+          <defs>
+            <linearGradient id="hg1" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#00bf63" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#00bf63" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="hg2" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#024cff" stop-opacity=".45"/>
+              <stop offset="100%" stop-color="#024cff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g opacity=".5" stroke="#ffffff" stroke-opacity=".08">
+            <line x1="0" y1="70" x2="960" y2="70"/><line x1="0" y1="140" x2="960" y2="140"/>
+            <line x1="0" y1="210" x2="960" y2="210"/><line x1="0" y1="280" x2="960" y2="280"/>
+            <line x1="0" y1="350" x2="960" y2="350"/>
+          </g>
+          <polyline points="0,300 120,270 240,285 360,220 480,240 600,160 720,180 840,90 960,110" fill="none" stroke="#00bf63" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+          <polygon points="0,300 120,270 240,285 360,220 480,240 600,160 720,180 840,90 960,110 960,420 0,420" fill="url(#hg1)"/>
+          <polyline points="0,340 120,335 240,300 360,310 480,260 600,270 720,210 840,225 960,170" fill="none" stroke="#024cff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
+          <polygon points="0,340 120,335 240,300 360,310 480,260 600,270 720,210 840,225 960,170 960,420 0,420" fill="url(#hg2)"/>
+          <g fill="#fff">
+            <circle cx="840" cy="90" r="5"/><circle cx="960" cy="110" r="5"/>
+          </g>
+        </svg>
+        <div style="position:absolute;left:28px;bottom:24px;color:rgba(255,255,255,.85);font-size:13px;letter-spacing:.04em;font-weight:500" data-i18n="home.heroCaption">CAPITAL DEPLOYED, YEAR OVER YEAR</div>
       </div>
     </div>
   </div>
@@ -179,6 +204,20 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
       <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" id="stat-deals" style="font-size:34px;font-weight:500;color:var(--ink)">0</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statDeals">Active Deals</div></div>
       <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" style="font-size:34px;font-weight:500;color:var(--green-dark)">৳<span id="stat-capital">0</span>L</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statCapital">Capital Deployed</div></div>
       <div style="padding:32px 24px;text-align:center"><div class="serif" style="font-size:34px;font-weight:500;color:var(--ink)"><span id="stat-roi">0</span>%</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statRoi">Historical ROI</div></div>
+    </div>
+  </div>
+
+  <div class="container" style="max-width:900px;margin-top:128px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div class="serif reveal" style="font-size:clamp(26px,3.4vw,34px);font-weight:500;letter-spacing:-.01em" data-i18n="home.trackH2">Track Record at a Glance</div>
+      <a style="font-weight:600;font-size:14px" data-nav="portfolio" data-i18n="home.trackViewAll">Full breakdown →</a>
+    </div>
+    <div class="card reveal" style="margin-top:32px;padding:32px">
+      <div id="roi-chart" style="display:flex;align-items:flex-end;gap:24px;height:180px"></div>
+      <div style="margin-top:28px;padding-top:22px;border-top:1px solid var(--line)">
+        <div style="font-size:12px;color:var(--muted);letter-spacing:.03em;margin-bottom:12px" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
+        <div id="sector-badges" style="display:flex;flex-wrap:wrap;gap:10px"></div>
+      </div>
     </div>
   </div>
 
@@ -227,6 +266,13 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
         <div style="font-size:15px;line-height:1.75;color:var(--body);margin-top:10px" data-i18n="home.why3Body">No guaranteed returns are ever promised — profit and risk are shared transparently.</div>
       </div>
     </div>
+    <div class="reveal" style="margin-top:36px;padding:18px 24px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);text-align:center;font-size:13px;color:var(--body)" data-i18n="home.aaoifi">Structured to AAOIFI Shariah Standards — SS-1 (Murabaha), SS-5 (Guarantees), and SS-12 (Musharaka &amp; Mudaraba).</div>
+  </div>
+
+  <div class="container" style="max-width:720px;margin-top:128px;text-align:center">
+    <div style="font-size:12.5px;color:var(--muted);letter-spacing:.06em;font-weight:600" data-i18n="about.eyebrow">ABOUT US</div>
+    <div class="serif reveal" style="font-size:clamp(22px,3vw,28px);line-height:1.65;font-weight:500;color:var(--ink);margin-top:16px" data-i18n="about.quote">The goal is simple: prove that disciplined, Shariah-first capital can move faster and fairer than conventional interest-based financing for Bangladeshi entrepreneurs — without hiding the risk.</div>
+    <a data-nav="about" style="display:inline-flex;font-size:14px;font-weight:600;margin-top:20px" data-i18n="home.aboutLink">Read our full story →</a>
   </div>
 
   <div class="container" style="max-width:780px;margin-top:128px;text-align:center">
@@ -411,6 +457,11 @@ const I18N = {
     'home.cta1': 'Submit a Proposal', 'home.cta2': 'View Portfolio',
     'home.heroImg': 'Hero image placeholder — founder, storefront, or portfolio business',
     'home.statDeals': 'Active Deals', 'home.statCapital': 'Capital Deployed', 'home.statRoi': 'Historical ROI',
+    'home.heroCaption': 'CAPITAL DEPLOYED, YEAR OVER YEAR',
+    'home.trackH2': 'Track Record at a Glance', 'home.trackViewAll': 'Full breakdown →',
+    'home.sectorsLabel': 'SECTORS FUNDED SINCE 2023',
+    'home.aaoifi': 'Structured to AAOIFI Shariah Standards — SS-1 (Murabaha), SS-5 (Guarantees), and SS-12 (Musharaka &amp; Mudaraba).',
+    'home.aboutLink': 'Read our full story →',
     'home.howH2': 'How It Works',
     'home.step1Title': 'Proposal comes in', 'home.step1Body': 'Entrepreneurs submit their business proposal and initial financials',
     'home.step2Title': 'Diligence & review', 'home.step2Body': 'The business, cash flow, and Shariah compliance are verified hands-on',
@@ -463,6 +514,11 @@ const I18N = {
     'home.cta1': 'প্রস্তাব পাঠান', 'home.cta2': 'পোর্টফোলিও দেখুন',
     'home.heroImg': 'হিরো ছবি বসবে — ফাউন্ডার, দোকান, বা পোর্টফোলিও ব্যবসার',
     'home.statDeals': 'সক্রিয় ডিল', 'home.statCapital': 'মোট বিনিয়োগকৃত পুঁজি', 'home.statRoi': 'হিস্টোরিক্যাল ROI',
+    'home.heroCaption': 'বছরের পর বছর মোতাবেক বিনিয়োগকৃত পুঁজি',
+    'home.trackH2': 'এক নজরে ট্র্যাক রেকর্ড', 'home.trackViewAll': 'সম্পূর্ণ বিবরণ →',
+    'home.sectorsLabel': '২০২৩ থেকে যেসব সেক্টরে বিনিয়োগ হয়েছে',
+    'home.aaoifi': 'AAOIFI শরিয়াহ স্ট্যান্ডার্ড অনুযায়ী গঠিত — SS-1 (মুরাবাহা), SS-5 (গ্যারান্টি), এবং SS-12 (মুশারাকা ও মুদারাবা)।',
+    'home.aboutLink': 'আমাদের সম্পূর্ণ গল্প পড়ুন →',
     'home.howH2': 'কীভাবে কাজ করে',
     'home.step1Title': 'প্রস্তাব আসে', 'home.step1Body': 'উদ্যোক্তারা তাদের ব্যবসার প্রস্তাব ও প্রাথমিক আর্থিক তথ্য জমা দেন',
     'home.step2Title': 'ডিলিজেন্স ও পর্যালোচনা', 'home.step2Body': 'ব্যবসার ক্যাশ ফ্লো, মালিকানা ও শরিয়াহ সম্মতি হাতে-কলমে যাচাই করা হয়',
@@ -657,6 +713,47 @@ function renderTrackRecord() {
   }).join('');
 }
 
+// Home page: ROI-by-year mini bar chart (from real trackRecord data)
+function renderRoiChart() {
+  const el = document.getElementById('roi-chart');
+  if (!el) return;
+  const bn = (n) => currentLang === 'bn' ? String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : n;
+  const years = [...new Set(trackRecord.map(t => t.year))].sort((a, b) => a - b);
+  const yearAvg = years.map(year => {
+    const items = trackRecord.filter(t => t.year === year);
+    const avg = items.reduce((s, t) => s + t.roi * (12 / t.months), 0) / items.length;
+    return { year, avg };
+  });
+  const max = Math.max(...yearAvg.map(y => y.avg));
+  el.innerHTML = yearAvg.map(({ year, avg }, i) => {
+    const pct = Math.max(8, (avg / max) * 100);
+    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+      <div class="serif" style="font-size:15px;font-weight:500;color:var(--green-dark);margin-bottom:8px">${bn(avg.toFixed(1))}%</div>
+      <div class="roi-bar" style="width:100%;max-width:64px;height:0;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--green),var(--green-dark));transition:height 1s cubic-bezier(.16,1,.3,1) ${i * 120}ms" data-target="${pct}"></div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:10px;font-weight:500">${bn(year)}</div>
+    </div>`;
+  }).join('');
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    el.querySelectorAll('.roi-bar').forEach(bar => { bar.style.height = bar.dataset.target + '%'; });
+  }));
+}
+
+// Home page: sector/category diversity badges (from real trackRecord data)
+function renderSectorBadges() {
+  const el = document.getElementById('sector-badges');
+  if (!el) return;
+  const counts = {};
+  trackRecord.forEach(t => { counts[t.category] = (counts[t.category] || 0) + 1; });
+  const bn = (n) => currentLang === 'bn' ? String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : n;
+  el.innerHTML = Object.entries(counts).map(([cat, count]) => {
+    const label = CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en'];
+    const color = CATEGORY_COLORS[cat];
+    return `<span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line)">
+      <span style="width:8px;height:8px;border-radius:50%;background:${color}"></span>${label}<span style="color:var(--muted)">· ${bn(count)}</span>
+    </span>`;
+  }).join('');
+}
+
 let currentDealIndex = null;
 function renderDealDetail() {
   const wrap = document.getElementById('deal-detail');
@@ -768,6 +865,8 @@ function applyLang(lang) {
   renderFaqs();
   renderDealDetail();
   renderTrackRecord();
+  renderRoiChart();
+  renderSectorBadges();
   if (typeof setupReveal === 'function') setupReveal();
   try { localStorage.setItem('fv-lang', lang); } catch (e) {}
 }
@@ -871,6 +970,29 @@ document.getElementById('proposal-form').addEventListener('submit', e => {
   document.getElementById('proposal-form').style.display = 'none';
   document.getElementById('form-sent').style.display = 'block';
 });
+
+// cursor-follow glow in hero
+const heroSection = document.getElementById('hero-section');
+const cursorGlow = document.getElementById('cursor-glow');
+if (heroSection && cursorGlow && matchMedia('(hover: hover)').matches) {
+  heroSection.addEventListener('mousemove', e => {
+    const r = heroSection.getBoundingClientRect();
+    cursorGlow.style.transform = `translate3d(${e.clientX - r.left}px, ${e.clientY - r.top}px, 0)`;
+  });
+}
+
+// magnetic buttons
+if (matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.25;
+      const y = (e.clientY - r.top - r.height / 2) * 0.35;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
+}
 </script>
 </body>
 </html>
