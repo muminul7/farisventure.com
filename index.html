@@ -283,7 +283,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 
     <div style="margin-top:68px">
       <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
-      <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 9 halal SME investments across 5 businesses, with an overall return of ~13.8%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
+      <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
       <a data-nav="portfolio" style="display:inline-flex;font-size:14px;font-weight:600;margin-top:14px" data-i18n="about.trackLink">See the full track record →</a>
     </div>
     </div>
@@ -434,7 +434,7 @@ const I18N = {
     'about.p1': 'A defined maximum investment per deal', 'about.p2': 'No guaranteed return is ever promised',
     'about.p3': 'Only Shariah-compliant structures — no exceptions', 'about.p4': 'No investment without business verification',
     'about.trackH2': 'Track Record Before Faris Venture',
-    'about.trackBody': "Between 2023 and 2025, the founder completed 9 halal SME investments across 5 businesses, with an overall return of ~13.8%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.",
+    'about.trackBody': "Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.",
     'about.trackLink': 'See the full track record →',
     'portfolio.eyebrow': 'PORTFOLIO', 'portfolio.h1': 'Our Investments',
     'portfolio.sub': 'Every deal is completed through verification and a defined Shariah-compliant structure — process, not guesswork.',
@@ -486,7 +486,7 @@ const I18N = {
     'about.p1': 'প্রতি ডিলে সর্বোচ্চ বিনিয়োগের একটি নির্দিষ্ট সীমা', 'about.p2': 'নিশ্চিত রিটার্নের প্রতিশ্রুতি কখনোই দেওয়া হয় না',
     'about.p3': 'শুধুমাত্র শরিয়াহ-সম্মত কাঠামো — কোনো ব্যতিক্রম নয়', 'about.p4': 'ব্যবসা যাচাই ছাড়া কোনো বিনিয়োগ নয়',
     'about.trackH2': 'ফারিস ভেঞ্চারের আগের ট্র্যাক রেকর্ড',
-    'about.trackBody': '২০২৩ থেকে ২০২৫ সালের মধ্যে, ফাউন্ডার ৫টা ব্যবসায় ৯টা হালাল SME বিনিয়োগ সম্পন্ন করেছেন, যার মোট রিটার্ন প্রায় ১৩.৮%। ওই সময়ের একটা শিক্ষা সরাসরি ফারিস ভেঞ্চারের নিয়ম তৈরি করেছে: সবচেয়ে বড় একক টিকেট সবচেয়ে দুর্বল রিটার্ন দিয়েছিল। তাই এখানে কোনো ডিল ৳৭ লাখের বেশি হয় না।',
+    'about.trackBody': '২০২৩ থেকে ২০২৫ সালের মধ্যে, ফাউন্ডার ৬টা ব্যবসায় ১০টা হালাল SME বিনিয়োগ সম্পন্ন করেছেন, যার মোট রিটার্ন প্রায় ১৩.৫%। ওই সময়ের একটা শিক্ষা সরাসরি ফারিস ভেঞ্চারের নিয়ম তৈরি করেছে: সবচেয়ে বড় একক টিকেট সবচেয়ে দুর্বল রিটার্ন দিয়েছিল। তাই এখানে কোনো ডিল ৳৭ লাখের বেশি হয় না।',
     'about.trackLink': 'সম্পূর্ণ ট্র্যাক রেকর্ড দেখুন →',
     'portfolio.eyebrow': 'পোর্টফোলিও', 'portfolio.h1': 'আমাদের বিনিয়োগ',
     'portfolio.sub': 'প্রতিটি ডিল যাচাই ও একটি নির্দিষ্ট শরিয়াহ-সম্মত কাঠামোর মধ্য দিয়ে সম্পন্ন হয় — অনুমান নয়, প্রক্রিয়া।',
@@ -531,6 +531,7 @@ const deals = [
 const trackRecord = [
   { year: 2023, nameEn: 'Shai Tea', nameBn: 'Shai Tea', round: null, months: 20, durationEn: '20 months', durationBn: '২০ মাস', roi: 28.75 },
   { year: 2023, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 1, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 15.9 },
+  { year: 2023, nameEn: 'Onman', nameBn: 'Onman', round: null, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 9.33 },
   { year: 2024, nameEn: 'Muin Shop', nameBn: 'Muin Shop', round: null, months: 2, durationEn: '2 months', durationBn: '২ মাস', roi: 6 },
   { year: 2024, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 6.2 },
   { year: 2024, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 13.94 },
@@ -814,7 +815,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // stat counter — figures derived from real deal data, not fabricated.
-// Historical ROI (13.8%) is the fund's actual track record across completed deals.
+// Historical ROI (13.5%) is the fund's actual track record across completed deals.
 let statsAnimated = false;
 function animateStats() {
   const duration = 900, start = performance.now();
@@ -822,7 +823,7 @@ function animateStats() {
     const m = /([\d.]+)/.exec(d.amountEn);
     return sum + (m ? parseFloat(m[1]) : 0);
   }, 0);
-  const targets = { deals: deals.length, capital: capitalLakh, roi: 13.8 };
+  const targets = { deals: deals.length, capital: capitalLakh, roi: 13.5 };
   function step(now) {
     const t = Math.min(1, (now - start) / duration);
     document.getElementById('stat-deals').textContent = Math.round(targets.deals * t);
