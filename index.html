@@ -17,18 +17,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#111315;--body:#5c6068;--muted:#8a8f98;--line:#ececec;--line-2:#e2e4e7;
-  --green:#00bf63;--green-dark:#00954d;--blue:#024cff;--bg:#fff;--surface:#fafafa;
+  --ink:#111315;--body:#5c6068;--muted:#8a8f98;--line:#eae9e5;--line-2:#ddDBd5;
+  --green:#00bf63;--green-dark:#00954d;--blue:#024cff;--bg:#fbfaf8;--surface:#f4f2ee;
   --r-sm:8px;--r-md:14px;--r-lg:20px;--r-pill:999px;
-  --shadow-sm:0 1px 2px rgba(17,19,21,.04),0 1px 1px rgba(17,19,21,.03);
-  --shadow-md:0 12px 28px rgba(17,19,21,.07);
-  --shadow-lg:0 24px 56px rgba(17,19,21,.12);
+  --shadow-sm:0 1px 2px rgba(30,25,15,.05),0 1px 1px rgba(30,25,15,.04);
+  --shadow-md:0 14px 32px rgba(30,25,15,.08);
+  --shadow-lg:0 30px 70px rgba(20,17,10,.14);
   --ease:cubic-bezier(.16,1,.3,1);
   --container:920px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:'Inter','Noto Sans Bengali',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;font-family:'Inter','Noto Sans Bengali',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 a{color:var(--blue);text-decoration:none}
 a:hover{color:var(--green)}
 ::selection{background:var(--green);color:#fff}
@@ -36,9 +37,9 @@ a:hover{color:var(--green)}
 .serif{font-family:'Newsreader','Noto Serif Bengali',serif}
 .wrap{min-height:100vh;display:flex;flex-direction:column}
 .container{max-width:var(--container);margin:0 auto;padding-inline:56px}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-sm)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-sm),inset 0 1px 0 rgba(255,255,255,.6)}
 .card-hov{transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
-.card-hov:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--line-2)}
+.card-hov:hover{transform:translateY(-4px);box-shadow:var(--shadow-md),inset 0 1px 0 rgba(255,255,255,.6);border-color:var(--line-2)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:500;font-size:15px;padding:14px 28px;border-radius:var(--r-pill);border:1px solid transparent;cursor:pointer;transition:transform .2s var(--ease),box-shadow .2s var(--ease),opacity .2s var(--ease),background .2s var(--ease);white-space:nowrap}
 .btn:active{transform:scale(.96)}
 .btn-primary{background:var(--ink);color:#fff;box-shadow:0 10px 24px rgba(17,19,21,.18)}
@@ -62,7 +63,7 @@ a:hover{color:var(--green)}
 .page{display:none}
 .page.active{display:block;animation:fadeIn .5s var(--ease)}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:18px 56px;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s ease,box-shadow .3s ease}
+.nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:18px 56px;background:rgba(251,250,248,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s ease,box-shadow .3s ease}
 .nav.scrolled{border-bottom-color:var(--line);box-shadow:0 1px 0 rgba(17,19,21,.02)}
 .nav-links a{font-size:14px;color:var(--body);font-weight:500;position:relative;padding:6px 2px}
 .nav-links a::after{content:"";position:absolute;left:2px;right:2px;bottom:0;height:2px;background:var(--ink);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
@@ -84,7 +85,7 @@ input,textarea{font-family:inherit}
 input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-shadow:0 0 0 3px rgba(17,19,21,.06)}
 .skip-link{position:absolute;left:-999px;top:auto;background:var(--ink);color:#fff;padding:12px 20px;border-radius:8px;z-index:100}
 .skip-link:focus{left:16px;top:16px}
-.dot-grid{position:absolute;inset:0;background-image:radial-gradient(#e4e6e9 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.dot-grid{position:absolute;inset:0;background-image:radial-gradient(#e3e0d8 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
 .glow{position:absolute;pointer-events:none;filter:blur(28px)}
 @media (max-width:860px){
   .g3{grid-template-columns:1fr!important}
@@ -139,9 +140,9 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 
 <!-- HOME -->
 <div class="page" id="page-home">
-  <div style="position:relative;padding:132px 0 0;text-align:center;overflow:hidden;background:#fff">
+  <div style="position:relative;padding:132px 0 0;text-align:center;overflow:hidden;background:var(--bg)">
     <div class="dot-grid" style="mask-image:radial-gradient(ellipse 55% 45% at 50% 15%,#000 30%,transparent 80%)"></div>
-    <div class="hero-blob glow" style="top:-260px;left:50%;width:900px;height:520px;background:radial-gradient(closest-side,rgba(0,191,99,.10),transparent),radial-gradient(closest-side at 72% 30%,rgba(2,76,255,.09),transparent)"></div>
+    <div class="hero-blob glow" style="top:-260px;left:50%;width:960px;height:560px;background:radial-gradient(closest-side,rgba(0,191,99,.12),transparent),radial-gradient(closest-side at 72% 30%,rgba(2,76,255,.10),transparent),radial-gradient(closest-side at 30% 60%,rgba(214,168,84,.10),transparent)"></div>
     <div class="container" style="position:relative;max-width:760px;display:flex;flex-direction:column;align-items:center;gap:24px">
       <div style="display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--body);letter-spacing:.04em;font-weight:600;background:var(--surface);border:1px solid var(--line);padding:8px 16px;border-radius:var(--r-pill)" data-i18n="home.eyebrow">
         <span style="width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0"></span>A FOUNDER-BACKED HALAL INVESTMENT VENTURE
@@ -154,7 +155,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
       </div>
     </div>
     <div class="container" style="position:relative;max-width:960px;margin-top:60px">
-      <div style="position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line);height:min(420px,50vw);background:linear-gradient(135deg,#f4f5f6,#e9ebed);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px" data-i18n="home.heroImg">
+      <div style="position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line);height:min(420px,50vw);background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px" data-i18n="home.heroImg">
         Hero image placeholder — founder, storefront, or portfolio business
       </div>
     </div>
@@ -163,8 +164,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
   <div id="stat-strip" class="container" style="max-width:820px;margin-top:52px;position:relative;z-index:2">
     <div class="g3 card" style="display:grid;grid-template-columns:repeat(3,1fr);border-radius:var(--r-lg);box-shadow:var(--shadow-md)">
       <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" id="stat-deals" style="font-size:34px;font-weight:500;color:var(--ink)">0</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statDeals">Active Deals</div></div>
-      <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" style="font-size:34px;font-weight:500;color:var(--green-dark)"><span id="stat-roi">0</span>%</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statRoi">Historical ROI</div></div>
-      <div style="padding:32px 24px;text-align:center"><div class="serif" style="font-size:34px;font-weight:500;color:var(--ink)"><span id="stat-sectors">0</span>+</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statSectors">Sector Coverage</div></div>
+      <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" style="font-size:34px;font-weight:500;color:var(--green-dark)">৳<span id="stat-capital">0</span>L</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statCapital">Capital Deployed</div></div>
+      <div style="padding:32px 24px;text-align:center"><div class="serif" style="font-size:34px;font-weight:500;color:var(--ink)"><span id="stat-sectors">0</span></div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statSectors">Sector Coverage</div></div>
     </div>
   </div>
 
@@ -240,7 +241,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     <h1 class="serif reveal" style="font-size:clamp(32px,4.4vw,42px);font-weight:500;margin-top:14px;letter-spacing:-.01em" data-i18n="about.h1">Who We Are, What We Do</h1>
     <div style="font-size:16px;line-height:1.9;color:var(--body);margin-top:22px" data-i18n="about.body">Faris Venture is a founder-backed halal investment venture that deploys capital into vetted Bangladeshi SMEs under Shariah-compliant structures. It currently operates as a single-investor fund. Every deal carries a defined agreement, a defined cap, and a clear expectation — nothing beyond that.</div>
 
-    <div style="border-radius:var(--r-lg);overflow:hidden;margin-top:40px;border:1px solid var(--line);height:320px;background:linear-gradient(135deg,#f4f5f6,#e9ebed);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;box-shadow:var(--shadow-sm)" data-i18n="about.imgPlaceholder">
+    <div style="border-radius:var(--r-lg);overflow:hidden;margin-top:40px;border:1px solid var(--line);height:320px;background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;box-shadow:var(--shadow-sm)" data-i18n="about.imgPlaceholder">
       Founder or team photo placeholder
     </div>
 
@@ -334,6 +335,18 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
   </div>
 </div>
 
+<!-- DEAL DETAIL -->
+<div class="page" id="page-deal">
+  <div style="position:relative;overflow:hidden">
+    <div class="dot-grid" style="mask-image:radial-gradient(ellipse 55% 50% at 50% 0%,#000 40%,transparent 85%)"></div>
+    <div class="glow" style="top:-180px;left:50%;transform:translateX(-50%);width:800px;height:420px;background:radial-gradient(closest-side,rgba(0,191,99,.14),transparent),radial-gradient(closest-side at 70% 30%,rgba(2,76,255,.14),transparent)"></div>
+    <div class="container" style="max-width:760px;padding-top:112px;padding-bottom:140px;position:relative">
+      <a href="#portfolio" data-nav="portfolio" style="font-size:13px;font-weight:600;color:var(--body);display:inline-flex;align-items:center;gap:6px" data-i18n="deal.back">← Back to Portfolio</a>
+      <div id="deal-detail" style="margin-top:24px"></div>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <!-- FOOTER -->
@@ -372,7 +385,7 @@ const I18N = {
     'home.sub': 'Responsible capital, deployed through vetted, Shariah-compliant structures — Musharaka, Mudaraba, and Murabaha. Every taka goes into a defined agreement, never a guess.',
     'home.cta1': 'Submit a Proposal', 'home.cta2': 'View Portfolio',
     'home.heroImg': 'Hero image placeholder — founder, storefront, or portfolio business',
-    'home.statDeals': 'Active Deals', 'home.statRoi': 'Historical ROI', 'home.statSectors': 'Sector Coverage',
+    'home.statDeals': 'Active Deals', 'home.statCapital': 'Capital Deployed', 'home.statSectors': 'Sector Coverage',
     'home.howH2': 'How It Works',
     'home.step1Title': 'Proposal comes in', 'home.step1Body': 'Entrepreneurs submit their business proposal and initial financials',
     'home.step2Title': 'Diligence & review', 'home.step2Body': 'The business, cash flow, and Shariah compliance are verified hands-on',
@@ -419,7 +432,7 @@ const I18N = {
     'home.sub': 'যাচাইকৃত, শরিয়াহ-সম্মত কাঠামোর অধীনে দায়িত্বশীল পুঁজি বিনিয়োগ করা হয় — মুশারাকা, মুদারাবা ও মুরাবাহায়। প্রতিটি টাকা একটি নির্দিষ্ট চুক্তির অধীনে যায়, কোনো অনুমানের ভিত্তিতে নয়।',
     'home.cta1': 'প্রস্তাব পাঠান', 'home.cta2': 'পোর্টফোলিও দেখুন',
     'home.heroImg': 'হিরো ছবি বসবে — ফাউন্ডার, দোকান, বা পোর্টফোলিও ব্যবসার',
-    'home.statDeals': 'সক্রিয় ডিল', 'home.statRoi': 'হিস্টোরিক্যাল ROI', 'home.statSectors': 'সেক্টর কাভারেজ',
+    'home.statDeals': 'সক্রিয় ডিল', 'home.statCapital': 'মোট বিনিয়োগকৃত পুঁজি', 'home.statSectors': 'সেক্টর কাভারেজ',
     'home.howH2': 'কীভাবে কাজ করে',
     'home.step1Title': 'প্রস্তাব আসে', 'home.step1Body': 'উদ্যোক্তারা তাদের ব্যবসার প্রস্তাব ও প্রাথমিক আর্থিক তথ্য জমা দেন',
     'home.step2Title': 'ডিলিজেন্স ও পর্যালোচনা', 'home.step2Body': 'ব্যবসার ক্যাশ ফ্লো, মালিকানা ও শরিয়াহ সম্মতি হাতে-কলমে যাচাই করা হয়',
@@ -466,8 +479,16 @@ const SECTOR_BN = { Service: 'সার্ভিস', Trading: 'ট্রেড�
 const STATUS_BN = { Deployed: 'ডিপ্লয়েড', Returned: 'রিটার্নড' };
 
 const deals = [
-  { sector: 'Service', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 5 lakh', amountBn: '৳৫ লাখ', nameEn: '[Business name pending]', nameBn: '[ব্যবসার নাম নির্ধারণ বাকি]', descEn: 'An operating service-sector business', descBn: 'একটি চলমান সার্ভিস-সেক্টর ব্যবসা', roi: null },
-  { sector: 'Trading', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 8 lakh', amountBn: '৳৮ লাখ', nameEn: '[Business name pending]', nameBn: '[ব্যবসার নাম নির্ধারণ বাকি]', descEn: 'An operating trading-sector business', descBn: 'একটি চলমান ট্রেডিং-সেক্টর ব্যবসা', roi: null },
+  { sector: 'Service', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 5 lakh', amountBn: '৳৫ লাখ', nameEn: '[Business name pending]', nameBn: '[ব্যবসার নাম নির্ধারণ বাকি]', descEn: 'An operating service-sector business', descBn: 'একটি চলমান সার্ভিস-সেক্টর ব্যবসা', roi: null,
+    overviewEn: 'This business operates in the service sector and has an ongoing, verifiable revenue history. Full public profile — business background, founder story, and photos — will be published here once finalized with the entrepreneur.',
+    overviewBn: 'এই ব্যবসাটি সার্ভিস সেক্টরে পরিচালিত হয় এবং এর একটি চলমান, যাচাইযোগ্য আয়ের ইতিহাস আছে। উদ্যোক্তার সাথে চূড়ান্ত হলে পূর্ণাঙ্গ প্রোফাইল — ব্যবসার পটভূমি, ফাউন্ডারের গল্প, এবং ছবি — এখানে প্রকাশ করা হবে।',
+    useEn: 'Capital was deployed under a Murabaha structure to finance inventory and working capital needs, with a defined repayment schedule agreed before disbursement.',
+    useBn: 'ইনভেন্টরি ও ওয়ার্কিং ক্যাপিটালের প্রয়োজন মেটাতে একটি মুরাবাহা কাঠামোর অধীনে পুঁজি বিনিয়োগ করা হয়েছে, বিতরণের আগেই নির্ধারিত একটি পরিশোধ সময়সূচি সহ।' },
+  { sector: 'Trading', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 8 lakh', amountBn: '৳৮ লাখ', nameEn: '[Business name pending]', nameBn: '[ব্যবসার নাম নির্ধারণ বাকি]', descEn: 'An operating trading-sector business', descBn: 'একটি চলমান ট্রেডিং-সেক্টর ব্যবসা', roi: null,
+    overviewEn: 'This business operates in the trading sector and has an ongoing, verifiable revenue history. Full public profile — business background, founder story, and photos — will be published here once finalized with the entrepreneur.',
+    overviewBn: 'এই ব্যবসাটি ট্রেডিং সেক্টরে পরিচালিত হয় এবং এর একটি চলমান, যাচাইযোগ্য আয়ের ইতিহাস আছে। উদ্যোক্তার সাথে চূড়ান্ত হলে পূর্ণাঙ্গ প্রোফাইল — ব্যবসার পটভূমি, ফাউন্ডারের গল্প, এবং ছবি — এখানে প্রকাশ করা হবে।',
+    useEn: 'Capital was deployed under a Murabaha structure to finance stock purchase and trade cycles, with a defined repayment schedule agreed before disbursement.',
+    useBn: 'স্টক ক্রয় ও ট্রেড সাইকেলের জন্য একটি মুরাবাহা কাঠামোর অধীনে পুঁজি বিনিয়োগ করা হয়েছে, বিতরণের আগেই নির্ধারিত একটি পরিশোধ সময়সূচি সহ।' },
 ];
 
 const faqs = [
@@ -477,11 +498,13 @@ const faqs = [
     qBn: 'কারা প্রস্তাব জমা দিতে পারেন?', aBn: 'চলমান, যাচাইযোগ্য ক্যাশ ফ্লো-সহ শরিয়াহ-সম্মত SME পরিচালনাকারী উদ্যোক্তারা।', open: false },
   { qEn: 'What investment structures do you use?', aEn: 'Musharaka, Mudaraba, and Murabaha — determined by the nature of the business.',
     qBn: 'আপনারা কোন বিনিয়োগ কাঠামো ব্যবহার করেন?', aBn: 'মুশারাকা, মুদারাবা ও মুরাবাহা — ব্যবসার প্রকৃতি অনুযায়ী নির্ধারিত হয়।', open: false },
+  { qEn: 'How long does the process take, from proposal to funding?', aEn: 'Diligence typically takes a few weeks — it depends on how quickly cash flow and ownership documents can be verified. There is no fixed timeline; a rushed review is not a real one.',
+    qBn: 'প্রস্তাব থেকে ফান্ডিং পর্যন্ত কতদিন লাগে?', aBn: 'ডিলিজেন্স সাধারণত কয়েক সপ্তাহ সময় নেয় — নির্ভর করে ক্যাশ ফ্লো ও মালিকানার কাগজপত্র কত দ্রুত যাচাই করা যায় তার উপর। নির্দিষ্ট কোনো টাইমলাইন নেই — তাড়াহুড়ো করে করা পর্যালোচনা প্রকৃত পর্যালোচনা নয়।', open: false },
 ];
 
 let currentLang = 'en';
 
-function dealCard(d, full, lang) {
+function dealCard(d, full, lang, i) {
   const sectorLabel = lang === 'bn' ? SECTOR_BN[d.sector] : d.sector;
   const statusLabel = lang === 'bn' ? (STATUS_BN[d.status] || d.status) : d.status;
   const structureLabel = lang === 'bn' ? d.structureBn : d.structure;
@@ -494,15 +517,18 @@ function dealCard(d, full, lang) {
   const chip = `<span style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:${SECTOR_COLORS[d.sector]||'#8a8f98'}"></span>${sectorLabel}</span>`;
   const status = `<span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:#eafaf0;color:var(--green-dark)">${statusLabel}</span>`;
   if (!full) {
-    return `<div class="card card-hov" style="padding:26px">
-      <div style="display:flex;justify-content:space-between;align-items:center">${chip}${status}</div>
-      <div style="font-size:16px;font-weight:600;margin-top:14px">${nameLabel}</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:6px">${structureLabel}</div>
+    return `<div class="card card-hov" role="button" tabindex="0" data-deal-open="${i}" style="overflow:hidden;cursor:pointer">
+      <div style="width:100%;height:130px;background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px">${photoWord}</div>
+      <div style="padding:22px">
+        <div style="display:flex;justify-content:space-between;align-items:center">${chip}${status}</div>
+        <div style="font-size:16px;font-weight:600;margin-top:14px">${nameLabel}</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:6px">${structureLabel}</div>
+      </div>
     </div>`;
   }
   const roiRow = d.roi ? `<div><div style="font-size:12px;color:var(--muted)">ROI</div><div style="font-size:14px;font-weight:600;margin-top:2px;color:var(--green-dark)">${d.roi}</div></div>` : '';
-  return `<div class="card card-hov" style="overflow:hidden">
-    <div style="width:100%;height:160px;background:linear-gradient(135deg,#f4f5f6,#e9ebed);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px">${photoWord}</div>
+  return `<div class="card card-hov" role="button" tabindex="0" data-deal-open="${i}" style="overflow:hidden;cursor:pointer">
+    <div style="width:100%;height:160px;background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px">${photoWord}</div>
     <div style="padding:24px">
       <div style="display:flex;justify-content:space-between;align-items:center">${chip}${status}</div>
       <div style="font-size:18px;font-weight:600;margin-top:16px">${nameLabel}</div>
@@ -517,8 +543,77 @@ function dealCard(d, full, lang) {
 }
 
 function renderDeals() {
-  document.getElementById('portfolio-preview').innerHTML = deals.map(d => dealCard(d, false, currentLang)).join('');
-  document.getElementById('portfolio-full').innerHTML = deals.map(d => dealCard(d, true, currentLang)).join('');
+  document.getElementById('portfolio-preview').innerHTML = deals.map((d,i) => dealCard(d, false, currentLang, i)).join('');
+  document.getElementById('portfolio-full').innerHTML = deals.map((d,i) => dealCard(d, true, currentLang, i)).join('');
+  document.querySelectorAll('[data-deal-open]').forEach(el => {
+    el.addEventListener('click', () => openDeal(+el.dataset.dealOpen));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDeal(+el.dataset.dealOpen); } });
+  });
+}
+
+let currentDealIndex = null;
+function renderDealDetail() {
+  const wrap = document.getElementById('deal-detail');
+  if (currentDealIndex == null || !deals[currentDealIndex]) { wrap.innerHTML = ''; return; }
+  const d = deals[currentDealIndex];
+  const lang = currentLang;
+  const sectorLabel = lang === 'bn' ? SECTOR_BN[d.sector] : d.sector;
+  const statusLabel = lang === 'bn' ? (STATUS_BN[d.status] || d.status) : d.status;
+  const structureLabel = lang === 'bn' ? d.structureBn : d.structure;
+  const nameLabel = lang === 'bn' ? d.nameBn : d.nameEn;
+  const amountLabel = lang === 'bn' ? d.amountBn : d.amountEn;
+  const overview = lang === 'bn' ? d.overviewBn : d.overviewEn;
+  const use = lang === 'bn' ? d.useBn : d.useEn;
+  const L = lang === 'bn'
+    ? { photo:'ছবি বসবে', sector:'সেক্টর', structure:'কাঠামো', invest:'বিনিয়োগ', status:'স্ট্যাটাস', overview:'ব্যবসার সংক্ষিপ্ত বিবরণ', use:'পুঁজি কীভাবে ব্যবহৃত হয়েছে', timeline:'ডিল টাইমলাইন', t1:'প্রস্তাব জমা ও প্রাথমিক পর্যালোচনা', t2:'ডিলিজেন্স ও শরিয়াহ সম্মতি যাচাই সম্পন্ন', t3:'পুঁজি বিনিয়োগ সম্পন্ন', cta:'এমন ব্যবসা চালাচ্ছেন? প্রস্তাব পাঠান', ctaBtn:'প্রস্তাব পাঠান' }
+    : { photo:'Photo placeholder', sector:'Sector', structure:'Structure', invest:'Investment', status:'Status', overview:'Business Overview', use:'How the Capital Was Used', timeline:'Deal Timeline', t1:'Proposal submitted and initial review', t2:'Diligence and Shariah compliance verification completed', t3:'Capital deployed', cta:'Running a business like this? Submit a proposal', ctaBtn:'Submit a Proposal' };
+  wrap.innerHTML = `
+    <div style="width:100%;height:240px;border-radius:var(--r-lg);background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;border:1px solid var(--line)">${L.photo}</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-top:28px;flex-wrap:wrap">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:${SECTOR_COLORS[d.sector]||'#8a8f98'}"></span>${sectorLabel}</div>
+        <h1 class="serif" style="font-size:clamp(26px,3.6vw,34px);font-weight:500;margin:8px 0 0;letter-spacing:-.01em">${nameLabel}</h1>
+      </div>
+      <span style="font-size:11px;font-weight:600;padding:6px 14px;border-radius:999px;background:#eafaf0;color:var(--green-dark);white-space:nowrap">${statusLabel}</span>
+    </div>
+    <div class="card" style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;overflow:hidden">
+      <div style="padding:20px;text-align:center;border-right:1px solid var(--line)"><div style="font-size:12px;color:var(--muted)">${L.structure}</div><div style="font-size:15px;font-weight:600;margin-top:4px">${structureLabel}</div></div>
+      <div style="padding:20px;text-align:center;border-right:1px solid var(--line)"><div style="font-size:12px;color:var(--muted)">${L.invest}</div><div style="font-size:15px;font-weight:600;margin-top:4px">${amountLabel}</div></div>
+      <div style="padding:20px;text-align:center"><div style="font-size:12px;color:var(--muted)">${L.sector}</div><div style="font-size:15px;font-weight:600;margin-top:4px">${sectorLabel}</div></div>
+    </div>
+    <div style="margin-top:40px">
+      <div style="font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.04em;margin-bottom:10px">${L.overview.toUpperCase()}</div>
+      <div style="font-size:15px;line-height:1.85;color:var(--body)">${overview}</div>
+    </div>
+    <div style="margin-top:32px">
+      <div style="font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.04em;margin-bottom:10px">${L.use.toUpperCase()}</div>
+      <div style="font-size:15px;line-height:1.85;color:var(--body)">${use}</div>
+    </div>
+    <div style="margin-top:44px">
+      <div style="font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.04em;margin-bottom:16px">${L.timeline.toUpperCase()}</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+        ${[L.t1,L.t2,L.t3].map((step,idx)=>`
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div style="width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">✓</div>
+            ${idx<2?'<div style="width:2px;flex:1;background:var(--line);min-height:28px"></div>':''}
+          </div>
+          <div style="padding-bottom:28px;font-size:14px;color:var(--body);padding-top:1px">${step}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+    <div class="card" style="margin-top:24px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--surface)">
+      <div style="font-size:14px;font-weight:500;color:var(--ink)">${L.cta}</div>
+      <div class="btn btn-primary" data-nav="contact" style="font-size:14px;padding:11px 22px">${L.ctaBtn}</div>
+    </div>
+  `;
+  wrap.querySelectorAll('[data-nav]').forEach(el => el.addEventListener('click', () => setPage(el.dataset.nav)));
+}
+
+function openDeal(i) {
+  currentDealIndex = i;
+  renderDealDetail();
+  setPage('deal');
 }
 
 function renderFaqs() {
@@ -565,6 +660,7 @@ function applyLang(lang) {
   document.title = dict['title'];
   renderDeals();
   renderFaqs();
+  renderDealDetail();
   try { localStorage.setItem('fv-lang', lang); } catch (e) {}
 }
 
@@ -623,15 +719,19 @@ window.addEventListener('scroll', () => {
   siteNav.classList.toggle('scrolled', window.scrollY > 8);
 }, { passive: true });
 
-// stat counter
+// stat counter — figures derived from real deal data, not fabricated
 let statsAnimated = false;
 function animateStats() {
   const duration = 900, start = performance.now();
-  const targets = { deals: 2, roi: 18, sectors: 3 };
+  const capitalLakh = deals.reduce((sum, d) => {
+    const m = /([\d.]+)/.exec(d.amountEn);
+    return sum + (m ? parseFloat(m[1]) : 0);
+  }, 0);
+  const targets = { deals: deals.length, capital: capitalLakh, sectors: new Set(deals.map(d => d.sector)).size };
   function step(now) {
     const t = Math.min(1, (now - start) / duration);
     document.getElementById('stat-deals').textContent = Math.round(targets.deals * t);
-    document.getElementById('stat-roi').textContent = Math.round(targets.roi * t);
+    document.getElementById('stat-capital').textContent = Math.round(targets.capital * t);
     document.getElementById('stat-sectors').textContent = Math.round(targets.sectors * t);
     if (t < 1) requestAnimationFrame(step);
   }
@@ -647,9 +747,18 @@ new IntersectionObserver((entries, obs) => {
   });
 }, { threshold: 0.3 }).observe(document.getElementById('stat-strip'));
 
-// contact form
+// contact form — no backend yet, so it opens a pre-filled email to the founder
 document.getElementById('proposal-form').addEventListener('submit', e => {
   e.preventDefault();
+  const fd = new FormData(e.target);
+  const name = (fd.get('name') || '').toString().trim();
+  const business = (fd.get('business') || '').toString().trim();
+  const sector = (fd.get('sector') || '').toString().trim();
+  const message = (fd.get('message') || '').toString().trim();
+  const subject = `Proposal — ${business || name}`;
+  const body = `Name: ${name}\nBusiness: ${business}\nSector: ${sector}\n\n${message}`;
+  const mailto = `mailto:hello@farisventure.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
   document.getElementById('proposal-form').style.display = 'none';
   document.getElementById('form-sent').style.display = 'block';
 });

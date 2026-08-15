@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://farisventure.com/sitemap.xml
