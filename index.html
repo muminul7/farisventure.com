@@ -365,10 +365,10 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     <div style="margin-top:68px">
       <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:24px" data-i18n="about.principlesH2">Our Principles</div>
       <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm)">
-        <div style="padding:24px;background:#fff"><div style="font-size:13px;font-weight:700;color:var(--green-dark);margin-bottom:6px">01</div><div style="font-size:14px;color:var(--body);line-height:1.6" data-i18n="about.p1">A defined maximum investment per deal</div></div>
-        <div style="padding:24px;background:#fff"><div style="font-size:13px;font-weight:700;color:var(--green-dark);margin-bottom:6px">02</div><div style="font-size:14px;color:var(--body);line-height:1.6" data-i18n="about.p2">No guaranteed return is ever promised</div></div>
-        <div style="padding:24px;background:#fff"><div style="font-size:13px;font-weight:700;color:var(--green-dark);margin-bottom:6px">03</div><div style="font-size:14px;color:var(--body);line-height:1.6" data-i18n="about.p3">Only Shariah-compliant structures — no exceptions</div></div>
-        <div style="padding:24px;background:#fff"><div style="font-size:13px;font-weight:700;color:var(--green-dark);margin-bottom:6px">04</div><div style="font-size:14px;color:var(--body);line-height:1.6" data-i18n="about.p4">No investment without business verification</div></div>
+        <div style="padding:24px;background:#fff;position:relative;overflow:hidden"><div class="serif step-num" style="right:auto;left:16px">01</div><div style="font-size:14px;color:var(--body);line-height:1.6;position:relative" data-i18n="about.p1">A defined maximum investment per deal</div></div>
+        <div style="padding:24px;background:#fff;position:relative;overflow:hidden"><div class="serif step-num" style="right:auto;left:16px">02</div><div style="font-size:14px;color:var(--body);line-height:1.6;position:relative" data-i18n="about.p2">No guaranteed return is ever promised</div></div>
+        <div style="padding:24px;background:#fff;position:relative;overflow:hidden"><div class="serif step-num" style="right:auto;left:16px">03</div><div style="font-size:14px;color:var(--body);line-height:1.6;position:relative" data-i18n="about.p3">Only Shariah-compliant structures — no exceptions</div></div>
+        <div style="padding:24px;background:#fff;position:relative;overflow:hidden"><div class="serif step-num" style="right:auto;left:16px">04</div><div style="font-size:14px;color:var(--body);line-height:1.6;position:relative" data-i18n="about.p4">No investment without business verification</div></div>
       </div>
     </div>
 
@@ -886,11 +886,11 @@ function renderSectorBadges() {
   const bn = (n) => currentLang === 'bn' ? String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : n;
   const entries = Object.entries(counts);
 
-  const squares = [];
+  const units = [];
   entries.forEach(([cat, count]) => {
-    for (let i = 0; i < count; i++) squares.push(cat);
+    for (let i = 0; i < count; i++) units.push(cat);
   });
-  const waffle = squares.map((cat, i) => `<div class="waffle-sq" style="width:30px;height:30px;border-radius:7px;background:${CATEGORY_COLORS[cat]};transition:transform .25s var(--ease) ${i * 40}ms,box-shadow .25s ease;transform:scale(0)" data-i="${i}"><title>${CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en']}</title></div>`).join('');
+  const line = units.map((cat, i) => `<div class="line-seg" style="flex:1;height:14px;border-radius:3px;background:${CATEGORY_COLORS[cat]};transition:transform .35s var(--ease) ${i * 45}ms;transform:scaleY(0)" data-i="${i}"><title>${CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en']}</title></div>`).join('');
 
   const legend = entries.map(([cat, count]) => {
     const label = CATEGORY_LABELS[cat][currentLang === 'bn' ? 'bn' : 'en'];
@@ -904,11 +904,11 @@ function renderSectorBadges() {
   }).join('');
 
   el.innerHTML = `
-    <div style="display:flex;flex-wrap:wrap;gap:8px">${waffle}</div>
+    <div style="display:flex;gap:3px">${line}</div>
     <div style="display:flex;flex-wrap:wrap;gap:16px 28px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)">${legend}</div>
   `;
   requestAnimationFrame(() => requestAnimationFrame(() => {
-    el.querySelectorAll('.waffle-sq').forEach(sq => { sq.style.transform = 'scale(1)'; });
+    el.querySelectorAll('.line-seg').forEach(sq => { sq.style.transform = 'scaleY(1)'; });
   }));
 }
 
