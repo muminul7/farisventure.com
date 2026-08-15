@@ -117,6 +117,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 .hero-stat-cell:last-child{border-right:none}
 .stat-cell{border-right:1px solid var(--line)}
 .stat-cell:last-child{border-right:none}
+.step-num{position:absolute;top:-6px;right:16px;font-size:64px;font-weight:600;color:var(--green);opacity:.14;line-height:1;pointer-events:none;letter-spacing:-.02em}
 .stat-cell-dark{border-left:1px solid rgba(255,255,255,.1)}
 .stat-cell-dark:first-child{border-left:none}
 @media (max-width:640px){
@@ -240,20 +241,20 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
   <div class="container" style="max-width:900px;margin-top:128px">
     <div class="serif reveal" style="font-size:clamp(26px,3.4vw,34px);font-weight:500;text-align:center;letter-spacing:-.01em" data-i18n="home.howH2">How It Works</div>
     <div class="g3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px">
-      <div class="card card-hov reveal" style="padding:30px">
-        <div style="font-size:13px;color:var(--green);font-weight:700;letter-spacing:.02em">01</div>
-        <div style="font-size:17px;font-weight:600;margin-top:14px" data-i18n="home.step1Title">Proposal comes in</div>
-        <div style="font-size:14px;color:var(--body);margin-top:8px;line-height:1.7" data-i18n="home.step1Body">Entrepreneurs submit their business proposal and initial financials</div>
+      <div class="card card-hov reveal" style="padding:30px;position:relative;overflow:hidden">
+        <div class="serif step-num">01</div>
+        <div style="font-size:17px;font-weight:600;margin-top:14px;position:relative" data-i18n="home.step1Title">Proposal comes in</div>
+        <div style="font-size:14px;color:var(--body);margin-top:8px;line-height:1.7;position:relative" data-i18n="home.step1Body">Entrepreneurs submit their business proposal and initial financials</div>
       </div>
-      <div class="card card-hov reveal" style="padding:30px">
-        <div style="font-size:13px;color:var(--green);font-weight:700;letter-spacing:.02em">02</div>
-        <div style="font-size:17px;font-weight:600;margin-top:14px" data-i18n="home.step2Title">Diligence &amp; review</div>
-        <div style="font-size:14px;color:var(--body);margin-top:8px;line-height:1.7" data-i18n="home.step2Body">The business, cash flow, and Shariah compliance are verified hands-on</div>
+      <div class="card card-hov reveal" style="padding:30px;position:relative;overflow:hidden">
+        <div class="serif step-num">02</div>
+        <div style="font-size:17px;font-weight:600;margin-top:14px;position:relative" data-i18n="home.step2Title">Diligence &amp; review</div>
+        <div style="font-size:14px;color:var(--body);margin-top:8px;line-height:1.7;position:relative" data-i18n="home.step2Body">The business, cash flow, and Shariah compliance are verified hands-on</div>
       </div>
-      <div class="card card-hov reveal" style="padding:30px">
-        <div style="font-size:13px;color:var(--green);font-weight:700;letter-spacing:.02em">03</div>
-        <div style="font-size:17px;font-weight:600;margin-top:14px" data-i18n="home.step3Title">Capital deployed</div>
-        <div style="font-size:14px;color:var(--body);margin-top:8px;line-height:1.7" data-i18n="home.step3Body">Investment is completed under the agreed structure</div>
+      <div class="card card-hov reveal" style="padding:30px;position:relative;overflow:hidden">
+        <div class="serif step-num">03</div>
+        <div style="font-size:17px;font-weight:600;margin-top:14px;position:relative" data-i18n="home.step3Title">Capital deployed</div>
+        <div style="font-size:14px;color:var(--body);margin-top:8px;line-height:1.7;position:relative" data-i18n="home.step3Body">Investment is completed under the agreed structure</div>
       </div>
     </div>
   </div>
@@ -379,20 +380,16 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
         <a data-nav="portfolio" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;margin-top:20px" data-i18n="about.trackLink">See the full track record →</a>
       </div>
       <div class="card reveal" style="margin-top:36px;padding:32px">
-        <div class="g2" style="display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:start">
-          <div>
-            <div class="serif" id="stat-headline" style="font-size:42px;font-weight:500;color:var(--green-dark);line-height:1">13.5%</div>
-            <div style="font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:8px" data-i18n="about.statHeadline">avg. annualized return, 2023–2025</div>
-          </div>
-          <div>
-            <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700;margin-bottom:18px" data-i18n="about.chartEyebrow">PERFORMANCE BY YEAR</div>
-            <div id="roi-chart" style="height:140px"></div>
-          </div>
+        <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700;margin-bottom:18px" data-i18n="about.chartEyebrow">PERFORMANCE BY YEAR</div>
+        <div id="roi-chart" style="height:140px"></div>
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:10px">
+          <div class="serif" id="stat-headline" style="font-size:34px;font-weight:500;color:var(--green-dark);line-height:1">13.5%</div>
+          <div style="font-size:12.5px;color:var(--muted);line-height:1.5" data-i18n="about.statHeadline">avg. annualized return, 2023–2025</div>
         </div>
-        <div style="margin-top:28px;padding-top:22px;border-top:1px solid var(--line)">
-          <div style="font-size:11px;color:var(--muted);letter-spacing:.03em;margin-bottom:12px;font-weight:700" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
-          <div id="sector-badges"></div>
-        </div>
+      </div>
+      <div class="card reveal" style="margin-top:20px;padding:32px;background:linear-gradient(160deg,#f7f5f0,#fff)">
+        <div style="font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700;margin-bottom:18px" data-i18n="home.sectorsLabel">SECTORS FUNDED SINCE 2023</div>
+        <div id="sector-badges"></div>
       </div>
     </div>
     </div>
@@ -671,7 +668,7 @@ const deals = [
 
 // Historical track record (2023–2025, before this fund) — sourced from the founder's
 // Investment Tracker in Notion. Profit amounts withheld by request; duration + ROI% only.
-const CATEGORY_COLORS = { maleClothing: '#024cff', femaleClothing: '#c2438a', trading: '#00bf63', agro: '#7a5c2e' };
+const CATEGORY_COLORS = { trading: '#00bf63', maleClothing: '#111315', femaleClothing: '#d6a854', agro: '#8aa876' };
 const CATEGORY_LABELS = {
   maleClothing: { en: 'Male Clothing', bn: 'পুরুষদের পোশাক' },
   femaleClothing: { en: 'Female Clothing', bn: 'মহিলাদের পোশাক' },
@@ -819,17 +816,27 @@ function smoothPath(pts) {
   return d;
 }
 
+// 2026 figure is NOT historical — Faris Venture's fund only started in 2026 and neither
+// active deal (SukunLife, Walidain) has returned yet. This is an expected/estimated
+// annualized rate (SukunLife: confirmed 20% over 6mo = 40% annualized; Walidain: ~25%
+// over 6mo estimated, not confirmed, per fund records) — shown dashed and labeled
+// "expected" so it's never confused with the realized 2023-2025 figures.
+const EXPECTED_2026_ROI = 45;
+
 function renderRoiChart() {
   const el = document.getElementById('roi-chart');
   if (!el) return;
   const bn = (n) => currentLang === 'bn' ? String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : n;
+  const expectedWord = currentLang === 'bn' ? 'প্রত্যাশিত' : 'expected';
   const years = [...new Set(trackRecord.map(t => t.year))].sort((a, b) => a - b);
   const yearAvg = years.map(year => {
     const items = trackRecord.filter(t => t.year === year);
     const avg = items.reduce((s, t) => s + t.roi * (12 / t.months), 0) / items.length;
-    return { year, avg };
+    return { year, avg, expected: false };
   });
-  const W = 320, H = 130, padX = 26, padTop = 30, padBottom = 26;
+  yearAvg.push({ year: 2026, avg: EXPECTED_2026_ROI, expected: true });
+
+  const W = 340, H = 130, padX = 26, padTop = 30, padBottom = 26;
   const max = Math.max(...yearAvg.map(y => y.avg));
   const min = Math.min(...yearAvg.map(y => y.avg));
   const range = Math.max(max - min, 1);
@@ -840,20 +847,30 @@ function renderRoiChart() {
     const yy = padTop + (1 - (y.avg - min) / range) * (H - padTop - padBottom);
     return [x, yy];
   });
-  const linePath = smoothPath(points);
-  const areaPath = `${linePath} L${points[n - 1][0]},${H - padBottom} L${points[0][0]},${H - padBottom} Z`;
-  const dots = points.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${i === n - 1 ? 4.5 : 3}" fill="${i === n - 1 ? 'var(--green-dark)' : '#fff'}" stroke="var(--green-dark)" stroke-width="2"/>`).join('');
-  const valueLabels = points.map(([x, y], i) => `<text x="${x}" y="${y - 14}" text-anchor="middle" font-size="13" font-weight="600" fill="${i === n - 1 ? 'var(--green-dark)' : 'var(--ink)'}" font-family="Newsreader,serif">${bn(yearAvg[i].avg.toFixed(1))}%</text>`).join('');
-  const yearLabels = points.map(([x], i) => `<text x="${x}" y="${H - 6}" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--muted)">${bn(yearAvg[i].year)}</text>`).join('');
+  const lastReal = n - 2; // index of 2025 (last actual point before the expected one)
+  const fullPath = smoothPath(points);
+  // approximate split: solid line drawn as smooth path through all-but-last, dashed
+  // segment drawn separately as a straight line from 2025 -> 2026 for clarity
+  const solidPath = smoothPath(points.slice(0, lastReal + 1));
+  const areaPath = `${solidPath} L${points[lastReal][0]},${H - padBottom} L${points[0][0]},${H - padBottom} Z`;
+  const dashedPath = `M${points[lastReal][0]},${points[lastReal][1]} L${points[n - 1][0]},${points[n - 1][1]}`;
+  const dots = points.map(([x, y], i) => {
+    if (yearAvg[i].expected) return `<circle cx="${x}" cy="${y}" r="4.5" fill="#fff" stroke="var(--green-dark)" stroke-width="2" stroke-dasharray="2 2"/>`;
+    return `<circle cx="${x}" cy="${y}" r="${i === lastReal ? 4.5 : 3}" fill="${i === lastReal ? 'var(--green-dark)' : '#fff'}" stroke="var(--green-dark)" stroke-width="2"/>`;
+  }).join('');
+  const valueLabels = points.map(([x, y], i) => `<text x="${x}" y="${y - 14}" text-anchor="middle" font-size="${yearAvg[i].expected ? 11 : 13}" font-weight="600" fill="${yearAvg[i].expected ? 'var(--muted)' : (i === lastReal ? 'var(--green-dark)' : 'var(--ink)')}" font-family="${yearAvg[i].expected ? 'Inter,sans-serif' : 'Newsreader,serif'}">${bn(yearAvg[i].avg.toFixed(1))}%</text>`).join('');
+  const yearLabels = points.map(([x], i) => `<text x="${x}" y="${H - 6}" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--muted)">${bn(yearAvg[i].year)}${yearAvg[i].expected ? '*' : ''}</text>`).join('');
   el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" style="overflow:visible">
     <defs><linearGradient id="roiFill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="var(--green)" stop-opacity=".18"/>
       <stop offset="100%" stop-color="var(--green)" stop-opacity="0"/>
     </linearGradient></defs>
     <path d="${areaPath}" fill="url(#roiFill)"/>
-    <path d="${linePath}" fill="none" stroke="var(--green-dark)" stroke-width="2.25" stroke-linecap="round"/>
+    <path d="${solidPath}" fill="none" stroke="var(--green-dark)" stroke-width="2.25" stroke-linecap="round"/>
+    <path d="${dashedPath}" fill="none" stroke="var(--green-dark)" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 5"/>
     ${dots}${valueLabels}${yearLabels}
-  </svg>`;
+  </svg>
+  <div style="font-size:10.5px;color:var(--muted);margin-top:6px">*${bn(2026)} — ${expectedWord}, ${currentLang==='bn'?'বাস্তবায়িত হয়নি':'not yet realized'}</div>`;
 }
 
 // Home page: sector/category diversity — proportional bar + plain legend (from real trackRecord data)
