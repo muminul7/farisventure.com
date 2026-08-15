@@ -91,7 +91,7 @@ a:hover{color:var(--green)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .mobile-menu{display:none;position:fixed;inset:0 0 auto 0;top:70px;background:#fff;border-bottom:1px solid var(--line);padding:8px 24px 24px;flex-direction:column;gap:2px;z-index:29;box-shadow:var(--shadow-lg);transform:translateY(-8px);opacity:0;pointer-events:none;transition:transform .25s var(--ease),opacity .25s var(--ease)}
-.mobile-menu.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.mobile-menu.open{display:flex;transform:translateY(0);opacity:1;pointer-events:auto}
 .mobile-menu a{padding:14px 4px;font-size:16px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--line)}
 .logo-img{height:42px;width:auto;display:block}
 input,textarea{font-family:inherit}
