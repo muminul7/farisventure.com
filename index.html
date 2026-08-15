@@ -108,6 +108,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 .tl-year-meta{font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em}
 .tl-cards{display:flex;flex-wrap:wrap;gap:14px;margin-top:22px}
 .tl-card{transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.hero-stat-cell{border-right:1px solid rgba(255,255,255,.1)}
+.hero-stat-cell:last-child{border-right:none}
 @media (max-width:640px){
   .tl-cards{flex-direction:column}
   .tl-card{min-width:0!important}
@@ -127,6 +129,9 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
   [style*="padding-top:112px"]{padding-top:96px!important}
   [style*="padding-bottom:140px"]{padding-bottom:80px!important}
   .eyebrow-badge{font-size:11px!important;padding:7px 12px!important;border-radius:var(--r-md)!important;white-space:normal!important}
+  .hero-stats{grid-template-columns:1fr!important}
+  .hero-stat-cell{border-right:none!important;border-bottom:1px solid rgba(255,255,255,.1)}
+  .hero-stat-cell:last-child{border-bottom:none}
 }
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -191,41 +196,38 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
       </div>
     </div>
     <div class="container" style="position:relative;max-width:960px;margin-top:60px">
-      <div id="hero-art" style="position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line);height:min(420px,50vw);background:linear-gradient(135deg,#12151a,#1c2027);display:flex;align-items:center;justify-content:center">
-        <svg viewBox="0 0 960 420" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display:block">
-          <defs>
-            <linearGradient id="hg1" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#00bf63" stop-opacity=".55"/>
-              <stop offset="100%" stop-color="#00bf63" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="hg2" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#024cff" stop-opacity=".45"/>
-              <stop offset="100%" stop-color="#024cff" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          <g opacity=".5" stroke="#ffffff" stroke-opacity=".08">
-            <line x1="0" y1="70" x2="960" y2="70"/><line x1="0" y1="140" x2="960" y2="140"/>
-            <line x1="0" y1="210" x2="960" y2="210"/><line x1="0" y1="280" x2="960" y2="280"/>
-            <line x1="0" y1="350" x2="960" y2="350"/>
-          </g>
-          <polyline points="0,300 120,270 240,285 360,220 480,240 600,160 720,180 840,90 960,110" fill="none" stroke="#00bf63" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
-          <polygon points="0,300 120,270 240,285 360,220 480,240 600,160 720,180 840,90 960,110 960,420 0,420" fill="url(#hg1)"/>
-          <polyline points="0,340 120,335 240,300 360,310 480,260 600,270 720,210 840,225 960,170" fill="none" stroke="#024cff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
-          <polygon points="0,340 120,335 240,300 360,310 480,260 600,270 720,210 840,225 960,170 960,420 0,420" fill="url(#hg2)"/>
-          <g fill="#fff">
-            <circle cx="840" cy="90" r="5"/><circle cx="960" cy="110" r="5"/>
-          </g>
-        </svg>
-        <div style="position:absolute;left:28px;bottom:24px;color:rgba(255,255,255,.85);font-size:13px;letter-spacing:.04em;font-weight:500" data-i18n="home.heroCaption">CAPITAL DEPLOYED, YEAR OVER YEAR</div>
+      <div id="hero-art" style="position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);background:linear-gradient(135deg,#12151a,#1c2027)">
+        <div style="position:relative;height:min(300px,40vw)">
+          <svg viewBox="0 0 960 300" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style="display:block">
+            <defs>
+              <linearGradient id="hg1" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#00bf63" stop-opacity=".55"/>
+                <stop offset="100%" stop-color="#00bf63" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="hg2" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#024cff" stop-opacity=".45"/>
+                <stop offset="100%" stop-color="#024cff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g opacity=".5" stroke="#ffffff" stroke-opacity=".08">
+              <line x1="0" y1="50" x2="960" y2="50"/><line x1="0" y1="100" x2="960" y2="100"/>
+              <line x1="0" y1="150" x2="960" y2="150"/><line x1="0" y1="200" x2="960" y2="200"/>
+              <line x1="0" y1="250" x2="960" y2="250"/>
+            </g>
+            <polyline points="0,215 120,193 240,204 360,157 480,171 600,114 720,129 840,64 960,79" fill="none" stroke="#00bf63" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+            <polygon points="0,215 120,193 240,204 360,157 480,171 600,114 720,129 840,64 960,79 960,300 0,300" fill="url(#hg1)"/>
+            <polyline points="0,243 120,239 240,214 360,221 480,186 600,193 720,150 840,161 960,121" fill="none" stroke="#024cff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
+            <polygon points="0,243 120,239 240,214 360,221 480,186 600,193 720,150 840,161 960,121 960,300 0,300" fill="url(#hg2)"/>
+            <g fill="#fff"><circle cx="840" cy="64" r="5"/><circle cx="960" cy="79" r="5"/></g>
+          </svg>
+          <div style="position:absolute;left:24px;top:20px;color:rgba(255,255,255,.85);font-size:12.5px;letter-spacing:.05em;font-weight:600" data-i18n="home.heroCaption">CAPITAL DEPLOYED, YEAR OVER YEAR</div>
+        </div>
+        <div class="hero-stats" style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.1)">
+          <div class="hero-stat-cell" style="padding:26px 20px;text-align:center"><div class="serif" id="stat-deals" style="font-size:30px;font-weight:500;color:#fff">0</div><div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:5px;letter-spacing:.02em" data-i18n="home.statDeals">Businesses Funded</div></div>
+          <div class="hero-stat-cell" style="padding:26px 20px;text-align:center"><div class="serif" style="font-size:30px;font-weight:500;color:var(--green)">৳<span id="stat-capital">0</span>L</div><div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:5px;letter-spacing:.02em" data-i18n="home.statCapital">Total Capital Deployed</div></div>
+          <div class="hero-stat-cell" style="padding:26px 20px;text-align:center"><div class="serif" style="font-size:30px;font-weight:500;color:#fff"><span id="stat-roi">0</span>%</div><div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:5px;letter-spacing:.02em" data-i18n="home.statRoi">Historical ROI</div></div>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div id="stat-strip" class="container" style="max-width:820px;margin-top:52px;position:relative;z-index:2">
-    <div class="g3 card" style="display:grid;grid-template-columns:repeat(3,1fr);border-radius:var(--r-lg);box-shadow:var(--shadow-md)">
-      <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" id="stat-deals" style="font-size:34px;font-weight:500;color:var(--ink)">0</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statDeals">Businesses Funded</div></div>
-      <div style="padding:32px 24px;text-align:center;border-right:1px solid var(--line)"><div class="serif" style="font-size:34px;font-weight:500;color:var(--green-dark)">৳<span id="stat-capital">0</span>L</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statCapital">Total Capital Deployed</div></div>
-      <div style="padding:32px 24px;text-align:center"><div class="serif" style="font-size:34px;font-weight:500;color:var(--ink)"><span id="stat-roi">0</span>%</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em" data-i18n="home.statRoi">Historical ROI</div></div>
     </div>
   </div>
 
@@ -279,22 +281,39 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
   </div>
 
   <div class="container" style="max-width:720px;margin-top:128px;text-align:center">
-    <div style="font-size:12.5px;color:var(--muted);letter-spacing:.06em;font-weight:600" data-i18n="about.eyebrow">ABOUT US</div>
-    <div class="serif reveal" style="font-size:clamp(22px,3vw,28px);line-height:1.65;font-weight:500;color:var(--ink);margin-top:16px" data-i18n="about.quote">The goal is simple: prove that disciplined, Shariah-first capital can move faster and fairer than conventional interest-based financing for Bangladeshi entrepreneurs — without hiding the risk.</div>
-    <a data-nav="about" style="display:inline-flex;font-size:14px;font-weight:600;margin-top:20px" data-i18n="home.aboutLink">Read our full story →</a>
-  </div>
-
-  <div class="container" style="max-width:780px;margin-top:128px;text-align:center">
-    <svg width="28" height="22" viewBox="0 0 28 22" fill="none" style="opacity:.15;margin-bottom:20px"><path d="M0 22V13.5C0 6 4.5 1 12 0L13 3.5C8 5 6 8 6 12H12V22H0ZM16 22V13.5C16 6 20.5 1 28 0L29 3.5C24 5 22 8 22 12H28V22H16Z" fill="black"/></svg>
-    <div class="serif reveal" style="font-size:clamp(21px,2.6vw,27px);line-height:1.6;font-weight:500;color:var(--ink)" data-i18n="home.quote">"Faris Venture didn't just fund my business — they understood the model before offering a single taka."</div>
-    <div style="font-size:14px;color:var(--muted);margin-top:18px" data-i18n="home.quoteBy">Founder, portfolio business — Trading sector</div>
+    <svg width="28" height="22" viewBox="0 0 28 22" fill="none" style="opacity:.15;margin-bottom:24px"><path d="M0 22V13.5C0 6 4.5 1 12 0L13 3.5C8 5 6 8 6 12H12V22H0ZM16 22V13.5C16 6 20.5 1 28 0L29 3.5C24 5 22 8 22 12H28V22H16Z" fill="black"/></svg>
+    <div id="quote-carousel" class="reveal" style="min-height:150px;position:relative">
+      <div class="qc-slide" data-slide="0" style="transition:opacity .5s ease">
+        <div class="serif" style="font-size:clamp(20px,2.6vw,26px);line-height:1.6;font-weight:500;color:var(--ink)" data-i18n="home.quote">"Faris Venture didn't just fund my business — they understood the model before offering a single taka."</div>
+        <div style="font-size:13.5px;color:var(--muted);margin-top:16px" data-i18n="home.quoteBy">Founder, portfolio business — Trading sector</div>
+      </div>
+      <div class="qc-slide" data-slide="1" style="transition:opacity .5s ease;display:none">
+        <div class="serif" style="font-size:clamp(20px,2.6vw,26px);line-height:1.6;font-weight:500;color:var(--ink)" data-i18n="home.quote2">"No guaranteed return is ever promised. Every entrepreneur sees the same terms, on the same document, before a single taka moves."</div>
+        <div style="font-size:13.5px;color:var(--muted);margin-top:16px" data-i18n="home.quote2By">Faris Venture — Fund Principles</div>
+      </div>
+      <div class="qc-slide" data-slide="2" style="transition:opacity .5s ease;display:none">
+        <div class="serif" style="font-size:clamp(20px,2.6vw,26px);line-height:1.6;font-weight:500;color:var(--ink)" data-i18n="home.quote3">"13.5% average return across 7 businesses since 2023 — profit and risk shared transparently, deal by deal."</div>
+        <div style="font-size:13.5px;color:var(--muted);margin-top:16px" data-i18n="home.quote3By">The Track Record, 2023–2026</div>
+      </div>
+    </div>
+    <div id="qc-dots" style="display:flex;justify-content:center;gap:8px;margin-top:28px"></div>
   </div>
 
   <div class="container" style="max-width:900px;margin-top:128px;margin-bottom:160px">
-    <div class="reveal" style="padding:56px 40px;border-radius:var(--r-lg);text-align:center;background:linear-gradient(135deg,#0e1013,#181b1f);color:#fff;box-shadow:var(--shadow-lg)">
-      <div class="serif" style="font-size:clamp(22px,2.8vw,28px);font-weight:500" data-i18n="home.ctaH2">Submit Your Business for Consideration</div>
-      <div style="font-size:14px;color:rgba(255,255,255,.6);margin-top:10px" data-i18n="home.ctaSub">Ticket size BDT 3–7 lakh — under Shariah-compliant structures</div>
-      <div class="btn btn-light" style="margin-top:24px" data-nav="contact" data-i18n="home.cta1">Submit a Proposal</div>
+    <div class="reveal" style="position:relative;overflow:hidden;padding:clamp(48px,7vw,72px) 40px;border-radius:var(--r-lg);text-align:center;background:linear-gradient(160deg,#0b0d10,#181c22);color:#fff;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.06)">
+      <div class="dot-grid" style="background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1px);mask-image:radial-gradient(ellipse 60% 70% at 50% 30%,#000 30%,transparent 80%)"></div>
+      <div class="glow" style="top:-140px;left:50%;transform:translateX(-50%);width:640px;height:340px;background:radial-gradient(closest-side,rgba(0,191,99,.28),transparent),radial-gradient(closest-side at 70% 40%,rgba(2,76,255,.20),transparent)"></div>
+      <div style="position:relative">
+        <div style="display:inline-flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.08em;font-weight:700;color:rgba(255,255,255,.55);padding:7px 14px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.14);margin-bottom:20px">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0"></span>FOR ENTREPRENEURS
+        </div>
+        <div class="serif" style="font-size:clamp(24px,3.4vw,34px);font-weight:500;line-height:1.25" data-i18n="home.ctaH2">Submit Your Business for Consideration</div>
+        <div style="font-size:15px;color:rgba(255,255,255,.62);margin-top:12px" data-i18n="home.ctaSub">Ticket size BDT 3–7 lakh — under Shariah-compliant structures</div>
+        <div class="btn btn-light" style="margin-top:28px;gap:10px" data-nav="contact">
+          <span data-i18n="home.cta1">Submit a Proposal</span><span aria-hidden="true">→</span>
+        </div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,.4);margin-top:18px" data-i18n="home.ctaFine">No obligation — reviewed within a few business days</div>
+      </div>
     </div>
   </div>
 </div>
@@ -309,8 +328,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     <h1 class="serif reveal" style="font-size:clamp(32px,4.4vw,42px);font-weight:500;margin-top:14px;letter-spacing:-.01em" data-i18n="about.h1">Who We Are, What We Do</h1>
     <div style="font-size:16px;line-height:1.9;color:var(--body);margin-top:22px" data-i18n="about.body">Faris Venture is a founder-backed halal investment venture that deploys capital into vetted Bangladeshi SMEs under Shariah-compliant structures. It currently operates as a single-investor fund. Every deal carries a defined agreement, a defined cap, and a clear expectation — nothing beyond that.</div>
 
-    <div style="border-radius:var(--r-lg);overflow:hidden;margin-top:40px;border:1px solid var(--line);height:320px;background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;box-shadow:var(--shadow-sm)" data-i18n="about.imgPlaceholder">
-      Founder or team photo placeholder
+    <div style="border-radius:var(--r-lg);overflow:hidden;margin-top:40px;border:1px solid var(--line);box-shadow:var(--shadow-sm)">
+      <img src="assets/founder.png" alt="Faris Venture Founder" style="width:100%;height:380px;object-fit:cover;object-position:center 20%;display:block">
     </div>
 
     <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);line-height:1.75;font-weight:500;color:var(--ink);margin-top:52px" data-i18n="about.quote">The goal is simple: prove that disciplined, Shariah-first capital can move faster and fairer than conventional interest-based financing for Bangladeshi entrepreneurs — without hiding the risk.</div>
@@ -493,8 +512,13 @@ const I18N = {
     'home.why3Title': 'HONEST TERMS', 'home.why3Body': 'No guaranteed returns are ever promised — profit and risk are shared transparently.',
     'home.quote': '"Faris Venture didn’t just fund my business — they understood the model before offering a single taka."',
     'home.quoteBy': 'Founder, portfolio business — Trading sector',
+    'home.quote2': '"No guaranteed return is ever promised. Every entrepreneur sees the same terms, on the same document, before a single taka moves."',
+    'home.quote2By': 'Faris Venture — Fund Principles',
+    'home.quote3': '"13.5% average return across 7 businesses since 2023 — profit and risk shared transparently, deal by deal."',
+    'home.quote3By': 'The Track Record, 2023–2026',
     'home.ctaH2': 'Submit Your Business for Consideration',
     'home.ctaSub': 'Ticket size BDT 3–7 lakh — under Shariah-compliant structures',
+    'home.ctaFine': 'No obligation — reviewed within a few business days',
     'about.eyebrow': 'ABOUT US', 'about.h1': 'Who We Are, What We Do',
     'about.body': "Faris Venture is a founder-backed halal investment venture that deploys capital into vetted Bangladeshi SMEs under Shariah-compliant structures. It currently operates as a single-investor fund. Every deal carries a defined agreement, a defined cap, and a clear expectation — nothing beyond that.",
     'about.imgPlaceholder': 'Founder or team photo placeholder',
@@ -550,8 +574,13 @@ const I18N = {
     'home.why3Title': 'সৎ শর্ত', 'home.why3Body': 'নিশ্চিত রিটার্নের প্রতিশ্রুতি কখনোই দেওয়া হয় না — লাভ ও ঝুঁকি উভয় পক্ষের মধ্যে স্বচ্ছভাবে ভাগ হয়।',
     'home.quote': '"ফারিস ভেঞ্চার শুধু আমার ব্যবসায় পুঁজি দেয়নি — একটি টাকা দেওয়ার আগে পুরো মডেলটা বুঝে নিয়েছিল।"',
     'home.quoteBy': 'ফাউন্ডার, পোর্টফোলিও ব্যবসা — ট্রেডিং সেক্টর',
+    'home.quote2': '"নিশ্চিত রিটার্নের প্রতিশ্রুতি কখনোই দেওয়া হয় না। প্রতিটি উদ্যোক্তা একই শর্ত, একই ডকুমেন্টে দেখেন, একটি টাকা যাওয়ার আগেই।"',
+    'home.quote2By': 'ফারিস ভেঞ্চার — ফান্ডের নীতিমালা',
+    'home.quote3': '"২০২৩ সাল থেকে ৭টা ব্যবসায় গড়ে ১৩.৫% রিটার্ন — লাভ ও ঝুঁকি ডিল অনুযায়ী স্বচ্ছভাবে ভাগ করা হয়েছে।"',
+    'home.quote3By': 'ট্র্যাক রেকর্ড, ২০২৩–২০২৬',
     'home.ctaH2': 'আপনার ব্যবসা বিবেচনার জন্য জমা দিন',
     'home.ctaSub': 'টিকেট সাইজ ৳৩–৭ লাখ — শরিয়াহ-সম্মত কাঠামোর অধীনে',
+    'home.ctaFine': 'কোনো বাধ্যবাধকতা নেই — কয়েক কার্যদিবসের মধ্যে পর্যালোচনা করা হবে',
     'about.eyebrow': 'আমাদের সম্পর্কে', 'about.h1': 'আমরা কারা, কী করি',
     'about.body': 'ফারিস ভেঞ্চার একটি ফাউন্ডার-ব্যাকড হালাল বিনিয়োগ উদ্যোগ — যাচাইকৃত বাংলাদেশি SME-তে শরিয়াহ-সম্মত কাঠামোর অধীনে পুঁজি বিনিয়োগ করা হয়। বর্তমানে এটি একক-বিনিয়োগকারী ফান্ড হিসেবে পরিচালিত হয়। প্রতিটি ডিলের পেছনে একটি নির্দিষ্ট চুক্তি, একটি নির্দিষ্ট সীমা, আর একটি স্পষ্ট প্রত্যাশা থাকে — এর বাইরে কিছু নয়।',
     'about.imgPlaceholder': 'ফাউন্ডার বা টিমের ছবি বসবে',
@@ -977,7 +1006,7 @@ new IntersectionObserver((entries, obs) => {
       obs.disconnect();
     }
   });
-}, { threshold: 0.3 }).observe(document.getElementById('stat-strip'));
+}, { threshold: 0.3 }).observe(document.getElementById('hero-art'));
 
 // contact form — no backend yet, so it opens a pre-filled email to the founder
 document.getElementById('proposal-form').addEventListener('submit', e => {
@@ -1017,6 +1046,31 @@ if (matchMedia('(hover: hover)').matches) {
     btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
 }
+
+// quote carousel — auto-rotates, pauses on hover, dots are clickable
+(function () {
+  const wrap = document.getElementById('quote-carousel');
+  const dotsEl = document.getElementById('qc-dots');
+  if (!wrap || !dotsEl) return;
+  const slides = Array.from(wrap.querySelectorAll('.qc-slide'));
+  let i = 0, timer = null;
+  dotsEl.innerHTML = slides.map((_, idx) =>
+    `<button type="button" class="qc-dot" data-i="${idx}" aria-label="Slide ${idx + 1}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;background:${idx === 0 ? 'var(--ink)' : 'var(--line-2)'};transition:background .3s ease"></button>`
+  ).join('');
+  const dots = Array.from(dotsEl.querySelectorAll('.qc-dot'));
+  function show(idx) {
+    slides.forEach((s, si) => { s.style.display = si === idx ? '' : 'none'; });
+    dots.forEach((d, di) => { d.style.background = di === idx ? 'var(--ink)' : 'var(--line-2)'; });
+    i = idx;
+  }
+  function next() { show((i + 1) % slides.length); }
+  function start() { stop(); timer = setInterval(next, 5000); }
+  function stop() { if (timer) clearInterval(timer); }
+  dots.forEach(d => d.addEventListener('click', () => { show(+d.dataset.i); start(); }));
+  wrap.addEventListener('mouseenter', stop);
+  wrap.addEventListener('mouseleave', start);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) start();
+})();
 </script>
 </body>
 </html>
