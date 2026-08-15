@@ -270,14 +270,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 
     <div style="margin-top:68px">
       <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
-      <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 9 halal SME investments across 5 businesses, deploying roughly BDT 41 lakh and realizing about BDT 5.66 lakh in profit — an overall return of ~13.8%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
-      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px">
-        <span style="font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line)">Walidain</span>
-        <span style="font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line)">Sharif Fashion</span>
-        <span style="font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line)">Shai Tea</span>
-        <span style="font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line)">Muin Shop</span>
-        <span style="font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line)">Hygienic Agro</span>
-      </div>
+      <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 9 halal SME investments across 5 businesses, with an overall return of ~13.8%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
+      <a data-nav="portfolio" style="display:inline-flex;font-size:14px;font-weight:600;margin-top:14px" data-i18n="about.trackLink">See the full track record →</a>
     </div>
     </div>
   </div>
@@ -296,6 +290,12 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     <div class="g2" id="portfolio-full" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px"></div>
     <div style="margin-top:20px;padding:26px;border:1.5px dashed #d5d8dc;border-radius:var(--r-md);text-align:center;color:var(--muted);font-size:13px" data-i18n="portfolio.more">More deals coming soon — currently 2 active, ticket size BDT 3–7 lakh</div>
     <div style="margin-top:16px;font-size:13px;color:var(--muted)" data-i18n="portfolio.namesNote">Business names will be updated here once finalized — currently shown as placeholders.</div>
+
+    <div style="margin-top:96px">
+      <div class="serif reveal" style="font-size:clamp(24px,3.2vw,30px);font-weight:500;letter-spacing:-.01em" data-i18n="portfolio.trackH2">Track Record Before Faris Venture</div>
+      <div style="font-size:14px;color:var(--body);margin-top:10px;max-width:560px" data-i18n="portfolio.trackSub">Completed halal SME investments from 2023–2025, before this fund existed. Duration and return shown per deal — profit amounts are kept private.</div>
+      <div class="g3" id="track-record" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px"></div>
+    </div>
     </div>
   </div>
 </div>
@@ -421,11 +421,14 @@ const I18N = {
     'about.p1': 'A defined maximum investment per deal', 'about.p2': 'No guaranteed return is ever promised',
     'about.p3': 'Only Shariah-compliant structures — no exceptions', 'about.p4': 'No investment without business verification',
     'about.trackH2': 'Track Record Before Faris Venture',
-    'about.trackBody': "Between 2023 and 2025, the founder completed 9 halal SME investments across 5 businesses, deploying roughly BDT 41 lakh and realizing about BDT 5.66 lakh in profit — an overall return of ~13.8%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.",
+    'about.trackBody': "Between 2023 and 2025, the founder completed 9 halal SME investments across 5 businesses, with an overall return of ~13.8%. One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.",
+    'about.trackLink': 'See the full track record →',
     'portfolio.eyebrow': 'PORTFOLIO', 'portfolio.h1': 'Our Investments',
     'portfolio.sub': 'Every deal is completed through verification and a defined Shariah-compliant structure — process, not guesswork.',
     'portfolio.more': 'More deals coming soon — currently 2 active, ticket size BDT 3–7 lakh',
     'portfolio.namesNote': 'Business names will be updated here once finalized — currently shown as placeholders.',
+    'portfolio.trackH2': 'Track Record Before Faris Venture',
+    'portfolio.trackSub': 'Completed halal SME investments from 2023–2025, before this fund existed. Duration and return shown per deal — profit amounts are kept private.',
     'contact.eyebrow': 'FOR ENTREPRENEURS', 'contact.h1': 'Submit a Proposal',
     'contact.sub': 'If your business fits the criteria below, you can send us a proposal.',
     'contact.forTitle': '✓ What We Look For', 'contact.forBody': 'Ongoing, verifiable cash flow<br>A Shariah-compliant business model<br>A clear plan for use of funds',
@@ -470,11 +473,14 @@ const I18N = {
     'about.p1': 'প্রতি ডিলে সর্বোচ্চ বিনিয়োগের একটি নির্দিষ্ট সীমা', 'about.p2': 'নিশ্চিত রিটার্নের প্রতিশ্রুতি কখনোই দেওয়া হয় না',
     'about.p3': 'শুধুমাত্র শরিয়াহ-সম্মত কাঠামো — কোনো ব্যতিক্রম নয়', 'about.p4': 'ব্যবসা যাচাই ছাড়া কোনো বিনিয়োগ নয়',
     'about.trackH2': 'ফারিস ভেঞ্চারের আগের ট্র্যাক রেকর্ড',
-    'about.trackBody': '২০২৩ থেকে ২০২৫ সালের মধ্যে, ফাউন্ডার ৫টা ব্যবসায় ৯টা হালাল SME বিনিয়োগ সম্পন্ন করেছেন — প্রায় ৳৪১ লাখ বিনিয়োগ করে প্রায় ৳৫.৬৬ লাখ মুনাফা অর্জন করেছেন, যা মোট প্রায় ১৩.৮% রিটার্ন। ওই সময়ের একটা শিক্ষা সরাসরি ফারিস ভেঞ্চারের নিয়ম তৈরি করেছে: সবচেয়ে বড় একক টিকেট সবচেয়ে দুর্বল রিটার্ন দিয়েছিল। তাই এখানে কোনো ডিল ৳৭ লাখের বেশি হয় না।',
+    'about.trackBody': '২০২৩ থেকে ২০২৫ সালের মধ্যে, ফাউন্ডার ৫টা ব্যবসায় ৯টা হালাল SME বিনিয়োগ সম্পন্ন করেছেন, যার মোট রিটার্ন প্রায় ১৩.৮%। ওই সময়ের একটা শিক্ষা সরাসরি ফারিস ভেঞ্চারের নিয়ম তৈরি করেছে: সবচেয়ে বড় একক টিকেট সবচেয়ে দুর্বল রিটার্ন দিয়েছিল। তাই এখানে কোনো ডিল ৳৭ লাখের বেশি হয় না।',
+    'about.trackLink': 'সম্পূর্ণ ট্র্যাক রেকর্ড দেখুন →',
     'portfolio.eyebrow': 'পোর্টফোলিও', 'portfolio.h1': 'আমাদের বিনিয়োগ',
     'portfolio.sub': 'প্রতিটি ডিল যাচাই ও একটি নির্দিষ্ট শরিয়াহ-সম্মত কাঠামোর মধ্য দিয়ে সম্পন্ন হয় — অনুমান নয়, প্রক্রিয়া।',
     'portfolio.more': 'আরও ডিল শীঘ্রই আসছে — বর্তমানে ২টি সক্রিয়, টিকেট সাইজ ৳৩–৭ লাখ',
     'portfolio.namesNote': 'ব্যবসার নাম চূড়ান্ত হলে এখানে আপডেট করা হবে — বর্তমানে placeholder হিসেবে দেখানো হচ্ছে।',
+    'portfolio.trackH2': 'ফারিস ভেঞ্চারের আগের ট্র্যাক রেকর্ড',
+    'portfolio.trackSub': '২০২৩–২০২৫ সালের সম্পন্ন হালাল SME বিনিয়োগ, এই ফান্ড শুরু হওয়ার আগে। প্রতি ডিলের মেয়াদ ও রিটার্ন দেখানো হয়েছে — মুনাফার পরিমাণ প্রাইভেট রাখা হয়েছে।',
     'contact.eyebrow': 'উদ্যোক্তাদের জন্য', 'contact.h1': 'প্রস্তাব জমা দিন',
     'contact.sub': 'নিচের criteria-তে আপনার ব্যবসা ফিট করলে, আমাদের প্রস্তাব পাঠাতে পারেন।',
     'contact.forTitle': '✓ যা আমরা খুঁজি', 'contact.forBody': 'চলমান, যাচাইযোগ্য ক্যাশ ফ্লো<br>একটি শরিয়াহ-সম্মত বিজনেস মডেল<br>তহবিল ব্যবহারের স্পষ্ট পরিকল্পনা',
@@ -505,6 +511,20 @@ const deals = [
     overviewBn: 'Walidain পাঞ্জাবির কাপড়ের একটি ট্রেডিং ব্যবসা। বিনিয়োগটি ২০২৬ সালের আগস্ট মাসে একটি মুরাবাহা কাঠামোর অধীনে বিতরণ করা হয়েছে, ৬ মাস মেয়াদে, বিতরণের আগেই নির্ধারিত একটি নিশ্চিত মুনাফার হার সহ।',
     useEn: 'Capital was deployed under a Murabaha structure to finance the purchase of panjabi fabric stock, with a defined repayment schedule agreed before disbursement.',
     useBn: 'পাঞ্জাবির কাপড়ের স্টক কেনার জন্য একটি মুরাবাহা কাঠামোর অধীনে পুঁজি বিনিয়োগ করা হয়েছে, বিতরণের আগেই নির্ধারিত একটি পরিশোধ সময়সূচি সহ।' },
+];
+
+// Historical track record (2023–2025, before this fund) — sourced from the founder's
+// Investment Tracker in Notion. Profit amounts withheld by request; duration + ROI% only.
+const trackRecord = [
+  { nameEn: 'Shai Tea', nameBn: 'Shai Tea', round: null, durationEn: '20 months', durationBn: '২০ মাস', roi: '28.75%' },
+  { nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 1, durationEn: '3 months', durationBn: '৩ মাস', roi: '15.9%' },
+  { nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', round: 2, durationEn: '6 months', durationBn: '৬ মাস', roi: '13.94%' },
+  { nameEn: 'Muin Shop', nameBn: 'Muin Shop', round: null, durationEn: '2 months', durationBn: '২ মাস', roi: '6%' },
+  { nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 1, durationEn: '4 months', durationBn: '৪ মাস', roi: '6.2%' },
+  { nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', round: 2, durationEn: '1 month', durationBn: '১ মাস', roi: '2%' },
+  { nameEn: 'Walidain', nameBn: 'Walidain', round: 1, durationEn: '4 months', durationBn: '৪ মাস', roi: '12.5%' },
+  { nameEn: 'Walidain', nameBn: 'Walidain', round: 2, durationEn: '6 months', durationBn: '৬ মাস', roi: '20%' },
+  { nameEn: 'Walidain', nameBn: 'Walidain', round: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: '10%' },
 ];
 
 const faqs = [
@@ -565,6 +585,25 @@ function renderDeals() {
     el.addEventListener('click', () => openDeal(+el.dataset.dealOpen));
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDeal(+el.dataset.dealOpen); } });
   });
+}
+
+function renderTrackRecord() {
+  const el = document.getElementById('track-record');
+  if (!el) return;
+  const durationWord = currentLang === 'bn' ? 'মেয়াদ' : 'Duration';
+  const roiWord = currentLang === 'bn' ? 'রিটার্ন' : 'Return';
+  const roundWord = currentLang === 'bn' ? 'রাউন্ড' : 'Round';
+  el.innerHTML = trackRecord.map(t => {
+    const name = currentLang === 'bn' ? t.nameBn : t.nameEn;
+    const duration = currentLang === 'bn' ? t.durationBn : t.durationEn;
+    return `<div class="card card-hov" style="padding:22px">
+      <div style="font-size:15px;font-weight:600">${name}${t.round ? ` <span style="font-weight:500;color:var(--muted);font-size:13px">— ${roundWord} ${t.round}</span>` : ''}</div>
+      <div style="display:flex;gap:20px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
+        <div><div style="font-size:11.5px;color:var(--muted)">${durationWord}</div><div style="font-size:14px;font-weight:500;margin-top:2px">${duration}</div></div>
+        <div><div style="font-size:11.5px;color:var(--muted)">${roiWord}</div><div style="font-size:14px;font-weight:600;margin-top:2px;color:var(--green-dark)">${t.roi}</div></div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 let currentDealIndex = null;
@@ -677,6 +716,7 @@ function applyLang(lang) {
   renderDeals();
   renderFaqs();
   renderDealDetail();
+  renderTrackRecord();
   try { localStorage.setItem('fv-lang', lang); } catch (e) {}
 }
 
