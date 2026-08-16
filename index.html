@@ -1059,7 +1059,7 @@ function setPage(p) {
     a.classList.toggle('active', a.dataset.nav === p);
   });
   window.scrollTo(0, 0);
-  history.replaceState(null, '', p === 'home' ? '#' : '#' + p);
+  history.replaceState(null, '', p === 'home' ? location.pathname : '#' + p);
   mobileMenu.classList.remove('open');
   hamburger.classList.remove('open');
   hamburger.setAttribute('aria-expanded', 'false');
