@@ -27,6 +27,24 @@ if (dealCount === 0) {
   console.log(`Seeded ${deals.length} deals.`);
 } else {
   console.log(`Deals table already has ${dealCount} rows — skipped.`);
+
+  // One-off correction: the SukunLife deal was originally seeded with the
+  // wrong description (said "steel materials" — actually office devices and
+  // decoration for their Ruqyah wellness center). Fix it in place if it's
+  // still carrying the old text, so this heals live data without needing
+  // an admin login.
+  const stale = db.prepare("SELECT id FROM deals WHERE nameEn = 'SukunLife' AND descEn LIKE '%steel materials%'").get();
+  if (stale) {
+    db.prepare(`UPDATE deals SET
+      descEn = 'A Ruqyah-based spiritual wellness service, Murabaha financed for office devices and decoration',
+      descBn = 'একটা রুকইয়াহ-ভিত্তিক স্পিরিচুয়াল ওয়েলনেস সার্ভিস, অফিস ডিভাইস আর ডেকোরেশনের জন্য মুরাবাহায় অর্থায়ন করা',
+      overviewEn = 'SukunLife is a Ruqyah-based spiritual wellness service — offering diagnosis, courses, and appointments — and the first deal funded under this SME segment. The Murabaha financed office devices and interior decoration for their center, deployed in July 2026 with a 6-month term and a confirmed profit rate agreed before disbursement.',
+      overviewBn = 'SukunLife একটা রুকইয়াহ-ভিত্তিক স্পিরিচুয়াল ওয়েলনেস সার্ভিস — ডায়াগনোসিস, কোর্স, আর অ্যাপয়েন্টমেন্ট নিয়ে কাজ করে — আর এই SME সেগমেন্টের আওতায় ফান্ড হওয়া প্রথম ডিল। মুরাবাহাটা গেছে তাদের সেন্টারের জন্য অফিস ডিভাইস আর ইন্টেরিয়র ডেকোরেশনের খরচ মেটাতে। বিতরণ হয়েছে ২০২৬-এর জুলাইয়ে, ৬ মাস মেয়াদে, বিতরণের আগেই ঠিক করা একটা নিশ্চিত মুনাফার হার নিয়ে।',
+      useEn = 'Capital was deployed under a Murabaha structure to finance office devices and interior decoration for SukunLife''s premises, secured with a post-dated cheque and a defined repayment schedule agreed before disbursement.',
+      useBn = 'SukunLife-এর প্রাঙ্গণের জন্য অফিস ডিভাইস আর ইন্টেরিয়র ডেকোরেশনের খরচ মেটাতে মুরাবাহা কাঠামোর আওতায় পুঁজি গেছে। নিরাপত্তা হিসেবে আছে post-dated চেক, আর বিতরণের আগেই ঠিক করা একটা পরিশোধের সময়সূচি।'
+      WHERE id = ?`).run(stale.id);
+    console.log('Corrected stale SukunLife description (steel materials -> office devices and decoration).');
+  }
 }
 
 if (trackCount === 0) {
