@@ -178,6 +178,10 @@
               <div><label>Duration (BN)</label><input id="track-durationBn" placeholder="৩ মাস" required></div>
             </div>
             <div class="row">
+              <div><label>Amount invested (EN)</label><input id="track-amountEn" placeholder="BDT 3 lakh"></div>
+              <div><label>Amount invested (BN)</label><input id="track-amountBn" placeholder="৳৩ লাখ"></div>
+            </div>
+            <div class="row">
               <div><label>ROI %</label><input id="track-roi" type="number" step="0.01" required></div>
             </div>
             <button class="btn btn-primary" type="submit">Save entry</button>
@@ -369,6 +373,8 @@ function editTrack(t) {
   document.getElementById('track-months').value = t.months;
   document.getElementById('track-durationEn').value = t.durationEn;
   document.getElementById('track-durationBn').value = t.durationBn;
+  document.getElementById('track-amountEn').value = t.amountEn || '';
+  document.getElementById('track-amountBn').value = t.amountBn || '';
   document.getElementById('track-roi').value = t.roi;
   showSection('track');
   window.scrollTo(0, 0);
@@ -386,6 +392,8 @@ async function saveTrack(e) {
     months: document.getElementById('track-months').value,
     durationEn: document.getElementById('track-durationEn').value,
     durationBn: document.getElementById('track-durationBn').value,
+    amountEn: document.getElementById('track-amountEn').value,
+    amountBn: document.getElementById('track-amountBn').value,
     roi: document.getElementById('track-roi').value,
   };
   const url = id ? `${API}/api/track-record/${id}` : `${API}/api/track-record`;

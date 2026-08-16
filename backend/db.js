@@ -36,7 +36,9 @@ CREATE TABLE IF NOT EXISTS track_record (
   months INTEGER NOT NULL,
   durationEn TEXT NOT NULL,
   durationBn TEXT NOT NULL,
-  roi REAL NOT NULL
+  roi REAL NOT NULL,
+  amountEn TEXT,
+  amountBn TEXT
 );
 `);
 
@@ -44,6 +46,15 @@ CREATE TABLE IF NOT EXISTS track_record (
 const dealsColumns = db.prepare("PRAGMA table_info(deals)").all().map(c => c.name);
 if (!dealsColumns.includes('imageUrl')) {
   db.exec('ALTER TABLE deals ADD COLUMN imageUrl TEXT');
+}
+
+// Migration for DBs created before amountEn/amountBn existed on track_record.
+const trackColumns = db.prepare("PRAGMA table_info(track_record)").all().map(c => c.name);
+if (!trackColumns.includes('amountEn')) {
+  db.exec('ALTER TABLE track_record ADD COLUMN amountEn TEXT');
+}
+if (!trackColumns.includes('amountBn')) {
+  db.exec('ALTER TABLE track_record ADD COLUMN amountBn TEXT');
 }
 
 module.exports = db;

@@ -49,24 +49,50 @@ if (dealCount === 0) {
 
 if (trackCount === 0) {
   const insert = db.prepare(`INSERT INTO track_record
-    (year, nameEn, nameBn, category, round, months, durationEn, durationBn, roi)
-    VALUES (@year, @nameEn, @nameBn, @category, @round, @months, @durationEn, @durationBn, @roi)`);
+    (year, nameEn, nameBn, category, round, months, durationEn, durationBn, roi, amountEn, amountBn)
+    VALUES (@year, @nameEn, @nameBn, @category, @round, @months, @durationEn, @durationBn, @roi, @amountEn, @amountBn)`);
 
   const trackRecord = [
-    { year: 2023, nameEn: 'Shai Tea', nameBn: 'Shai Tea', category: 'trading', round: null, months: 20, durationEn: '20 months', durationBn: '২০ মাস', roi: 28.75 },
-    { year: 2023, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', category: 'maleClothing', round: 1, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 15.9 },
-    { year: 2023, nameEn: 'Onman', nameBn: 'Onman', category: 'maleClothing', round: null, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 9.33 },
-    { year: 2024, nameEn: 'Muin Shop', nameBn: 'Muin Shop', category: 'femaleClothing', round: null, months: 2, durationEn: '2 months', durationBn: '২ মাস', roi: 6 },
-    { year: 2024, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', category: 'agro', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 6.2 },
-    { year: 2024, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', category: 'maleClothing', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 13.94 },
-    { year: 2024, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 12.5 },
-    { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 20 },
-    { year: 2025, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', category: 'agro', round: 2, months: 1, durationEn: '1 month', durationBn: '১ মাস', roi: 2 },
-    { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 3, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 10 },
+    { year: 2023, nameEn: 'Shai Tea', nameBn: 'Shai Tea', category: 'trading', round: 1, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 16.67, amountEn: 'BDT 3 lakh', amountBn: '৳৩ লাখ' },
+    { year: 2024, nameEn: 'Shai Tea', nameBn: 'Shai Tea', category: 'trading', round: 2, months: 12, durationEn: '12 months', durationBn: '১২ মাস', roi: 25, amountEn: 'BDT 5 lakh', amountBn: '৳৫ লাখ' },
+    { year: 2024, nameEn: 'Shai Tea', nameBn: 'Shai Tea', category: 'trading', round: 3, months: 20, durationEn: '20 months', durationBn: '২০ মাস', roi: 28.75, amountEn: 'BDT 6 lakh', amountBn: '৳৬ লাখ' },
+    { year: 2023, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', category: 'maleClothing', round: 1, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 15.9, amountEn: null, amountBn: null },
+    { year: 2023, nameEn: 'Onman', nameBn: 'Onman', category: 'maleClothing', round: null, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 9.33, amountEn: 'BDT 3 lakh', amountBn: '৳৩ লাখ' },
+    { year: 2024, nameEn: 'Muin Shop', nameBn: 'Muin Shop', category: 'femaleClothing', round: null, months: 2, durationEn: '2 months', durationBn: '২ মাস', roi: 6, amountEn: null, amountBn: null },
+    { year: 2024, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', category: 'agro', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 6.2, amountEn: null, amountBn: null },
+    { year: 2024, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', category: 'maleClothing', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 13.94, amountEn: null, amountBn: null },
+    { year: 2024, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 1, months: 4, durationEn: '4 months', durationBn: '৪ মাস', roi: 12.5, amountEn: null, amountBn: null },
+    { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 2, months: 6, durationEn: '6 months', durationBn: '৬ মাস', roi: 20, amountEn: null, amountBn: null },
+    { year: 2025, nameEn: 'Hygienic Agro', nameBn: 'Hygienic Agro', category: 'agro', round: 2, months: 1, durationEn: '1 month', durationBn: '১ মাস', roi: 2, amountEn: null, amountBn: null },
+    { year: 2025, nameEn: 'Walidain', nameBn: 'Walidain', category: 'maleClothing', round: 3, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 10, amountEn: null, amountBn: null },
   ];
   const insertMany = db.transaction(rows => rows.forEach(r => insert.run(r)));
   insertMany(trackRecord);
   console.log(`Seeded ${trackRecord.length} track record rows.`);
 } else {
   console.log(`Track record table already has ${trackCount} rows — skipped.`);
+
+  // One-off correction: originally only Shai Tea's 3rd round was tracked
+  // (mis-dated 2023, missing amount). The founder actually funded Shai Tea
+  // across 3 separate rounds. Fix the existing row and add the 2 missing ones,
+  // idempotently, so this heals live data without needing an admin login.
+  const round3 = db.prepare("SELECT id FROM track_record WHERE nameEn = 'Shai Tea' AND months = 20 AND round IS NULL").get();
+  if (round3) {
+    db.prepare(`UPDATE track_record SET year = 2024, round = 3, amountEn = 'BDT 6 lakh', amountBn = '৳৬ লাখ' WHERE id = ?`).run(round3.id);
+    console.log('Corrected Shai Tea round 3 (year -> 2024, tagged as round 3, amount added).');
+  }
+  const round1 = db.prepare("SELECT id FROM track_record WHERE nameEn = 'Shai Tea' AND months = 6").get();
+  if (!round1) {
+    db.prepare(`INSERT INTO track_record (year, nameEn, nameBn, category, round, months, durationEn, durationBn, roi, amountEn, amountBn)
+      VALUES (2023, 'Shai Tea', 'Shai Tea', 'trading', 1, 6, '6 months', '৬ মাস', 16.67, 'BDT 3 lakh', '৳৩ লাখ')`).run();
+    console.log('Added missing Shai Tea round 1.');
+  }
+  const round2 = db.prepare("SELECT id FROM track_record WHERE nameEn = 'Shai Tea' AND months = 12").get();
+  if (!round2) {
+    db.prepare(`INSERT INTO track_record (year, nameEn, nameBn, category, round, months, durationEn, durationBn, roi, amountEn, amountBn)
+      VALUES (2024, 'Shai Tea', 'Shai Tea', 'trading', 2, 12, '12 months', '১২ মাস', 25, 'BDT 5 lakh', '৳৫ লাখ')`).run();
+    console.log('Added missing Shai Tea round 2.');
+  }
+  // Backfill the one other amount we know for certain (Onman, 3 lakh) if still blank.
+  db.prepare("UPDATE track_record SET amountEn = 'BDT 3 lakh', amountBn = '৳৩ লাখ' WHERE nameEn = 'Onman' AND amountEn IS NULL").run();
 }

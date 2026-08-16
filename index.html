@@ -236,7 +236,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
         </div>
         <div class="stat-cell" style="padding:36px 30px">
           <div class="serif" style="font-size:40px;font-weight:500;color:var(--green-dark)">৳<span id="stat-capital">0</span>L</div>
-          <div style="font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.6" data-i18n="home.statCapitalDesc">total capital deployed across 12 individual deals, 2023 to 2026</div>
+          <div style="font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.6" data-i18n="home.statCapitalDesc">total capital deployed across 14 individual deals, 2023 to 2026</div>
         </div>
         <div class="stat-cell" style="padding:36px 30px">
           <div class="serif" style="font-size:40px;font-weight:500;color:var(--green-dark)"><span id="stat-roi">0</span>%</div>
@@ -384,7 +384,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     <div style="margin-top:68px">
       <div style="border-left:2px solid var(--green);padding-left:24px;max-width:580px">
         <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
-        <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%.</div>
+        <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 12 halal SME investments across 6 businesses, with an overall return of ~13.5%.</div>
         <div class="serif" style="font-size:16px;line-height:1.7;color:var(--ink);margin-top:16px;font-weight:500" data-i18n="about.trackInsight">One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
         <a data-nav="portfolio" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;margin-top:20px" data-i18n="about.trackLink">See the full track record →</a>
       </div>
@@ -529,7 +529,7 @@ const I18N = {
     'deal.back': '← Back to Portfolio',
     'home.statsH2': 'The Track Record, in Numbers',
     'home.statDealsDesc': 'businesses funded across trading, fashion, agro, and service sectors since 2023',
-    'home.statCapitalDesc': 'total capital deployed across 12 individual deals, 2023 to 2026',
+    'home.statCapitalDesc': 'total capital deployed across 14 individual deals, 2023 to 2026',
     'home.statRoiDesc': 'average historical return across completed deals — no minimum ever guaranteed',
     'home.heroCaption': 'CAPITAL DEPLOYED, YEAR OVER YEAR',
     'home.trackH2': 'Track Record at a Glance', 'home.trackViewAll': 'Full breakdown →',
@@ -564,7 +564,7 @@ const I18N = {
     'about.p1': 'A defined maximum investment per deal', 'about.p2': 'No guaranteed return is ever promised',
     'about.p3': 'Only Shariah-compliant structures — no exceptions', 'about.p4': 'No investment without business verification',
     'about.trackH2': 'Track Record Before Faris Venture',
-    'about.trackBody': "Between 2023 and 2025, the founder completed 10 halal SME investments across 6 businesses, with an overall return of ~13.5%.",
+    'about.trackBody': "Between 2023 and 2025, the founder completed 12 halal SME investments across 6 businesses, with an overall return of ~13.5%.",
     'about.trackInsight': "One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.",
     'about.statHeadline': 'avg. annualized return, 2023–2025',
     'about.trackLink': 'See the full track record →',
@@ -599,7 +599,7 @@ const I18N = {
     'deal.back': '← পোর্টফোলিওতে ফিরে যান',
     'home.statsH2': 'ট্র্যাক রেকর্ড, সংখ্যায়',
     'home.statDealsDesc': 'ট্রেডিং, ফ্যাশন, এগ্রো আর সার্ভিস সেক্টর মিলিয়ে ২০২৩ সাল থেকে যত বিজনেসে ফান্ড গেছে',
-    'home.statCapitalDesc': '২০২৩ থেকে ২০২৬ পর্যন্ত ১২টা আলাদা ডিলে যত পুঁজি বিনিয়োগ হয়েছে, তার যোগফল',
+    'home.statCapitalDesc': '২০২৩ থেকে ২০২৬ পর্যন্ত ১৪টা আলাদা ডিলে যত পুঁজি বিনিয়োগ হয়েছে, তার যোগফল',
     'home.statRoiDesc': 'সম্পন্ন হওয়া ডিলগুলোর গড় হিস্টোরিক্যাল রিটার্ন — কোনো ন্যূনতম রিটার্নের নিশ্চয়তা কখনো দেওয়া হয়নি',
     'home.heroCaption': 'বছরের পর বছর ধরে বিনিয়োগকৃত পুঁজি',
     'home.trackH2': 'এক নজরে ট্র্যাক রেকর্ড', 'home.trackViewAll': 'পুরো বিবরণ →',
@@ -771,6 +771,7 @@ function renderTrackRecord() {
   const avgWord = currentLang === 'bn' ? 'গড় বার্ষিক রিটার্ন' : 'avg annualized return';
   const periodWord = currentLang === 'bn' ? 'ঐ মেয়াদে রিটার্ন' : 'Return for term';
   const annualWord = currentLang === 'bn' ? 'বার্ষিক হারে (annualized)' : 'Annualized rate';
+  const investWord = currentLang === 'bn' ? 'বিনিয়োগ' : 'Investment';
   const toBnDigits = s => String(s).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
   const bn = (n) => currentLang === 'bn' ? toBnDigits(n) : n;
   const annualized = t => t.roi * (12 / t.months);
@@ -786,6 +787,8 @@ function renderTrackRecord() {
       const ann = annualized(t).toFixed(1);
       const catLabel = CATEGORY_LABELS[t.category][currentLang === 'bn' ? 'bn' : 'en'];
       const catColor = CATEGORY_COLORS[t.category];
+      const amount = currentLang === 'bn' ? t.amountBn : t.amountEn;
+      const amountRow = amount ? `<div style="font-size:12px;color:var(--muted);margin-top:8px">${investWord}: <span style="font-weight:600;color:var(--ink)">${amount}</span></div>` : '';
       return `<div class="card card-hov tl-card" style="padding:20px;min-width:200px;flex:1">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
           <div>
@@ -794,6 +797,7 @@ function renderTrackRecord() {
           </div>
           <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">${duration}</span>
         </div>
+        ${amountRow}
         <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
           <div><div style="font-size:11px;color:var(--muted)">${periodWord}</div><div style="font-size:15px;font-weight:600;margin-top:2px">${bn(t.roi)}%</div></div>
           <div style="text-align:right"><div style="font-size:11px;color:var(--muted)">${annualWord}</div><div class="serif" style="font-size:20px;font-weight:500;margin-top:2px;color:var(--green-dark)">${bn(ann)}%</div></div>
@@ -1138,8 +1142,9 @@ window.addEventListener('scroll', () => {
 // stat counter — figures derived from real deal data, not fabricated.
 // Historical ROI (13.5%) is the fund's actual track record across completed deals.
 // HISTORICAL_CAPITAL_LAKH: sum of all completed (2023-2025) deals from the founder's
-// Investment Tracker in Notion — BDT 41,07,000 (pre-Onman total) + BDT 3,00,000 (Onman) = 44.07L.
-const HISTORICAL_CAPITAL_LAKH = 44.07;
+// Investment Tracker in Notion — BDT 41,07,000 (pre-Onman total) + BDT 3,00,000 (Onman)
+// + BDT 3,00,000 (Shai Tea round 1) + BDT 5,00,000 (Shai Tea round 2) = 52.07L.
+const HISTORICAL_CAPITAL_LAKH = 52.07;
 let statsAnimated = false;
 function animateStats() {
   const duration = 900, start = performance.now();

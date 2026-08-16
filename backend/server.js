@@ -105,13 +105,14 @@ app.get('/api/track-record', (req, res) => {
 app.post('/api/track-record', requireAuth, (req, res) => {
   const t = req.body || {};
   const stmt = db.prepare(`INSERT INTO track_record
-    (year, nameEn, nameBn, category, round, months, durationEn, durationBn, roi)
-    VALUES (@year, @nameEn, @nameBn, @category, @round, @months, @durationEn, @durationBn, @roi)`);
+    (year, nameEn, nameBn, category, round, months, durationEn, durationBn, roi, amountEn, amountBn)
+    VALUES (@year, @nameEn, @nameBn, @category, @round, @months, @durationEn, @durationBn, @roi, @amountEn, @amountBn)`);
   const info = stmt.run({
     year: Number(t.year), nameEn: t.nameEn || '', nameBn: t.nameBn || '',
     category: t.category || '', round: t.round === '' || t.round === undefined ? null : Number(t.round),
     months: Number(t.months) || 0, durationEn: t.durationEn || '', durationBn: t.durationBn || '',
     roi: Number(t.roi) || 0,
+    amountEn: t.amountEn || null, amountBn: t.amountBn || null,
   });
   res.json({ id: info.lastInsertRowid });
 });
@@ -119,12 +120,14 @@ app.post('/api/track-record', requireAuth, (req, res) => {
 app.put('/api/track-record/:id', requireAuth, (req, res) => {
   const t = req.body || {};
   db.prepare(`UPDATE track_record SET year=@year, nameEn=@nameEn, nameBn=@nameBn, category=@category,
-    round=@round, months=@months, durationEn=@durationEn, durationBn=@durationBn, roi=@roi WHERE id=@id`).run({
+    round=@round, months=@months, durationEn=@durationEn, durationBn=@durationBn, roi=@roi,
+    amountEn=@amountEn, amountBn=@amountBn WHERE id=@id`).run({
     id: Number(req.params.id),
     year: Number(t.year), nameEn: t.nameEn || '', nameBn: t.nameBn || '',
     category: t.category || '', round: t.round === '' || t.round === undefined ? null : Number(t.round),
     months: Number(t.months) || 0, durationEn: t.durationEn || '', durationBn: t.durationBn || '',
     roi: Number(t.roi) || 0,
+    amountEn: t.amountEn || null, amountBn: t.amountBn || null,
   });
   res.json({ ok: true });
 });
