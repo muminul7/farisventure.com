@@ -723,9 +723,12 @@ function dealCard(d, full, lang, i) {
   const photoWord = lang === 'bn' ? 'ছবি বসবে' : 'Photo placeholder';
   const chip = `<span style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:${SECTOR_COLORS[d.sector]||'#8a8f98'}"></span>${sectorLabel}</span>`;
   const status = `<span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:#eafaf0;color:var(--green-dark)">${statusLabel}</span>`;
+  const photo = h => d.imageUrl
+    ? `<img src="${d.imageUrl}" alt="${nameLabel}" loading="lazy" style="width:100%;height:${h}px;object-fit:cover;display:block">`
+    : `<div style="width:100%;height:${h}px;background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:${h>140?13:12}px">${photoWord}</div>`;
   if (!full) {
     return `<div class="card card-hov" role="button" tabindex="0" data-deal-open="${i}" style="overflow:hidden;cursor:pointer">
-      <div style="width:100%;height:130px;background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px">${photoWord}</div>
+      ${photo(130)}
       <div style="padding:22px">
         <div style="display:flex;justify-content:space-between;align-items:center">${chip}${status}</div>
         <div style="font-size:16px;font-weight:600;margin-top:14px">${nameLabel}</div>
@@ -735,7 +738,7 @@ function dealCard(d, full, lang, i) {
   }
   const roiRow = d.roi ? `<div><div style="font-size:12px;color:var(--muted)">ROI</div><div style="font-size:14px;font-weight:600;margin-top:2px;color:var(--green-dark)">${d.roi}</div></div>` : '';
   return `<div class="card card-hov" role="button" tabindex="0" data-deal-open="${i}" style="overflow:hidden;cursor:pointer">
-    <div style="width:100%;height:160px;background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px">${photoWord}</div>
+    ${photo(160)}
     <div style="padding:24px">
       <div style="display:flex;justify-content:space-between;align-items:center">${chip}${status}</div>
       <div style="font-size:18px;font-weight:600;margin-top:16px">${nameLabel}</div>
@@ -937,8 +940,11 @@ function renderDealDetail() {
   const L = lang === 'bn'
     ? { photo:'ছবি বসবে', sector:'সেক্টর', structure:'কাঠামো', invest:'বিনিয়োগ', status:'স্ট্যাটাস', overview:'ব্যবসার সংক্ষিপ্ত বিবরণ', use:'পুঁজি কীভাবে ব্যবহৃত হয়েছে', timeline:'ডিল টাইমলাইন', t1:'প্রস্তাব জমা ও প্রাথমিক পর্যালোচনা', t2:'ডিলিজেন্স ও শরিয়াহ সম্মতি যাচাই সম্পন্ন', t3:'পুঁজি বিনিয়োগ সম্পন্ন', cta:'এমন ব্যবসা চালাচ্ছেন? প্রস্তাব পাঠান', ctaBtn:'প্রস্তাব পাঠান' }
     : { photo:'Photo placeholder', sector:'Sector', structure:'Structure', invest:'Investment', status:'Status', overview:'Business Overview', use:'How the Capital Was Used', timeline:'Deal Timeline', t1:'Proposal submitted and initial review', t2:'Diligence and Shariah compliance verification completed', t3:'Capital deployed', cta:'Running a business like this? Submit a proposal', ctaBtn:'Submit a Proposal' };
+  const photoBlock = d.imageUrl
+    ? `<img src="${d.imageUrl}" alt="${nameLabel}" style="width:100%;height:240px;border-radius:var(--r-lg);object-fit:cover;display:block;border:1px solid var(--line)">`
+    : `<div style="width:100%;height:240px;border-radius:var(--r-lg);background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;border:1px solid var(--line)">${L.photo}</div>`;
   wrap.innerHTML = `
-    <div style="width:100%;height:240px;border-radius:var(--r-lg);background:linear-gradient(135deg,#f2efe9,#e6e2d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;border:1px solid var(--line)">${L.photo}</div>
+    ${photoBlock}
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-top:28px;flex-wrap:wrap">
       <div>
         <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:${SECTOR_COLORS[d.sector]||'#8a8f98'}"></span>${sectorLabel}</div>

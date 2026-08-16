@@ -1,11 +1,34 @@
+const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
 const db = require('./db');
 const { issueToken, checkPassword, requireAuth } = require('./auth');
 
 const app = express();
 app.use(express.json());
+
+const uploadsDir = path.join(__dirname, 'data', 'uploads');
+fs.mkdirSync(uploadsDir, { recursive: true });
+app.use('/uploads', express.static(uploadsDir));
+
+const ALLOWED_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadsDir),
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname).toLowerCase();
+      cb(null, crypto.randomUUID() + (ALLOWED_EXT.has(ext) ? ext : '.jpg'));
+    },
+  }),
+  limits: { fileSize: 8 * 1024 * 1024 }, // 8MB
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    cb(null, ALLOWED_EXT.has(ext));
+  },
+});
 
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'https://farisventure.com')
   .split(',')
@@ -21,6 +44,12 @@ app.post('/api/login', (req, res) => {
   res.json({ token: issueToken() });
 });
 
+// ---- image upload (admin only) ----
+app.post('/api/upload', requireAuth, upload.single('image'), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'No image uploaded, or file type not allowed.' });
+  res.json({ url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}` });
+});
+
 // ---- deals (public read, admin write) ----
 app.get('/api/deals', (req, res) => {
   const rows = db.prepare('SELECT * FROM deals ORDER BY sortOrder ASC, id ASC').all();
@@ -30,8 +59,8 @@ app.get('/api/deals', (req, res) => {
 app.post('/api/deals', requireAuth, (req, res) => {
   const d = req.body || {};
   const stmt = db.prepare(`INSERT INTO deals
-    (sector, structure, structureBn, status, amountEn, amountBn, nameEn, nameBn, descEn, descBn, roi, overviewEn, overviewBn, useEn, useBn, sortOrder)
-    VALUES (@sector, @structure, @structureBn, @status, @amountEn, @amountBn, @nameEn, @nameBn, @descEn, @descBn, @roi, @overviewEn, @overviewBn, @useEn, @useBn, @sortOrder)`);
+    (sector, structure, structureBn, status, amountEn, amountBn, nameEn, nameBn, descEn, descBn, roi, overviewEn, overviewBn, useEn, useBn, sortOrder, imageUrl)
+    VALUES (@sector, @structure, @structureBn, @status, @amountEn, @amountBn, @nameEn, @nameBn, @descEn, @descBn, @roi, @overviewEn, @overviewBn, @useEn, @useBn, @sortOrder, @imageUrl)`);
   const info = stmt.run({
     sector: d.sector || '', structure: d.structure || '', structureBn: d.structureBn || '',
     status: d.status || 'Deployed', amountEn: d.amountEn || '', amountBn: d.amountBn || '',
@@ -39,6 +68,7 @@ app.post('/api/deals', requireAuth, (req, res) => {
     roi: d.roi === '' || d.roi === undefined ? null : Number(d.roi),
     overviewEn: d.overviewEn || '', overviewBn: d.overviewBn || '',
     useEn: d.useEn || '', useBn: d.useBn || '', sortOrder: Number(d.sortOrder) || 0,
+    imageUrl: d.imageUrl || null,
   });
   res.json({ id: info.lastInsertRowid });
 });
@@ -48,7 +78,7 @@ app.put('/api/deals/:id', requireAuth, (req, res) => {
   db.prepare(`UPDATE deals SET sector=@sector, structure=@structure, structureBn=@structureBn,
     status=@status, amountEn=@amountEn, amountBn=@amountBn, nameEn=@nameEn, nameBn=@nameBn,
     descEn=@descEn, descBn=@descBn, roi=@roi, overviewEn=@overviewEn, overviewBn=@overviewBn,
-    useEn=@useEn, useBn=@useBn, sortOrder=@sortOrder WHERE id=@id`).run({
+    useEn=@useEn, useBn=@useBn, sortOrder=@sortOrder, imageUrl=@imageUrl WHERE id=@id`).run({
     id: Number(req.params.id),
     sector: d.sector || '', structure: d.structure || '', structureBn: d.structureBn || '',
     status: d.status || 'Deployed', amountEn: d.amountEn || '', amountBn: d.amountBn || '',
@@ -56,6 +86,7 @@ app.put('/api/deals/:id', requireAuth, (req, res) => {
     roi: d.roi === '' || d.roi === undefined ? null : Number(d.roi),
     overviewEn: d.overviewEn || '', overviewBn: d.overviewBn || '',
     useEn: d.useEn || '', useBn: d.useBn || '', sortOrder: Number(d.sortOrder) || 0,
+    imageUrl: d.imageUrl || null,
   });
   res.json({ ok: true });
 });

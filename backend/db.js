@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS deals (
   overviewBn TEXT NOT NULL DEFAULT '',
   useEn TEXT NOT NULL DEFAULT '',
   useBn TEXT NOT NULL DEFAULT '',
-  sortOrder INTEGER NOT NULL DEFAULT 0
+  sortOrder INTEGER NOT NULL DEFAULT 0,
+  imageUrl TEXT
 );
 
 CREATE TABLE IF NOT EXISTS track_record (
@@ -38,5 +39,11 @@ CREATE TABLE IF NOT EXISTS track_record (
   roi REAL NOT NULL
 );
 `);
+
+// Migration for DBs created before the imageUrl column existed.
+const dealsColumns = db.prepare("PRAGMA table_info(deals)").all().map(c => c.name);
+if (!dealsColumns.includes('imageUrl')) {
+  db.exec('ALTER TABLE deals ADD COLUMN imageUrl TEXT');
+}
 
 module.exports = db;

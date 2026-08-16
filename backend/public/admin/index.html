@@ -61,6 +61,14 @@
           <div><label>Business name (EN)</label><input id="deal-nameEn" required></div>
           <div><label>Business name (BN)</label><input id="deal-nameBn" required></div>
         </div>
+        <div class="row full">
+          <div>
+            <label>Photo</label>
+            <input type="file" id="deal-image-file" accept="image/png,image/jpeg,image/webp,image/gif">
+            <input type="hidden" id="deal-imageUrl">
+            <div id="deal-image-preview" style="margin-top:8px"></div>
+          </div>
+        </div>
         <div class="row">
           <div><label>Sector</label><input id="deal-sector" placeholder="Trading / Service / Agro..." required></div>
           <div><label>Status</label>
@@ -178,6 +186,26 @@ if (token) showApp();
 function resetDealForm() {
   document.getElementById('deal-form').reset();
   document.getElementById('deal-id').value = '';
+  document.getElementById('deal-imageUrl').value = '';
+  document.getElementById('deal-image-preview').innerHTML = '';
+}
+
+function showImagePreview(url) {
+  document.getElementById('deal-image-preview').innerHTML = url
+    ? `<img src="${url}" style="max-width:200px;max-height:120px;border-radius:6px;display:block">`
+    : '';
+}
+
+async function uploadDealImage() {
+  const fileInput = document.getElementById('deal-image-file');
+  const file = fileInput.files[0];
+  if (!file) return document.getElementById('deal-imageUrl').value || null;
+  const fd = new FormData();
+  fd.append('image', file);
+  const res = await fetch(API + '/api/upload', { method: 'POST', headers: { Authorization: 'Bearer ' + token }, body: fd });
+  if (!res.ok) { alert('Image upload failed.'); return null; }
+  const data = await res.json();
+  return data.url;
 }
 
 async function loadDeals() {
@@ -212,13 +240,18 @@ function editDeal(d) {
   document.getElementById('deal-useBn').value = d.useBn || '';
   document.getElementById('deal-roi').value = d.roi ?? '';
   document.getElementById('deal-sortOrder').value = d.sortOrder ?? 0;
+  document.getElementById('deal-imageUrl').value = d.imageUrl || '';
+  showImagePreview(d.imageUrl);
   window.scrollTo(0, 0);
 }
 
 async function saveDeal(e) {
   e.preventDefault();
   const id = document.getElementById('deal-id').value;
+  const uploadedUrl = await uploadDealImage();
+  if (uploadedUrl) document.getElementById('deal-imageUrl').value = uploadedUrl;
   const body = {
+    imageUrl: document.getElementById('deal-imageUrl').value || null,
     nameEn: document.getElementById('deal-nameEn').value,
     nameBn: document.getElementById('deal-nameBn').value,
     sector: document.getElementById('deal-sector').value,
@@ -309,6 +342,11 @@ async function deleteTrack(id) {
   await fetch(`${API}/api/track-record/${id}`, { method: 'DELETE', headers: authHeaders() });
   loadTrack();
 }
+
+document.getElementById('deal-image-file').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) showImagePreview(URL.createObjectURL(file));
+});
 </script>
 </body>
 </html>
