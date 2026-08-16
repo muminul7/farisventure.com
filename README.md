@@ -4,10 +4,13 @@ Website for Faris Venture — a founder-backed halal investment venture deployin
 
 Static single-page site, no build step. Bilingual (English default / Bangla toggle).
 
+Deals and the track-record table are pulled live from `backend/` (a small API + admin panel at `/admin`) at `api.farisventure.com`. If that's unreachable the site falls back to the hardcoded arrays built into `index.html`, so the site never breaks — see `backend/README.md`.
+
 ## Structure
 
 - `index.html` — the entire site (markup, styles, and routing/i18n JS inline)
 - `assets/Logo.png` — brand logo
+- `backend/` — Node/Express + SQLite API and the `/admin` panel used to add/edit deals and track-record entries without touching code
 
 ## Local preview
 

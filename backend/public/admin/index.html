@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Faris Venture — Admin</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:#f5f4f1;color:#111315}
+  header{background:#111315;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+  header h1{font-size:16px;margin:0;font-weight:600}
+  header button{background:transparent;border:1px solid #444;color:#eee;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer}
+  main{max-width:960px;margin:0 auto;padding:24px}
+  .card{background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .card h2{font-size:15px;margin:0 0 14px}
+  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px}
+  .row.full{grid-template-columns:1fr}
+  label{display:block;font-size:12px;color:#666;margin-bottom:4px}
+  input,select,textarea{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit}
+  textarea{min-height:60px;resize:vertical}
+  .btn{display:inline-block;padding:9px 16px;border-radius:6px;border:none;font-size:13px;font-weight:600;cursor:pointer}
+  .btn-primary{background:#111315;color:#fff}
+  .btn-danger{background:#c0392b;color:#fff}
+  .btn-ghost{background:#eee;color:#111}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid #eee}
+  th{color:#777;font-weight:600;font-size:11px;text-transform:uppercase}
+  .actions{display:flex;gap:6px}
+  .actions button{padding:5px 10px;font-size:12px}
+  #login-screen{max-width:340px;margin:80px auto;padding:28px;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  #login-screen h1{font-size:18px;margin:0 0 16px}
+  #login-screen input{margin-bottom:10px}
+  #login-error{color:#c0392b;font-size:13px;margin-top:8px;display:none}
+  .hidden{display:none}
+  .muted{color:#888;font-size:12px}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <h1>Faris Venture Admin</h1>
+  <label>Password</label>
+  <input type="password" id="login-password" placeholder="••••••••">
+  <button class="btn btn-primary" style="width:100%" onclick="login()">Log in</button>
+  <div id="login-error">Wrong password.</div>
+</div>
+
+<div id="app" class="hidden">
+  <header>
+    <h1>Faris Venture — Admin</h1>
+    <button onclick="logout()">Log out</button>
+  </header>
+  <main>
+
+    <div class="card">
+      <h2>Add new deal (active business)</h2>
+      <form id="deal-form" onsubmit="return saveDeal(event)">
+        <input type="hidden" id="deal-id">
+        <div class="row">
+          <div><label>Business name (EN)</label><input id="deal-nameEn" required></div>
+          <div><label>Business name (BN)</label><input id="deal-nameBn" required></div>
+        </div>
+        <div class="row">
+          <div><label>Sector</label><input id="deal-sector" placeholder="Trading / Service / Agro..." required></div>
+          <div><label>Status</label>
+            <select id="deal-status"><option>Deployed</option><option>Repaid</option><option>Under Review</option></select>
+          </div>
+        </div>
+        <div class="row">
+          <div><label>Structure (EN)</label><input id="deal-structure" placeholder="Murabaha / Musharaka / Mudaraba" required></div>
+          <div><label>Structure (BN)</label><input id="deal-structureBn" required></div>
+        </div>
+        <div class="row">
+          <div><label>Amount (EN)</label><input id="deal-amountEn" placeholder="BDT 5 lakh" required></div>
+          <div><label>Amount (BN)</label><input id="deal-amountBn" placeholder="৳৫ লাখ" required></div>
+        </div>
+        <div class="row">
+          <div><label>Short description (EN)</label><input id="deal-descEn" required></div>
+          <div><label>Short description (BN)</label><input id="deal-descBn" required></div>
+        </div>
+        <div class="row full"><div><label>Overview (EN)</label><textarea id="deal-overviewEn"></textarea></div></div>
+        <div class="row full"><div><label>Overview (BN)</label><textarea id="deal-overviewBn"></textarea></div></div>
+        <div class="row full"><div><label>Use of capital (EN)</label><textarea id="deal-useEn"></textarea></div></div>
+        <div class="row full"><div><label>Use of capital (BN)</label><textarea id="deal-useBn"></textarea></div></div>
+        <div class="row">
+          <div><label>ROI % (leave blank if not yet realized)</label><input id="deal-roi" type="number" step="0.01"></div>
+          <div><label>Sort order (lower shows first)</label><input id="deal-sortOrder" type="number" value="0"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save deal</button>
+        <button class="btn btn-ghost" type="button" onclick="resetDealForm()">Clear</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Current deals</h2>
+      <table id="deals-table"><thead><tr><th>Name</th><th>Sector</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+    </div>
+
+    <div class="card">
+      <h2>Add track record entry (historical, pre-fund)</h2>
+      <form id="track-form" onsubmit="return saveTrack(event)">
+        <input type="hidden" id="track-id">
+        <div class="row">
+          <div><label>Year</label><input id="track-year" type="number" required></div>
+          <div><label>Category</label>
+            <select id="track-category">
+              <option value="trading">Trading</option>
+              <option value="maleClothing">Male Clothing</option>
+              <option value="femaleClothing">Female Clothing</option>
+              <option value="agro">Agro</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div><label>Business name (EN)</label><input id="track-nameEn" required></div>
+          <div><label>Business name (BN)</label><input id="track-nameBn" required></div>
+        </div>
+        <div class="row">
+          <div><label>Round (optional)</label><input id="track-round" type="number"></div>
+          <div><label>Duration in months</label><input id="track-months" type="number" required></div>
+        </div>
+        <div class="row">
+          <div><label>Duration (EN)</label><input id="track-durationEn" placeholder="3 months" required></div>
+          <div><label>Duration (BN)</label><input id="track-durationBn" placeholder="৩ মাস" required></div>
+        </div>
+        <div class="row">
+          <div><label>ROI %</label><input id="track-roi" type="number" step="0.01" required></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save entry</button>
+        <button class="btn btn-ghost" type="button" onclick="resetTrackForm()">Clear</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Track record (all years)</h2>
+      <table id="track-table"><thead><tr><th>Year</th><th>Name</th><th>Category</th><th>ROI</th><th></th></tr></thead><tbody></tbody></table>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const API = location.origin;
+let token = localStorage.getItem('fv-admin-token') || '';
+
+function authHeaders() {
+  return { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token };
+}
+
+async function login() {
+  const password = document.getElementById('login-password').value;
+  const res = await fetch(API + '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) });
+  if (!res.ok) { document.getElementById('login-error').style.display = 'block'; return; }
+  const data = await res.json();
+  token = data.token;
+  localStorage.setItem('fv-admin-token', token);
+  showApp();
+}
+
+function logout() {
+  localStorage.removeItem('fv-admin-token');
+  token = '';
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
+}
+
+function showApp() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  loadDeals();
+  loadTrack();
+}
+
+if (token) showApp();
+
+// ---- deals ----
+function resetDealForm() {
+  document.getElementById('deal-form').reset();
+  document.getElementById('deal-id').value = '';
+}
+
+async function loadDeals() {
+  const res = await fetch(API + '/api/deals');
+  const rows = await res.json();
+  const tbody = document.querySelector('#deals-table tbody');
+  tbody.innerHTML = rows.map(d => `
+    <tr>
+      <td>${d.nameEn}</td><td>${d.sector}</td><td>${d.amountEn}</td><td>${d.status}</td>
+      <td class="actions">
+        <button class="btn btn-ghost" onclick='editDeal(${JSON.stringify(d)})'>Edit</button>
+        <button class="btn btn-danger" onclick="deleteDeal(${d.id})">Delete</button>
+      </td>
+    </tr>`).join('') || '<tr><td class="muted" colspan="5">No deals yet.</td></tr>';
+}
+
+function editDeal(d) {
+  document.getElementById('deal-id').value = d.id;
+  document.getElementById('deal-nameEn').value = d.nameEn;
+  document.getElementById('deal-nameBn').value = d.nameBn;
+  document.getElementById('deal-sector').value = d.sector;
+  document.getElementById('deal-status').value = d.status;
+  document.getElementById('deal-structure').value = d.structure;
+  document.getElementById('deal-structureBn').value = d.structureBn;
+  document.getElementById('deal-amountEn').value = d.amountEn;
+  document.getElementById('deal-amountBn').value = d.amountBn;
+  document.getElementById('deal-descEn').value = d.descEn;
+  document.getElementById('deal-descBn').value = d.descBn;
+  document.getElementById('deal-overviewEn').value = d.overviewEn || '';
+  document.getElementById('deal-overviewBn').value = d.overviewBn || '';
+  document.getElementById('deal-useEn').value = d.useEn || '';
+  document.getElementById('deal-useBn').value = d.useBn || '';
+  document.getElementById('deal-roi').value = d.roi ?? '';
+  document.getElementById('deal-sortOrder').value = d.sortOrder ?? 0;
+  window.scrollTo(0, 0);
+}
+
+async function saveDeal(e) {
+  e.preventDefault();
+  const id = document.getElementById('deal-id').value;
+  const body = {
+    nameEn: document.getElementById('deal-nameEn').value,
+    nameBn: document.getElementById('deal-nameBn').value,
+    sector: document.getElementById('deal-sector').value,
+    status: document.getElementById('deal-status').value,
+    structure: document.getElementById('deal-structure').value,
+    structureBn: document.getElementById('deal-structureBn').value,
+    amountEn: document.getElementById('deal-amountEn').value,
+    amountBn: document.getElementById('deal-amountBn').value,
+    descEn: document.getElementById('deal-descEn').value,
+    descBn: document.getElementById('deal-descBn').value,
+    overviewEn: document.getElementById('deal-overviewEn').value,
+    overviewBn: document.getElementById('deal-overviewBn').value,
+    useEn: document.getElementById('deal-useEn').value,
+    useBn: document.getElementById('deal-useBn').value,
+    roi: document.getElementById('deal-roi').value,
+    sortOrder: document.getElementById('deal-sortOrder').value,
+  };
+  const url = id ? `${API}/api/deals/${id}` : `${API}/api/deals`;
+  await fetch(url, { method: id ? 'PUT' : 'POST', headers: authHeaders(), body: JSON.stringify(body) });
+  resetDealForm();
+  loadDeals();
+  return false;
+}
+
+async function deleteDeal(id) {
+  if (!confirm('Delete this deal?')) return;
+  await fetch(`${API}/api/deals/${id}`, { method: 'DELETE', headers: authHeaders() });
+  loadDeals();
+}
+
+// ---- track record ----
+function resetTrackForm() {
+  document.getElementById('track-form').reset();
+  document.getElementById('track-id').value = '';
+}
+
+async function loadTrack() {
+  const res = await fetch(API + '/api/track-record');
+  const rows = await res.json();
+  const tbody = document.querySelector('#track-table tbody');
+  tbody.innerHTML = rows.map(t => `
+    <tr>
+      <td>${t.year}</td><td>${t.nameEn}</td><td>${t.category}</td><td>${t.roi}%</td>
+      <td class="actions">
+        <button class="btn btn-ghost" onclick='editTrack(${JSON.stringify(t)})'>Edit</button>
+        <button class="btn btn-danger" onclick="deleteTrack(${t.id})">Delete</button>
+      </td>
+    </tr>`).join('') || '<tr><td class="muted" colspan="5">No entries yet.</td></tr>';
+}
+
+function editTrack(t) {
+  document.getElementById('track-id').value = t.id;
+  document.getElementById('track-year').value = t.year;
+  document.getElementById('track-category').value = t.category;
+  document.getElementById('track-nameEn').value = t.nameEn;
+  document.getElementById('track-nameBn').value = t.nameBn;
+  document.getElementById('track-round').value = t.round ?? '';
+  document.getElementById('track-months').value = t.months;
+  document.getElementById('track-durationEn').value = t.durationEn;
+  document.getElementById('track-durationBn').value = t.durationBn;
+  document.getElementById('track-roi').value = t.roi;
+  window.scrollTo(0, 0);
+}
+
+async function saveTrack(e) {
+  e.preventDefault();
+  const id = document.getElementById('track-id').value;
+  const body = {
+    year: document.getElementById('track-year').value,
+    category: document.getElementById('track-category').value,
+    nameEn: document.getElementById('track-nameEn').value,
+    nameBn: document.getElementById('track-nameBn').value,
+    round: document.getElementById('track-round').value,
+    months: document.getElementById('track-months').value,
+    durationEn: document.getElementById('track-durationEn').value,
+    durationBn: document.getElementById('track-durationBn').value,
+    roi: document.getElementById('track-roi').value,
+  };
+  const url = id ? `${API}/api/track-record/${id}` : `${API}/api/track-record`;
+  await fetch(url, { method: id ? 'PUT' : 'POST', headers: authHeaders(), body: JSON.stringify(body) });
+  resetTrackForm();
+  loadTrack();
+  return false;
+}
+
+async function deleteTrack(id) {
+  if (!confirm('Delete this entry?')) return;
+  await fetch(`${API}/api/track-record/${id}`, { method: 'DELETE', headers: authHeaders() });
+  loadTrack();
+}
+</script>
+</body>
+</html>

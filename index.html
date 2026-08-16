@@ -662,7 +662,7 @@ const SECTOR_COLORS = { Service: '#024cff', Trading: '#00bf63', Manufacturing: '
 const SECTOR_BN = { Service: 'সার্ভিস', Trading: 'ট্রেডিং', Manufacturing: 'ম্যানুফ্যাকচারিং', Agro: 'এগ্রো', Fashion: 'ফ্যাশন', Food: 'ফুড', Tech: 'টেক' };
 const STATUS_BN = { Deployed: 'ডিপ্লয়েড', Returned: 'রিটার্নড' };
 
-const deals = [
+let deals = [
   { sector: 'Service', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 5 lakh', amountBn: '৳৫ লাখ', nameEn: 'SukunLife', nameBn: 'SukunLife', descEn: 'A service-sector business, Murabaha financed for steel materials', descBn: 'একটা সার্ভিস-সেক্টর বিজনেস, স্টিল মেটেরিয়ালসের জন্য মুরাবাহায় অর্থায়ন করা', roi: null,
     overviewEn: 'SukunLife is a service-sector business and the first deal funded under this SME segment. The Murabaha financed a steel materials purchase, deployed in July 2026 with a 6-month term and a confirmed profit rate agreed before disbursement.',
     overviewBn: 'SukunLife একটা সার্ভিস-সেক্টর বিজনেস, আর এই SME সেগমেন্টের আওতায় ফান্ড হওয়া প্রথম ডিল। মুরাবাহাটা গেছে একটা স্টিল মেটেরিয়ালস কেনার খরচ মেটাতে। বিতরণ হয়েছে ২০২৬-এর জুলাইয়ে, ৬ মাস মেয়াদে, বিতরণের আগেই ঠিক করা একটা নিশ্চিত মুনাফার হার নিয়ে।',
@@ -685,7 +685,7 @@ const CATEGORY_LABELS = {
   agro: { en: 'Agro', bn: 'এগ্রো' },
 };
 
-const trackRecord = [
+let trackRecord = [
   { year: 2023, nameEn: 'Shai Tea', nameBn: 'Shai Tea', category: 'trading', round: null, months: 20, durationEn: '20 months', durationBn: '২০ মাস', roi: 28.75 },
   { year: 2023, nameEn: 'Sharif Fashion', nameBn: 'Sharif Fashion', category: 'maleClothing', round: 1, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 15.9 },
   { year: 2023, nameEn: 'Onman', nameBn: 'Onman', category: 'maleClothing', round: null, months: 3, durationEn: '3 months', durationBn: '৩ মাস', roi: 9.33 },
@@ -1097,6 +1097,29 @@ try { savedLang = localStorage.getItem('fv-lang') || 'en'; } catch (e) {}
 applyLang(savedLang === 'bn' ? 'bn' : 'en');
 
 document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+// Pull live deals / track record from the backend. If it's unreachable, the
+// hardcoded arrays above stay in place as a fallback — the site never breaks.
+const API_BASE = 'https://api.farisventure.com';
+(async () => {
+  try {
+    const [dealsRes, trackRes] = await Promise.all([
+      fetch(API_BASE + '/api/deals'),
+      fetch(API_BASE + '/api/track-record'),
+    ]);
+    if (dealsRes.ok) {
+      const liveDeals = await dealsRes.json();
+      if (Array.isArray(liveDeals) && liveDeals.length) deals = liveDeals;
+    }
+    if (trackRes.ok) {
+      const liveTrack = await trackRes.json();
+      if (Array.isArray(liveTrack) && liveTrack.length) trackRecord = liveTrack;
+    }
+    applyLang(currentLang);
+  } catch (e) {
+    // Backend unreachable — keep showing the built-in fallback data.
+  }
+})();
 
 // nav scroll shadow
 const siteNav = document.getElementById('site-nav');
