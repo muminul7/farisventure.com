@@ -8,32 +8,59 @@
 <style>
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:#f5f4f1;color:#111315}
-  header{background:#111315;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
-  header h1{font-size:16px;margin:0;font-weight:600}
-  header button{background:transparent;border:1px solid #444;color:#eee;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer}
-  main{max-width:960px;margin:0 auto;padding:24px}
-  .card{background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-  .card h2{font-size:15px;margin:0 0 14px}
-  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px}
-  .row.full{grid-template-columns:1fr}
-  label{display:block;font-size:12px;color:#666;margin-bottom:4px}
-  input,select,textarea{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit}
-  textarea{min-height:60px;resize:vertical}
-  .btn{display:inline-block;padding:9px 16px;border-radius:6px;border:none;font-size:13px;font-weight:600;cursor:pointer}
-  .btn-primary{background:#111315;color:#fff}
-  .btn-danger{background:#c0392b;color:#fff}
-  .btn-ghost{background:#eee;color:#111}
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid #eee}
-  th{color:#777;font-weight:600;font-size:11px;text-transform:uppercase}
-  .actions{display:flex;gap:6px}
-  .actions button{padding:5px 10px;font-size:12px}
+
+  /* ---- login screen ---- */
   #login-screen{max-width:340px;margin:80px auto;padding:28px;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
   #login-screen h1{font-size:18px;margin:0 0 16px}
   #login-screen input{margin-bottom:10px}
   #login-error{color:#c0392b;font-size:13px;margin-top:8px;display:none}
+
+  /* ---- app shell ---- */
+  #app{display:flex;min-height:100vh}
+  #app.hidden{display:none}
+
+  .sidebar{width:220px;flex-shrink:0;background:#111315;color:#fff;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+  .sidebar-brand{padding:20px 20px 16px;font-size:15px;font-weight:600;border-bottom:1px solid #2a2c2f}
+  .sidebar-brand small{display:block;font-size:11px;font-weight:400;color:#9a9da2;margin-top:2px}
+  .sidebar-nav{flex:1;padding:14px 10px}
+  .sidebar-nav button{width:100%;text-align:left;background:transparent;border:none;color:#c7c9cc;padding:10px 12px;border-radius:8px;font-size:13.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:10px;margin-bottom:2px}
+  .sidebar-nav button:hover{background:#1c1e21;color:#fff}
+  .sidebar-nav button.active{background:#00bf63;color:#fff}
+  .sidebar-nav .icon{width:16px;text-align:center;font-size:14px}
+  .sidebar-foot{padding:14px 16px;border-top:1px solid #2a2c2f}
+  .sidebar-foot button{width:100%;background:transparent;border:1px solid #3a3c40;color:#eee;border-radius:6px;padding:8px 12px;font-size:12.5px;cursor:pointer}
+  .sidebar-foot button:hover{background:#1c1e21}
+
+  .content{flex:1;min-width:0}
+  .topbar{background:#fff;border-bottom:1px solid #e8e6e1;padding:16px 28px;position:sticky;top:0;z-index:5}
+  .topbar h1{font-size:16px;margin:0;font-weight:600}
+  .topbar p{font-size:12.5px;color:#888;margin:2px 0 0}
+  main{max-width:820px;margin:0 auto;padding:24px 28px 60px}
+
+  .section{display:none}
+  .section.active{display:block}
+
+  .card{background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .card h2{font-size:14px;margin:0 0 16px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px}
+  .row.full{grid-template-columns:1fr}
+  label{display:block;font-size:12px;color:#666;margin-bottom:4px}
+  input,select,textarea{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:#00bf63}
+  textarea{min-height:60px;resize:vertical}
+  .btn{display:inline-block;padding:9px 16px;border-radius:6px;border:none;font-size:13px;font-weight:600;cursor:pointer}
+  .btn-primary{background:#111315;color:#fff}
+  .btn-primary:hover{background:#000}
+  .btn-danger{background:#c0392b;color:#fff}
+  .btn-ghost{background:#eee;color:#111}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:9px 6px;border-bottom:1px solid #eee}
+  th{color:#888;font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:.03em}
+  .actions{display:flex;gap:6px}
+  .actions button{padding:5px 10px;font-size:12px}
   .hidden{display:none}
   .muted{color:#888;font-size:12px}
+  .thumb{width:36px;height:36px;border-radius:6px;object-fit:cover;background:#f0efec}
 </style>
 </head>
 <body>
@@ -47,105 +74,125 @@
 </div>
 
 <div id="app" class="hidden">
-  <header>
-    <h1>Faris Venture — Admin</h1>
-    <button onclick="logout()">Log out</button>
-  </header>
-  <main>
+  <aside class="sidebar">
+    <div class="sidebar-brand">Faris Venture<small>Admin panel</small></div>
+    <nav class="sidebar-nav">
+      <button data-section="deals" class="active" onclick="showSection('deals')"><span class="icon">◆</span> Deals</button>
+      <button data-section="track" onclick="showSection('track')"><span class="icon">▤</span> Track Record</button>
+    </nav>
+    <div class="sidebar-foot"><button onclick="logout()">Log out</button></div>
+  </aside>
 
-    <div class="card">
-      <h2>Add new deal (active business)</h2>
-      <form id="deal-form" onsubmit="return saveDeal(event)">
-        <input type="hidden" id="deal-id">
-        <div class="row">
-          <div><label>Business name (EN)</label><input id="deal-nameEn" required></div>
-          <div><label>Business name (BN)</label><input id="deal-nameBn" required></div>
-        </div>
-        <div class="row full">
-          <div>
-            <label>Photo</label>
-            <input type="file" id="deal-image-file" accept="image/png,image/jpeg,image/webp,image/gif">
-            <input type="hidden" id="deal-imageUrl">
-            <div id="deal-image-preview" style="margin-top:8px"></div>
-          </div>
-        </div>
-        <div class="row">
-          <div><label>Sector</label><input id="deal-sector" placeholder="Trading / Service / Agro..." required></div>
-          <div><label>Status</label>
-            <select id="deal-status"><option>Deployed</option><option>Repaid</option><option>Under Review</option></select>
-          </div>
-        </div>
-        <div class="row">
-          <div><label>Structure (EN)</label><input id="deal-structure" placeholder="Murabaha / Musharaka / Mudaraba" required></div>
-          <div><label>Structure (BN)</label><input id="deal-structureBn" required></div>
-        </div>
-        <div class="row">
-          <div><label>Amount (EN)</label><input id="deal-amountEn" placeholder="BDT 5 lakh" required></div>
-          <div><label>Amount (BN)</label><input id="deal-amountBn" placeholder="৳৫ লাখ" required></div>
-        </div>
-        <div class="row">
-          <div><label>Short description (EN)</label><input id="deal-descEn" required></div>
-          <div><label>Short description (BN)</label><input id="deal-descBn" required></div>
-        </div>
-        <div class="row full"><div><label>Overview (EN)</label><textarea id="deal-overviewEn"></textarea></div></div>
-        <div class="row full"><div><label>Overview (BN)</label><textarea id="deal-overviewBn"></textarea></div></div>
-        <div class="row full"><div><label>Use of capital (EN)</label><textarea id="deal-useEn"></textarea></div></div>
-        <div class="row full"><div><label>Use of capital (BN)</label><textarea id="deal-useBn"></textarea></div></div>
-        <div class="row">
-          <div><label>ROI % (leave blank if not yet realized)</label><input id="deal-roi" type="number" step="0.01"></div>
-          <div><label>Sort order (lower shows first)</label><input id="deal-sortOrder" type="number" value="0"></div>
-        </div>
-        <button class="btn btn-primary" type="submit">Save deal</button>
-        <button class="btn btn-ghost" type="button" onclick="resetDealForm()">Clear</button>
-      </form>
+  <div class="content">
+    <div class="topbar" id="topbar-deals">
+      <h1>Deals</h1>
+      <p>Active businesses shown on the Portfolio page.</p>
+    </div>
+    <div class="topbar hidden" id="topbar-track">
+      <h1>Track Record</h1>
+      <p>Historical, pre-fund deals (2023–2025).</p>
     </div>
 
-    <div class="card">
-      <h2>Current deals</h2>
-      <table id="deals-table"><thead><tr><th>Name</th><th>Sector</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
-    </div>
+    <main>
 
-    <div class="card">
-      <h2>Add track record entry (historical, pre-fund)</h2>
-      <form id="track-form" onsubmit="return saveTrack(event)">
-        <input type="hidden" id="track-id">
-        <div class="row">
-          <div><label>Year</label><input id="track-year" type="number" required></div>
-          <div><label>Category</label>
-            <select id="track-category">
-              <option value="trading">Trading</option>
-              <option value="maleClothing">Male Clothing</option>
-              <option value="femaleClothing">Female Clothing</option>
-              <option value="agro">Agro</option>
-            </select>
-          </div>
+      <section id="section-deals" class="section active">
+        <div class="card">
+          <h2>Add / edit a deal</h2>
+          <form id="deal-form" onsubmit="return saveDeal(event)">
+            <input type="hidden" id="deal-id">
+            <div class="row">
+              <div><label>Business name (EN)</label><input id="deal-nameEn" required></div>
+              <div><label>Business name (BN)</label><input id="deal-nameBn" required></div>
+            </div>
+            <div class="row full">
+              <div>
+                <label>Photo</label>
+                <input type="file" id="deal-image-file" accept="image/png,image/jpeg,image/webp,image/gif">
+                <input type="hidden" id="deal-imageUrl">
+                <div id="deal-image-preview" style="margin-top:8px"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div><label>Sector</label><input id="deal-sector" placeholder="Trading / Service / Agro..." required></div>
+              <div><label>Status</label>
+                <select id="deal-status"><option>Deployed</option><option>Repaid</option><option>Under Review</option></select>
+              </div>
+            </div>
+            <div class="row">
+              <div><label>Structure (EN)</label><input id="deal-structure" placeholder="Murabaha / Musharaka / Mudaraba" required></div>
+              <div><label>Structure (BN)</label><input id="deal-structureBn" required></div>
+            </div>
+            <div class="row">
+              <div><label>Amount (EN)</label><input id="deal-amountEn" placeholder="BDT 5 lakh" required></div>
+              <div><label>Amount (BN)</label><input id="deal-amountBn" placeholder="৳৫ লাখ" required></div>
+            </div>
+            <div class="row">
+              <div><label>Short description (EN)</label><input id="deal-descEn" required></div>
+              <div><label>Short description (BN)</label><input id="deal-descBn" required></div>
+            </div>
+            <div class="row full"><div><label>Overview (EN)</label><textarea id="deal-overviewEn"></textarea></div></div>
+            <div class="row full"><div><label>Overview (BN)</label><textarea id="deal-overviewBn"></textarea></div></div>
+            <div class="row full"><div><label>Use of capital (EN)</label><textarea id="deal-useEn"></textarea></div></div>
+            <div class="row full"><div><label>Use of capital (BN)</label><textarea id="deal-useBn"></textarea></div></div>
+            <div class="row">
+              <div><label>ROI % (leave blank if not yet realized)</label><input id="deal-roi" type="number" step="0.01"></div>
+              <div><label>Sort order (lower shows first)</label><input id="deal-sortOrder" type="number" value="0"></div>
+            </div>
+            <button class="btn btn-primary" type="submit">Save deal</button>
+            <button class="btn btn-ghost" type="button" onclick="resetDealForm()">Clear</button>
+          </form>
         </div>
-        <div class="row">
-          <div><label>Business name (EN)</label><input id="track-nameEn" required></div>
-          <div><label>Business name (BN)</label><input id="track-nameBn" required></div>
-        </div>
-        <div class="row">
-          <div><label>Round (optional)</label><input id="track-round" type="number"></div>
-          <div><label>Duration in months</label><input id="track-months" type="number" required></div>
-        </div>
-        <div class="row">
-          <div><label>Duration (EN)</label><input id="track-durationEn" placeholder="3 months" required></div>
-          <div><label>Duration (BN)</label><input id="track-durationBn" placeholder="৩ মাস" required></div>
-        </div>
-        <div class="row">
-          <div><label>ROI %</label><input id="track-roi" type="number" step="0.01" required></div>
-        </div>
-        <button class="btn btn-primary" type="submit">Save entry</button>
-        <button class="btn btn-ghost" type="button" onclick="resetTrackForm()">Clear</button>
-      </form>
-    </div>
 
-    <div class="card">
-      <h2>Track record (all years)</h2>
-      <table id="track-table"><thead><tr><th>Year</th><th>Name</th><th>Category</th><th>ROI</th><th></th></tr></thead><tbody></tbody></table>
-    </div>
+        <div class="card">
+          <h2>Current deals</h2>
+          <table id="deals-table"><thead><tr><th></th><th>Name</th><th>Sector</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+        </div>
+      </section>
 
-  </main>
+      <section id="section-track" class="section">
+        <div class="card">
+          <h2>Add / edit a track record entry</h2>
+          <form id="track-form" onsubmit="return saveTrack(event)">
+            <input type="hidden" id="track-id">
+            <div class="row">
+              <div><label>Year</label><input id="track-year" type="number" required></div>
+              <div><label>Category</label>
+                <select id="track-category">
+                  <option value="trading">Trading</option>
+                  <option value="maleClothing">Male Clothing</option>
+                  <option value="femaleClothing">Female Clothing</option>
+                  <option value="agro">Agro</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div><label>Business name (EN)</label><input id="track-nameEn" required></div>
+              <div><label>Business name (BN)</label><input id="track-nameBn" required></div>
+            </div>
+            <div class="row">
+              <div><label>Round (optional)</label><input id="track-round" type="number"></div>
+              <div><label>Duration in months</label><input id="track-months" type="number" required></div>
+            </div>
+            <div class="row">
+              <div><label>Duration (EN)</label><input id="track-durationEn" placeholder="3 months" required></div>
+              <div><label>Duration (BN)</label><input id="track-durationBn" placeholder="৩ মাস" required></div>
+            </div>
+            <div class="row">
+              <div><label>ROI %</label><input id="track-roi" type="number" step="0.01" required></div>
+            </div>
+            <button class="btn btn-primary" type="submit">Save entry</button>
+            <button class="btn btn-ghost" type="button" onclick="resetTrackForm()">Clear</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Track record (all years)</h2>
+          <table id="track-table"><thead><tr><th>Year</th><th>Name</th><th>Category</th><th>ROI</th><th></th></tr></thead><tbody></tbody></table>
+        </div>
+      </section>
+
+    </main>
+  </div>
 </div>
 
 <script>
@@ -154,6 +201,14 @@ let token = localStorage.getItem('fv-admin-token') || '';
 
 function authHeaders() {
   return { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token };
+}
+
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  document.querySelectorAll('.sidebar-nav button').forEach(b => b.classList.toggle('active', b.dataset.section === name));
+  document.querySelectorAll('.topbar').forEach(el => el.classList.add('hidden'));
+  document.getElementById('topbar-' + name).classList.remove('hidden');
 }
 
 async function login() {
@@ -214,12 +269,13 @@ async function loadDeals() {
   const tbody = document.querySelector('#deals-table tbody');
   tbody.innerHTML = rows.map(d => `
     <tr>
+      <td>${d.imageUrl ? `<img class="thumb" src="${d.imageUrl}">` : '<div class="thumb"></div>'}</td>
       <td>${d.nameEn}</td><td>${d.sector}</td><td>${d.amountEn}</td><td>${d.status}</td>
       <td class="actions">
         <button class="btn btn-ghost" onclick='editDeal(${JSON.stringify(d)})'>Edit</button>
         <button class="btn btn-danger" onclick="deleteDeal(${d.id})">Delete</button>
       </td>
-    </tr>`).join('') || '<tr><td class="muted" colspan="5">No deals yet.</td></tr>';
+    </tr>`).join('') || '<tr><td class="muted" colspan="6">No deals yet.</td></tr>';
 }
 
 function editDeal(d) {
@@ -242,6 +298,7 @@ function editDeal(d) {
   document.getElementById('deal-sortOrder').value = d.sortOrder ?? 0;
   document.getElementById('deal-imageUrl').value = d.imageUrl || '';
   showImagePreview(d.imageUrl);
+  showSection('deals');
   window.scrollTo(0, 0);
 }
 
@@ -313,6 +370,7 @@ function editTrack(t) {
   document.getElementById('track-durationEn').value = t.durationEn;
   document.getElementById('track-durationBn').value = t.durationBn;
   document.getElementById('track-roi').value = t.roi;
+  showSection('track');
   window.scrollTo(0, 0);
 }
 
