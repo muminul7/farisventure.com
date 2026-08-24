@@ -136,6 +136,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
 @media (max-width:860px){
   .g3{grid-template-columns:1fr!important}
   .g2{grid-template-columns:1fr!important}
+  .g4-process{grid-template-columns:1fr 1fr!important;row-gap:28px!important}
   .nav-links{display:none!important}
   .lang-toggle-desktop{display:none!important}
   .hamburger{display:flex!important}
@@ -453,6 +454,16 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
       </div>
     </div>
 
+    <div style="margin-top:52px">
+      <div style="font-size:18px;font-weight:600;margin-bottom:22px" data-i18n="contact.processH2">How the Process Works</div>
+      <div class="g4-process" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+        <div><div class="step-badge"><span class="serif">01</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep1Title">You submit a proposal</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep1Body">Share your business, your cash flow, and what the capital is for — via the form below or WhatsApp.</div></div>
+        <div><div class="step-badge"><span class="serif">02</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep2Title">We verify, by hand</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep2Body">Cash flow, ownership, and Shariah compliance are checked directly — no rushed reviews, no shortcuts.</div></div>
+        <div><div class="step-badge"><span class="serif">03</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep3Title">Terms get fixed upfront</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep3Body">Musharaka, Mudaraba, or Murabaha — whichever fits — with every term agreed before any money moves.</div></div>
+        <div><div class="step-badge"><span class="serif">04</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep4Title">Capital is deployed</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep4Body">Funds move on the agreed schedule, with repayment terms already locked in — nothing renegotiated later.</div></div>
+      </div>
+    </div>
+
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:28px;padding:26px 28px;border-radius:var(--r-lg);background:linear-gradient(135deg,#211d18,#2b251e);color:#fff;flex-wrap:wrap;gap:16px;box-shadow:var(--shadow-md)">
       <div><div style="font-size:12.5px;color:rgba(255,255,255,.55)" data-i18n="contact.ticketLabel">Ticket size</div><div class="serif" style="font-size:22px;font-weight:500;margin-top:4px" data-i18n="contact.ticketValue">BDT 3 – 7 lakh</div></div>
       <a class="btn btn-light" href="https://wa.me/8801601212570" target="_blank" rel="noopener" style="padding:12px 22px;font-size:14px" data-i18n="contact.whatsapp">Message us on WhatsApp</a>
@@ -581,6 +592,11 @@ const I18N = {
     'portfolio.trackH2': 'Track Record Before Faris Venture',
     'portfolio.trackSub': 'Completed halal SME investments from 2023–2025, before this fund existed. Duration and return shown per deal — profit amounts are kept private.',
     'contact.eyebrow': 'FOR ENTREPRENEURS', 'contact.h1': 'Submit a Proposal',
+    'contact.processH2': 'How the Process Works',
+    'contact.pStep1Title': 'You submit a proposal', 'contact.pStep1Body': 'Share your business, your cash flow, and what the capital is for — via the form below or WhatsApp.',
+    'contact.pStep2Title': 'We verify, by hand', 'contact.pStep2Body': 'Cash flow, ownership, and Shariah compliance are checked directly — no rushed reviews, no shortcuts.',
+    'contact.pStep3Title': 'Terms get fixed upfront', 'contact.pStep3Body': 'Musharaka, Mudaraba, or Murabaha — whichever fits — with every term agreed before any money moves.',
+    'contact.pStep4Title': 'Capital is deployed', 'contact.pStep4Body': 'Funds move on the agreed schedule, with repayment terms already locked in — nothing renegotiated later.',
     'contact.sub': 'If your business fits the criteria below, you can send us a proposal.',
     'contact.forTitle': '✓ What We Look For', 'contact.forBody': 'Ongoing, verifiable cash flow<br>A Shariah-compliant business model<br>A clear plan for use of funds',
     'contact.notTitle': "✕ What We Don't Take", 'contact.notBody': 'Non-Shariah-compliant sectors (interest-based, gambling, etc.)<br>Pre-revenue, idea-stage projects<br>Opaque business structures',
@@ -652,6 +668,11 @@ const I18N = {
     'portfolio.trackH2': 'ফারিস ভেঞ্চারের আগের ট্র্যাক রেকর্ড',
     'portfolio.trackSub': '২০২৩ থেকে ২০২৫, এই ফান্ড শুরু হওয়ার আগেই সম্পন্ন হওয়া হালাল SME বিনিয়োগ। প্রতিটা ডিলের মেয়াদ আর রিটার্ন দেখানো আছে — মুনাফার সঠিক অঙ্কটা প্রাইভেট রাখা হয়েছে।',
     'contact.eyebrow': 'উদ্যোক্তাদের জন্য', 'contact.h1': 'প্রপোজাল পাঠান',
+    'contact.processH2': 'পুরো প্রক্রিয়াটা যেভাবে চলে',
+    'contact.pStep1Title': 'আপনি প্রপোজাল পাঠান', 'contact.pStep1Body': 'আপনার বিজনেস, ক্যাশ ফ্লো, আর পুঁজিটা কীসের জন্য লাগবে — এসব জানান নিচের ফর্মে অথবা হোয়াটসঅ্যাপে।',
+    'contact.pStep2Title': 'আমরা হাতে-কলমে যাচাই করি', 'contact.pStep2Body': 'ক্যাশ ফ্লো, মালিকানা, আর শরিয়াহ সম্মতি সরাসরি চেক করা হয় — তাড়াহুড়ো নেই, শর্টকাট নেই।',
+    'contact.pStep3Title': 'শর্ত আগেই ঠিক হয়ে যায়', 'contact.pStep3Body': 'মুশারাকা, মুদারাবা, নাকি মুরাবাহা — যেটা আপনার বিজনেসের জন্য মানানসই, সেটাই ঠিক হয়, আর প্রতিটা শর্ত টাকা নড়ার আগেই চূড়ান্ত থাকে।',
+    'contact.pStep4Title': 'পুঁজি বিনিয়োগ হয়', 'contact.pStep4Body': 'সম্মত সময়সূচি অনুযায়ী টাকা যায়, পরিশোধের শর্তও আগে থেকেই লক করা থাকে — পরে নতুন করে দরকষাকষির সুযোগ নেই।',
     'contact.sub': 'নিচের criteria-তে আপনার বিজনেস মিললে, নির্দ্বিধায় প্রপোজাল পাঠাতে পারেন।',
     'contact.forTitle': '✓ যা আমরা খুঁজি', 'contact.forBody': 'চলমান, যাচাই করা যায় এমন ক্যাশ ফ্লো<br>একটা শরিয়াহ-সম্মত বিজনেস মডেল<br>তহবিল কীভাবে ব্যবহার হবে তার স্পষ্ট পরিকল্পনা',
     'contact.notTitle': '✕ যা আমরা নিই না', 'contact.notBody': 'অ-শরিয়াহ-সম্মত সেক্টর (সুদভিত্তিক, জুয়া, ইত্যাদি)<br>প্রি-রেভিনিউ, শুধু আইডিয়া-স্টেজ প্রজেক্ট<br>অস্বচ্ছ বিজনেস স্ট্রাকচার',
