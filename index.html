@@ -662,7 +662,7 @@ const I18N = {
 
 const SECTOR_COLORS = { Service: '#024cff', Trading: '#00bf63', Manufacturing: '#8a8f98', Agro: '#00bf63', Fashion: '#024cff', Food: '#00bf63', Tech: '#024cff' };
 const SECTOR_BN = { Service: 'সার্ভিস', Trading: 'ট্রেডিং', Manufacturing: 'ম্যানুফ্যাকচারিং', Agro: 'এগ্রো', Fashion: 'ফ্যাশন', Food: 'ফুড', Tech: 'টেক' };
-const STATUS_BN = { Deployed: 'ডিপ্লয়েড', Returned: 'রিটার্নড' };
+const STATUS_BN = { Deployed: 'ডিপ্লয়েড', Repaid: 'পরিশোধিত', 'Under Review': 'পর্যালোচনাধীন' };
 
 let deals = [
   { sector: 'Service', structure: 'Murabaha', structureBn: 'মুরাবাহা', status: 'Deployed', amountEn: 'BDT 5 lakh', amountBn: '৳৫ লাখ', nameEn: 'SukunLife', nameBn: 'SukunLife', descEn: 'A Ruqyah-based spiritual wellness service, Murabaha financed for office devices and decoration', descBn: 'একটা রুকইয়াহ-ভিত্তিক স্পিরিচুয়াল ওয়েলনেস সার্ভিস, অফিস ডিভাইস আর ডেকোরেশনের জন্য মুরাবাহায় অর্থায়ন করা', roi: null,
@@ -738,13 +738,18 @@ function dealCard(d, full, lang, i) {
       </div>
     </div>`;
   }
-  const roiRow = d.roi ? `<div><div style="font-size:12px;color:var(--muted)">ROI</div><div style="font-size:14px;font-weight:600;margin-top:2px;color:var(--green-dark)">${d.roi}</div></div>` : '';
+  const roiWord = d.status === 'Repaid' ? (lang === 'bn' ? 'রিটার্ন' : 'ROI') : (lang === 'bn' ? 'প্রত্যাশিত রিটার্ন' : 'Expected ROI');
+  const roiRow = d.roi ? `<div><div style="font-size:12px;color:var(--muted)">${roiWord}</div><div style="font-size:14px;font-weight:600;margin-top:2px;color:var(--green-dark)">${d.roi}%</div></div>` : '';
+  const ongoingNote = d.status === 'Deployed'
+    ? `<div style="display:flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;color:var(--green-dark);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0"></span>${lang === 'bn' ? 'চলমান বিনিয়োগ — মেয়াদ এখনো শেষ হয়নি' : 'Ongoing investment — term not yet complete'}</div>`
+    : '';
   return `<div class="card card-hov" role="button" tabindex="0" data-deal-open="${i}" style="overflow:hidden;cursor:pointer">
     ${photo(160)}
     <div style="padding:24px">
       <div style="display:flex;justify-content:space-between;align-items:center">${chip}${status}</div>
       <div style="font-size:18px;font-weight:600;margin-top:16px">${nameLabel}</div>
       <div style="font-size:14px;color:var(--body);margin-top:6px">${descLabel}</div>
+      ${ongoingNote}
       <div style="display:flex;gap:24px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)">
         <div><div style="font-size:12px;color:var(--muted)">${structureWord}</div><div style="font-size:14px;font-weight:500;margin-top:2px">${structureLabel}</div></div>
         <div><div style="font-size:12px;color:var(--muted)">${investWord}</div><div style="font-size:14px;font-weight:500;margin-top:2px">${amountLabel}</div></div>
