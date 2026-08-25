@@ -133,10 +133,27 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
   .tl-cards{flex-direction:column}
   .tl-card{min-width:0!important}
 }
+.track-card{text-align:left;padding:22px;border-radius:var(--r-lg);border:1px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.track-card:hover{border-color:var(--line-2);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.track-card.active{border-color:var(--green);box-shadow:0 0 0 1px var(--green),var(--shadow-sm)}
+.track-card-label{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--muted)}
+.track-card.active .track-card-label{color:var(--green-dark)}
+.track-card-title{font-size:16px;font-weight:600;margin-top:8px;color:var(--ink)}
+.track-card-body{font-size:13px;color:var(--body);line-height:1.65;margin-top:8px}
+.track-card-meta{font-size:12px;color:var(--muted);margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.track-panel[hidden]{display:none!important}
+.pillar{padding:20px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line)}
+.pillar-title{font-size:14px;font-weight:600;color:var(--ink)}
+.pillar-body{font-size:13px;color:var(--body);line-height:1.7;margin-top:7px}
+.trust-block{padding:22px 24px;border-radius:var(--r-md);border:1px solid var(--line);background:#fff}
+.trust-block+.trust-block{margin-top:14px}
+.trust-title{font-size:12.5px;font-weight:700;letter-spacing:.04em;color:var(--green-dark)}
+.trust-body{font-size:14px;color:var(--body);line-height:1.8;margin-top:9px}
 @media (max-width:860px){
   .g3{grid-template-columns:1fr!important}
   .g2{grid-template-columns:1fr!important}
   .g4-process{grid-template-columns:1fr 1fr!important;row-gap:28px!important}
+  .g4-pillars{grid-template-columns:1fr!important}
   .nav-links{display:none!important}
   .lang-toggle-desktop{display:none!important}
   .hamburger{display:flex!important}
@@ -270,6 +287,24 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
   </div>
 
   <div class="container" style="max-width:900px;margin-top:128px">
+    <div class="serif reveal" style="font-size:clamp(26px,3.4vw,34px);font-weight:500;text-align:center;letter-spacing:-.01em" data-i18n="home.tracksH2">Two Ways We Work</div>
+    <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px">
+      <div class="card card-hov reveal" data-nav="contact" data-track="financing" style="padding:30px;cursor:pointer">
+        <div style="font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--green-dark)" data-i18n="home.track1Label">FIXED-TERM FINANCING</div>
+        <div style="font-size:17px;font-weight:600;margin-top:12px" data-i18n="home.track1Title">Capital, repaid on schedule</div>
+        <div style="font-size:14px;color:var(--body);margin-top:8px;line-height:1.7" data-i18n="home.track1Body">Capital for stock, materials, or a confirmed order — repaid on a schedule fixed before disbursement. No ownership taken.</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:16px;padding-top:14px;border-top:1px solid var(--line)" data-i18n="home.track1Meta">৳3 – 7 lakh · Murabaha, Mudaraba</div>
+      </div>
+      <div class="card card-hov reveal" data-nav="contact" data-track="equity" style="padding:30px;cursor:pointer">
+        <div style="font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--green-dark)" data-i18n="home.track2Label">EQUITY PARTNERSHIP</div>
+        <div style="font-size:17px;font-weight:600;margin-top:12px" data-i18n="home.track2Title">Capital, a partner, and mentorship</div>
+        <div style="font-size:14px;color:var(--body);margin-top:8px;line-height:1.7" data-i18n="home.track2Body">For a running business ready to scale — capital, an equity partner, and hands-on mentorship every month.</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:16px;padding-top:14px;border-top:1px solid var(--line)" data-i18n="home.track2Meta">Up to ৳10 lakh · Musharaka</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="max-width:900px;margin-top:128px">
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
       <div class="serif reveal" style="font-size:clamp(26px,3.4vw,34px);font-weight:500;letter-spacing:-.01em" data-i18n="home.portfolioH2">Portfolio Preview</div>
       <a style="font-weight:600;font-size:14px" data-nav="portfolio" data-i18n="home.viewAll">View all →</a>
@@ -391,7 +426,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
       <div style="border-left:2px solid var(--green);padding-left:24px;max-width:580px">
         <div class="serif reveal" style="font-size:clamp(19px,2.4vw,23px);font-weight:500;margin-bottom:14px" data-i18n="about.trackH2">Track Record Before Faris Venture</div>
         <div style="font-size:15px;line-height:1.85;color:var(--body)" data-i18n="about.trackBody">Between 2023 and 2025, the founder completed 12 halal SME investments across 6 businesses, with an overall return of ~13.5%.</div>
-        <div class="serif" style="font-size:16px;line-height:1.7;color:var(--ink);margin-top:16px;font-weight:500" data-i18n="about.trackInsight">One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.</div>
+        <div class="serif" style="font-size:16px;line-height:1.7;color:var(--ink);margin-top:16px;font-weight:500" data-i18n="about.trackInsight">One lesson from that period shaped the rules here directly: the largest single ticket returned the weakest result. That is why financing is capped at BDT 7 lakh — where capital goes out and the business runs without us, exposure stays small. An equity partnership can go to BDT 10 lakh, because there we are inside the business, not watching from outside.</div>
         <a data-nav="portfolio" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;margin-top:20px" data-i18n="about.trackLink">See the full track record →</a>
       </div>
       <div class="card reveal" style="margin-top:36px;padding:32px">
@@ -442,32 +477,106 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
     <div class="container" style="max-width:720px;padding-top:112px;padding-bottom:140px;position:relative">
     <div style="font-size:13px;color:var(--muted);letter-spacing:.06em;font-weight:600" data-i18n="contact.eyebrow">FOR ENTREPRENEURS</div>
     <h1 class="serif reveal" style="font-size:clamp(32px,4.4vw,42px);font-weight:500;margin-top:14px;letter-spacing:-.01em" data-i18n="contact.h1">Submit a Proposal</h1>
-    <div style="font-size:15px;color:var(--body);margin-top:12px" data-i18n="contact.sub">If your business fits the criteria below, you can send us a proposal.</div>
+    <div style="font-size:15px;color:var(--body);margin-top:12px" data-i18n="contact.sub">There are two ways to work with Faris Venture. Pick the one that matches where your business is right now.</div>
 
-    <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px">
-      <div class="card card-hov" style="padding:24px;border-color:#d9f2e3;border-left:3px solid var(--green)">
-        <div style="font-size:14px;font-weight:700;color:var(--green-dark);margin-bottom:12px" data-i18n="contact.forTitle">✓ What We Look For</div>
-        <div style="font-size:14px;line-height:2;color:var(--body)" data-i18n="contact.forBody">Ongoing, verifiable cash flow<br>A Shariah-compliant business model<br>A clear plan for use of funds</div>
+    <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px">
+      <button type="button" class="track-card active" data-track-btn="financing">
+        <div class="track-card-label" data-i18n="contact.t1Label">FIXED-TERM FINANCING</div>
+        <div class="track-card-title" data-i18n="contact.t1Title">Capital, repaid on schedule</div>
+        <div class="track-card-body" data-i18n="contact.t1Card">You need capital for stock, raw materials, or a confirmed order. We take no ownership in your business.</div>
+        <div class="track-card-meta" data-i18n="contact.t1Meta">৳3 – 7 lakh · Murabaha, Mudaraba</div>
+      </button>
+      <button type="button" class="track-card" data-track-btn="equity">
+        <div class="track-card-label" data-i18n="contact.t2Label">EQUITY PARTNERSHIP</div>
+        <div class="track-card-title" data-i18n="contact.t2Title">Capital, a partner, and mentorship</div>
+        <div class="track-card-body" data-i18n="contact.t2Card">Your business is running and you want to scale it. We take an agreed equity share and work alongside you.</div>
+        <div class="track-card-meta" data-i18n="contact.t2Meta">Up to ৳10 lakh · Musharaka</div>
+      </button>
+    </div>
+
+    <!-- TRACK 1: FINANCING -->
+    <div class="track-panel" id="track-financing">
+      <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px">
+        <div class="card card-hov" style="padding:24px;border-color:#d9f2e3;border-left:3px solid var(--green)">
+          <div style="font-size:14px;font-weight:700;color:var(--green-dark);margin-bottom:12px" data-i18n="contact.forTitle">✓ What We Look For</div>
+          <div style="font-size:14px;line-height:2;color:var(--body)" data-i18n="contact.forBody">Ongoing, verifiable cash flow<br>A Shariah-compliant business model<br>A clear plan for use of funds</div>
+        </div>
+        <div class="card card-hov" style="padding:24px;border-left:3px solid #b8bcc2">
+          <div style="font-size:14px;font-weight:700;color:var(--body);margin-bottom:12px" data-i18n="contact.notTitle">✕ What We Don't Take</div>
+          <div style="font-size:14px;line-height:2;color:var(--body)" data-i18n="contact.notBody">Non-Shariah-compliant sectors (interest-based, gambling, etc.)<br>Pre-revenue, idea-stage projects<br>Opaque business structures</div>
+        </div>
       </div>
-      <div class="card card-hov" style="padding:24px;border-left:3px solid #b8bcc2">
-        <div style="font-size:14px;font-weight:700;color:var(--body);margin-bottom:12px" data-i18n="contact.notTitle">✕ What We Don't Take</div>
-        <div style="font-size:14px;line-height:2;color:var(--body)" data-i18n="contact.notBody">Non-Shariah-compliant sectors (interest-based, gambling, etc.)<br>Pre-revenue, idea-stage projects<br>Opaque business structures</div>
+
+      <div style="margin-top:52px">
+        <div style="font-size:18px;font-weight:600;margin-bottom:22px" data-i18n="contact.processH2">How the Process Works</div>
+        <div class="g4-process" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+          <div><div class="step-badge"><span class="serif">01</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep1Title">You submit a proposal</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep1Body">Share your business, your cash flow, and what the capital is for — via the form below or WhatsApp.</div></div>
+          <div><div class="step-badge"><span class="serif">02</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep2Title">We verify, by hand</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep2Body">Cash flow, ownership, and Shariah compliance are checked directly — no rushed reviews, no shortcuts.</div></div>
+          <div><div class="step-badge"><span class="serif">03</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep3Title">Terms get fixed upfront</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep3Body">Murabaha or Mudaraba — whichever fits — with every term agreed before any money moves.</div></div>
+          <div><div class="step-badge"><span class="serif">04</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep4Title">Capital is deployed</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep4Body">Funds move on the agreed schedule, with repayment terms already locked in — nothing renegotiated later.</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:28px;padding:26px 28px;border-radius:var(--r-lg);background:linear-gradient(135deg,#211d18,#2b251e);color:#fff;flex-wrap:wrap;gap:16px;box-shadow:var(--shadow-md)">
+        <div><div style="font-size:12.5px;color:rgba(255,255,255,.55)" data-i18n="contact.ticketLabel">Ticket size</div><div class="serif" style="font-size:22px;font-weight:500;margin-top:4px" data-i18n="contact.ticketValue">BDT 3 – 7 lakh</div></div>
+        <a class="btn btn-light" href="https://wa.me/8801601212570" target="_blank" rel="noopener" style="padding:12px 22px;font-size:14px" data-i18n="contact.whatsapp">Message us on WhatsApp</a>
       </div>
     </div>
 
-    <div style="margin-top:52px">
-      <div style="font-size:18px;font-weight:600;margin-bottom:22px" data-i18n="contact.processH2">How the Process Works</div>
-      <div class="g4-process" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
-        <div><div class="step-badge"><span class="serif">01</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep1Title">You submit a proposal</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep1Body">Share your business, your cash flow, and what the capital is for — via the form below or WhatsApp.</div></div>
-        <div><div class="step-badge"><span class="serif">02</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep2Title">We verify, by hand</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep2Body">Cash flow, ownership, and Shariah compliance are checked directly — no rushed reviews, no shortcuts.</div></div>
-        <div><div class="step-badge"><span class="serif">03</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep3Title">Terms get fixed upfront</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep3Body">Musharaka, Mudaraba, or Murabaha — whichever fits — with every term agreed before any money moves.</div></div>
-        <div><div class="step-badge"><span class="serif">04</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.pStep4Title">Capital is deployed</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.pStep4Body">Funds move on the agreed schedule, with repayment terms already locked in — nothing renegotiated later.</div></div>
-      </div>
-    </div>
+    <!-- TRACK 2: EQUITY PARTNERSHIP -->
+    <div class="track-panel" id="track-equity" hidden>
+      <div style="font-size:15px;line-height:1.85;color:var(--body);margin-top:36px" data-i18n="contact.eqIntro">This track is for a business that already works. You are not looking for someone to hand over money and disappear — you want a partner who is in it with you, and you are willing to share ownership for that.</div>
 
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:28px;padding:26px 28px;border-radius:var(--r-lg);background:linear-gradient(135deg,#211d18,#2b251e);color:#fff;flex-wrap:wrap;gap:16px;box-shadow:var(--shadow-md)">
-      <div><div style="font-size:12.5px;color:rgba(255,255,255,.55)" data-i18n="contact.ticketLabel">Ticket size</div><div class="serif" style="font-size:22px;font-weight:500;margin-top:4px" data-i18n="contact.ticketValue">BDT 3 – 7 lakh</div></div>
-      <a class="btn btn-light" href="https://wa.me/8801601212570" target="_blank" rel="noopener" style="padding:12px 22px;font-size:14px" data-i18n="contact.whatsapp">Message us on WhatsApp</a>
+      <div style="margin-top:36px">
+        <div style="font-size:18px;font-weight:600;margin-bottom:18px" data-i18n="contact.eqGetH2">What a Partner Gets</div>
+        <div class="g4-pillars" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="pillar"><div class="pillar-title" data-i18n="contact.eqP1Title">Marketing &amp; growth</div><div class="pillar-body" data-i18n="contact.eqP1Body">Customer acquisition, digital marketing, and sales systems — built with you, not handed over as a report.</div></div>
+          <div class="pillar"><div class="pillar-title" data-i18n="contact.eqP2Title">Systems &amp; operations</div><div class="pillar-body" data-i18n="contact.eqP2Body">Process, team structure, and reporting discipline — so the business can grow without breaking.</div></div>
+          <div class="pillar"><div class="pillar-title" data-i18n="contact.eqP3Title">Monthly review, one-on-one</div><div class="pillar-body" data-i18n="contact.eqP3Body">A working session every month — real numbers on the table, decisions made together, someone accountable alongside you.</div></div>
+          <div class="pillar"><div class="pillar-title" data-i18n="contact.eqP4Title">Network &amp; introductions</div><div class="pillar-body" data-i18n="contact.eqP4Body">Buyers, suppliers, and other business owners — introduced where it genuinely helps, not handed to you as a list.</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:28px;padding:26px 28px;border-radius:var(--r-lg);background:linear-gradient(135deg,#211d18,#2b251e);color:#fff;flex-wrap:wrap;gap:16px;box-shadow:var(--shadow-md)">
+        <div><div style="font-size:12.5px;color:rgba(255,255,255,.55)" data-i18n="contact.eqTicketLabel">Partnership size</div><div class="serif" style="font-size:22px;font-weight:500;margin-top:4px" data-i18n="contact.eqTicketValue">Up to BDT 10 lakh</div></div>
+        <a class="btn btn-light" href="https://wa.me/8801601212570" target="_blank" rel="noopener" style="padding:12px 22px;font-size:14px" data-i18n="contact.whatsapp">Message us on WhatsApp</a>
+      </div>
+
+      <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px">
+        <div class="card card-hov" style="padding:24px;border-color:#d9f2e3;border-left:3px solid var(--green)">
+          <div style="font-size:14px;font-weight:700;color:var(--green-dark);margin-bottom:12px" data-i18n="contact.eqForTitle">✓ What We Look For</div>
+          <div style="font-size:14px;line-height:2;color:var(--body)" data-i18n="contact.eqForBody">A business already running, with real revenue<br>An owner who wants a partner, not just a cheque<br>A clear plan for what scaling actually needs</div>
+        </div>
+        <div class="card card-hov" style="padding:24px;border-left:3px solid #b8bcc2">
+          <div style="font-size:14px;font-weight:700;color:var(--body);margin-bottom:12px" data-i18n="contact.eqNotTitle">✕ What We Don't Take</div>
+          <div style="font-size:14px;line-height:2;color:var(--body)" data-i18n="contact.eqNotBody">Idea-stage or pre-revenue businesses<br>Owners looking only for money, not partnership<br>Books that cannot be opened and verified</div>
+        </div>
+      </div>
+
+      <div style="margin-top:52px">
+        <div style="font-size:18px;font-weight:600;margin-bottom:22px" data-i18n="contact.eqProcessH2">How a Partnership Comes Together</div>
+        <div class="g4-process" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+          <div><div class="step-badge"><span class="serif">01</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.eqStep1Title">You submit a proposal</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.eqStep1Body">Your business, your numbers, and what scaling would take — plus what you want from a partner beyond capital.</div></div>
+          <div><div class="step-badge"><span class="serif">02</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.eqStep2Title">We verify and value</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.eqStep2Body">Books, ownership, and Shariah compliance are checked directly. Valuation is worked out together, on a method you can see.</div></div>
+          <div><div class="step-badge"><span class="serif">03</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.eqStep3Title">Terms are written down</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.eqStep3Body">Equity share, profit ratio, loss ratio, and how the partnership can end — all on paper before any money moves.</div></div>
+          <div><div class="step-badge"><span class="serif">04</span></div><div style="font-size:14px;font-weight:600;margin-top:12px" data-i18n="contact.eqStep4Title">We start working</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6" data-i18n="contact.eqStep4Body">Capital goes in and the mentorship begins — monthly sessions from the first month, not once things go wrong.</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:44px">
+        <div class="trust-block">
+          <div class="trust-title" data-i18n="contact.eqShariahTitle">THE SHARIAH BASIS</div>
+          <div class="trust-body" data-i18n="contact.eqShariahBody">An equity partnership here is Musharaka. Profit is shared at a ratio agreed in writing before any money moves. Loss is shared strictly in proportion to capital — that rule is not negotiable, because Shariah does not allow it to be.</div>
+        </div>
+        <div class="trust-block">
+          <div class="trust-title" data-i18n="contact.eqExitTitle">HOW A PARTNERSHIP ENDS</div>
+          <div class="trust-body" data-i18n="contact.eqExitBody">This is agreed at the start, not improvised later. Two paths are possible: you buy back our share at its fair value on the day, or we stay on as a long-term partner taking a profit share. What is never done is fixing a buyback price in advance — that would make it a loan wearing a partnership's clothes.</div>
+        </div>
+        <div class="trust-block">
+          <div class="trust-title" data-i18n="contact.eqCapacityTitle">HOW MANY WE TAKE</div>
+          <div class="trust-body" data-i18n="contact.eqCapacityBody">One or two partnerships a year. The mentorship is real time from one person, so it does not scale — and pretending otherwise would shortchange whoever is already in. The equity share itself is agreed per deal alongside the valuation; there is no fixed percentage.</div>
+        </div>
+      </div>
     </div>
 
     <div style="margin-top:52px">
@@ -475,9 +584,12 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)!important;box-sh
       <div style="font-size:13px;color:var(--muted);margin-bottom:22px" data-i18n="contact.directSub">We'll get back to you within a few business days.</div>
       <div id="form-sent" role="status" style="display:none;padding:24px;border-radius:var(--r-md);background:#eafaf0;color:var(--green-dark);font-size:14px;font-weight:500" data-i18n="contact.sent">Thanks — your proposal has been noted. We'll be in touch.</div>
       <form id="proposal-form" style="display:flex;flex-direction:column;gap:14px">
+        <input type="hidden" name="track" id="proposal-track" value="financing">
         <input required name="name" data-i18n-ph="contact.phName" placeholder="Your name" style="padding:15px 16px;border-radius:var(--r-sm);border:1px solid #dcdee2;font-size:14px;transition:border-color .2s ease">
         <input required name="business" data-i18n-ph="contact.phBusiness" placeholder="Business name" style="padding:15px 16px;border-radius:var(--r-sm);border:1px solid #dcdee2;font-size:14px;transition:border-color .2s ease">
         <input required name="sector" data-i18n-ph="contact.phSector" placeholder="Sector (e.g. Trading, Service)" style="padding:15px 16px;border-radius:var(--r-sm);border:1px solid #dcdee2;font-size:14px;transition:border-color .2s ease">
+        <input class="equity-only" name="revenue" data-i18n-ph="contact.phRevenue" placeholder="Approximate monthly revenue" style="padding:15px 16px;border-radius:var(--r-sm);border:1px solid #dcdee2;font-size:14px;transition:border-color .2s ease">
+        <textarea class="equity-only" name="partner" data-i18n-ph="contact.phPartner" placeholder="Beyond capital, what do you want from a partner?" rows="3" style="padding:15px 16px;border-radius:var(--r-sm);border:1px solid #dcdee2;font-size:14px;resize:vertical;transition:border-color .2s ease"></textarea>
         <textarea required name="message" data-i18n-ph="contact.phMessage" placeholder="Briefly describe your business and funding need" rows="4" style="padding:15px 16px;border-radius:var(--r-sm);border:1px solid #dcdee2;font-size:14px;resize:vertical;transition:border-color .2s ease"></textarea>
         <button type="submit" class="btn btn-primary" style="align-self:flex-start;border:none" data-i18n="contact.send">Send Proposal</button>
       </form>
@@ -560,6 +672,13 @@ const I18N = {
     'home.step1Title': 'Proposal comes in', 'home.step1Body': 'Entrepreneurs submit their business proposal and initial financials',
     'home.step2Title': 'Diligence & review', 'home.step2Body': 'The business, cash flow, and Shariah compliance are verified hands-on',
     'home.step3Title': 'Capital deployed', 'home.step3Body': 'Investment is completed under the agreed structure',
+    'home.tracksH2': 'Two Ways We Work',
+    'home.track1Label': 'FIXED-TERM FINANCING', 'home.track1Title': 'Capital, repaid on schedule',
+    'home.track1Body': 'Capital for stock, materials, or a confirmed order — repaid on a schedule fixed before disbursement. No ownership taken.',
+    'home.track1Meta': '৳3 – 7 lakh · Murabaha, Mudaraba',
+    'home.track2Label': 'EQUITY PARTNERSHIP', 'home.track2Title': 'Capital, a partner, and mentorship',
+    'home.track2Body': 'For a running business ready to scale — capital, an equity partner, and hands-on mentorship every month.',
+    'home.track2Meta': 'Up to ৳10 lakh · Musharaka',
     'home.portfolioH2': 'Portfolio Preview', 'home.viewAll': 'View all →',
     'home.whyH2': 'Why Shariah-First Capital',
     'home.why1Title': 'NO INTEREST', 'home.why1Body': 'Every deal is structured as Musharaka, Mudaraba, or Murabaha — never interest-bearing debt.',
@@ -572,7 +691,7 @@ const I18N = {
     'home.quote3': '"13.5% average return across 7 businesses since 2023 — profit and risk shared transparently, deal by deal."',
     'home.quote3By': 'The Track Record, 2023–2026',
     'home.ctaH2': 'Submit Your Business for Consideration',
-    'home.ctaSub': 'Ticket size BDT 3–7 lakh — under Shariah-compliant structures',
+    'home.ctaSub': 'Financing BDT 3–7 lakh, or an equity partnership up to BDT 10 lakh — both under Shariah-compliant structures',
     'home.ctaFine': 'No obligation — reviewed within a few business days',
     'about.eyebrow': 'ABOUT US', 'about.h1': 'Who We Are, What We Do',
     'about.founderName': 'Muminul Islam', 'about.founderTitle': 'Founder, Faris Venture',
@@ -586,7 +705,7 @@ const I18N = {
     'about.p3': 'Only Shariah-compliant structures — no exceptions', 'about.p4': 'No investment without business verification',
     'about.trackH2': 'Track Record Before Faris Venture',
     'about.trackBody': "Between 2023 and 2025, the founder completed 12 halal SME investments across 6 businesses, with an overall return of ~13.5%.",
-    'about.trackInsight': "One lesson from that period shaped Faris Venture's rules directly: the largest single ticket returned the weakest result. That's why no deal here exceeds BDT 7 lakh.",
+    'about.trackInsight': 'One lesson from that period shaped the rules here directly: the largest single ticket returned the weakest result. That is why financing is capped at BDT 7 lakh — where capital goes out and the business runs without us, exposure stays small. An equity partnership can go to BDT 10 lakh, because there we are inside the business, not watching from outside.',
     'about.statHeadline': 'avg. annualized return, 2023–2025',
     'about.trackLink': 'See the full track record →',
     'about.chartEyebrow': 'PERFORMANCE BY YEAR',
@@ -597,12 +716,36 @@ const I18N = {
     'portfolio.trackH2': 'Track Record Before Faris Venture',
     'portfolio.trackSub': 'Completed halal SME investments from 2023–2025, before this fund existed. Duration and return shown per deal — profit amounts are kept private.',
     'contact.eyebrow': 'FOR ENTREPRENEURS', 'contact.h1': 'Submit a Proposal',
+    'contact.t1Label': 'FIXED-TERM FINANCING', 'contact.t1Title': 'Capital, repaid on schedule',
+    'contact.t1Card': 'You need capital for stock, raw materials, or a confirmed order. We take no ownership in your business.',
+    'contact.t1Meta': '৳3 – 7 lakh · Murabaha, Mudaraba',
+    'contact.t2Label': 'EQUITY PARTNERSHIP', 'contact.t2Title': 'Capital, a partner, and mentorship',
+    'contact.t2Card': 'Your business is running and you want to scale it. We take an agreed equity share and work alongside you.',
+    'contact.t2Meta': 'Up to ৳10 lakh · Musharaka',
+    'contact.eqIntro': 'This track is for a business that already works. You are not looking for someone to hand over money and disappear — you want a partner who is in it with you, and you are willing to share ownership for that.',
+    'contact.eqGetH2': 'What a Partner Gets',
+    'contact.eqP1Title': 'Marketing &amp; growth', 'contact.eqP1Body': 'Customer acquisition, digital marketing, and sales systems — built with you, not handed over as a report.',
+    'contact.eqP2Title': 'Systems &amp; operations', 'contact.eqP2Body': 'Process, team structure, and reporting discipline — so the business can grow without breaking.',
+    'contact.eqP3Title': 'Monthly review, one-on-one', 'contact.eqP3Body': 'A working session every month — real numbers on the table, decisions made together, someone accountable alongside you.',
+    'contact.eqP4Title': 'Network &amp; introductions', 'contact.eqP4Body': 'Buyers, suppliers, and other business owners — introduced where it genuinely helps, not handed to you as a list.',
+    'contact.eqTicketLabel': 'Partnership size', 'contact.eqTicketValue': 'Up to BDT 10 lakh',
+    'contact.eqForTitle': '✓ What We Look For', 'contact.eqForBody': 'A business already running, with real revenue<br>An owner who wants a partner, not just a cheque<br>A clear plan for what scaling actually needs',
+    'contact.eqNotTitle': "✕ What We Don't Take", 'contact.eqNotBody': 'Idea-stage or pre-revenue businesses<br>Owners looking only for money, not partnership<br>Books that cannot be opened and verified',
+    'contact.eqProcessH2': 'How a Partnership Comes Together',
+    'contact.eqStep1Title': 'You submit a proposal', 'contact.eqStep1Body': 'Your business, your numbers, and what scaling would take — plus what you want from a partner beyond capital.',
+    'contact.eqStep2Title': 'We verify and value', 'contact.eqStep2Body': 'Books, ownership, and Shariah compliance are checked directly. Valuation is worked out together, on a method you can see.',
+    'contact.eqStep3Title': 'Terms are written down', 'contact.eqStep3Body': 'Equity share, profit ratio, loss ratio, and how the partnership can end — all on paper before any money moves.',
+    'contact.eqStep4Title': 'We start working', 'contact.eqStep4Body': 'Capital goes in and the mentorship begins — monthly sessions from the first month, not once things go wrong.',
+    'contact.eqShariahTitle': 'THE SHARIAH BASIS', 'contact.eqShariahBody': 'An equity partnership here is Musharaka. Profit is shared at a ratio agreed in writing before any money moves. Loss is shared strictly in proportion to capital — that rule is not negotiable, because Shariah does not allow it to be.',
+    'contact.eqExitTitle': 'HOW A PARTNERSHIP ENDS', 'contact.eqExitBody': "This is agreed at the start, not improvised later. Two paths are possible: you buy back our share at its fair value on the day, or we stay on as a long-term partner taking a profit share. What is never done is fixing a buyback price in advance — that would make it a loan wearing a partnership's clothes.",
+    'contact.eqCapacityTitle': 'HOW MANY WE TAKE', 'contact.eqCapacityBody': 'One or two partnerships a year. The mentorship is real time from one person, so it does not scale — and pretending otherwise would shortchange whoever is already in. The equity share itself is agreed per deal alongside the valuation; there is no fixed percentage.',
+    'contact.phRevenue': 'Approximate monthly revenue', 'contact.phPartner': 'Beyond capital, what do you want from a partner?',
     'contact.processH2': 'How the Process Works',
     'contact.pStep1Title': 'You submit a proposal', 'contact.pStep1Body': 'Share your business, your cash flow, and what the capital is for — via the form below or WhatsApp.',
     'contact.pStep2Title': 'We verify, by hand', 'contact.pStep2Body': 'Cash flow, ownership, and Shariah compliance are checked directly — no rushed reviews, no shortcuts.',
     'contact.pStep3Title': 'Terms get fixed upfront', 'contact.pStep3Body': 'Musharaka, Mudaraba, or Murabaha — whichever fits — with every term agreed before any money moves.',
     'contact.pStep4Title': 'Capital is deployed', 'contact.pStep4Body': 'Funds move on the agreed schedule, with repayment terms already locked in — nothing renegotiated later.',
-    'contact.sub': 'If your business fits the criteria below, you can send us a proposal.',
+    'contact.sub': 'There are two ways to work with Faris Venture. Pick the one that matches where your business is right now.',
     'contact.forTitle': '✓ What We Look For', 'contact.forBody': 'Ongoing, verifiable cash flow<br>A Shariah-compliant business model<br>A clear plan for use of funds',
     'contact.notTitle': "✕ What We Don't Take", 'contact.notBody': 'Non-Shariah-compliant sectors (interest-based, gambling, etc.)<br>Pre-revenue, idea-stage projects<br>Opaque business structures',
     'contact.ticketLabel': 'Ticket size', 'contact.ticketValue': 'BDT 3 – 7 lakh', 'contact.whatsapp': 'Message us on WhatsApp',
@@ -638,6 +781,13 @@ const I18N = {
     'home.step1Title': 'প্রপোজাল আসে', 'home.step1Body': 'উদ্যোক্তা তার বিজনেসের প্রপোজাল আর প্রাথমিক আর্থিক হিসাব জমা দেন',
     'home.step2Title': 'ডিলিজেন্স ও যাচাই', 'home.step2Body': 'বিজনেসের ক্যাশ ফ্লো, মালিকানা, আর শরিয়াহ সম্মতি হাতে-কলমে যাচাই করা হয়',
     'home.step3Title': 'পুঁজি বিনিয়োগ হয়', 'home.step3Body': 'সম্মত কাঠামোর আওতায় বিনিয়োগ সম্পন্ন হয়',
+    'home.tracksH2': 'আমরা দুইভাবে কাজ করি',
+    'home.track1Label': 'নির্দিষ্ট মেয়াদের অর্থায়ন', 'home.track1Title': 'পুঁজি, নির্দিষ্ট সময়ে পরিশোধ',
+    'home.track1Body': 'স্টক, কাঁচামাল, বা কনফার্ম হওয়া অর্ডারের জন্য পুঁজি — বিতরণের আগেই ঠিক করা সময়সূচিতে পরিশোধ। কোনো মালিকানা নেওয়া হয় না।',
+    'home.track1Meta': '৳৩ – ৭ লাখ · মুরাবাহা, মুদারাবা',
+    'home.track2Label': 'অংশীদারিত্ব (মুশারাকা)', 'home.track2Title': 'পুঁজি, একজন পার্টনার, আর মেন্টরশিপ',
+    'home.track2Body': 'চলমান বিজনেস যেটা স্কেল করার জন্য তৈরি — পুঁজি, একজন অংশীদার, আর প্রতি মাসে হাতে-কলমে মেন্টরশিপ।',
+    'home.track2Meta': '৳১০ লাখ পর্যন্ত · মুশারাকা',
     'home.portfolioH2': 'পোর্টফোলিও প্রিভিউ', 'home.viewAll': 'সব দেখুন →',
     'home.whyH2': 'কেন শরিয়াহ-ফার্স্ট পুঁজি',
     'home.why1Title': 'সুদমুক্ত', 'home.why1Body': 'প্রতিটা ডিল মুশারাকা, মুদারাবা বা মুরাবাহা কাঠামোয় সাজানো হয় — সুদভিত্তিক ঋণ হিসেবে কখনো না।',
@@ -650,7 +800,7 @@ const I18N = {
     'home.quote3': '"২০২৩ সাল থেকে ৭টা বিজনেসে গড়ে ১৩.৫% রিটার্ন। লাভ আর ঝুঁকি, দুটোই ডিল অনুযায়ী স্বচ্ছভাবে ভাগ হয়েছে।"',
     'home.quote3By': 'ট্র্যাক রেকর্ড, ২০২৩–২০২৬',
     'home.ctaH2': 'আপনার বিজনেসটা বিবেচনার জন্য পাঠান',
-    'home.ctaSub': 'টিকেট সাইজ ৳৩–৭ লাখ, শরিয়াহ-সম্মত কাঠামোর আওতায়',
+    'home.ctaSub': 'অর্থায়ন ৳৩–৭ লাখ, অথবা ৳১০ লাখ পর্যন্ত অংশীদারিত্ব — দুটোই শরিয়াহ-সম্মত কাঠামোর আওতায়',
     'home.ctaFine': 'কোনো বাধ্যবাধকতা নেই — কয়েক কার্যদিবসের মধ্যেই রিভিউ হবে',
     'about.eyebrow': 'আমাদের কথা', 'about.h1': 'আমরা কারা, কী করি',
     'about.founderName': 'মুমিনুল ইসলাম', 'about.founderTitle': 'ফাউন্ডার, ফারিস ভেঞ্চার',
@@ -664,7 +814,7 @@ const I18N = {
     'about.p3': 'শুধু শরিয়াহ-সম্মত কাঠামো, কোনো ব্যতিক্রম নেই', 'about.p4': 'বিজনেস যাচাই না করে কোনো বিনিয়োগ নেই',
     'about.trackH2': 'ফারিস ভেঞ্চারের আগের ট্র্যাক রেকর্ড',
     'about.trackBody': '২০২৩ থেকে ২০২৫, এই দুই বছরে ফাউন্ডার ৬টা বিজনেসে ১০টা হালাল SME বিনিয়োগ সম্পন্ন করেছেন। মোট রিটার্ন দাঁড়িয়েছে প্রায় ১৩.৫%-এ।',
-    'about.trackInsight': 'ওই সময়টা থেকে একটা শিক্ষা সরাসরি ফারিস ভেঞ্চারের নিয়ম তৈরি করেছে — সবচেয়ে বড় একক টিকেটটাই সবচেয়ে দুর্বল রিটার্ন দিয়েছিল। তাই এখানে কোনো ডিল ৳৭ লাখের বেশি হয় না।',
+    'about.trackInsight': 'ওই সময়ের একটা শিক্ষা এখানকার নিয়মগুলো সরাসরি তৈরি করে দিয়েছে — সবচেয়ে বড় একক টিকেটটাই সবচেয়ে দুর্বল রিটার্ন দিয়েছিল। এজন্যই অর্থায়নের সীমা ৳৭ লাখ: যেখানে পুঁজি চলে যায় আর বিজনেস চলে আমাদের ছাড়া, সেখানে এক্সপোজার ছোট রাখা হয়। অংশীদারিত্বে ৳১০ লাখ পর্যন্ত যাওয়া যায়, কারণ সেখানে আমরা বিজনেসের ভেতরে থাকি, বাইরে থেকে দেখি না।',
     'about.statHeadline': 'গড় বার্ষিক রিটার্ন, ২০২৩–২০২৫',
     'about.trackLink': 'পুরো ট্র্যাক রেকর্ড দেখুন →',
     'about.chartEyebrow': 'বছরভিত্তিক পারফরম্যান্স',
@@ -675,12 +825,36 @@ const I18N = {
     'portfolio.trackH2': 'ফারিস ভেঞ্চারের আগের ট্র্যাক রেকর্ড',
     'portfolio.trackSub': '২০২৩ থেকে ২০২৫, এই ফান্ড শুরু হওয়ার আগেই সম্পন্ন হওয়া হালাল SME বিনিয়োগ। প্রতিটা ডিলের মেয়াদ আর রিটার্ন দেখানো আছে — মুনাফার সঠিক অঙ্কটা প্রাইভেট রাখা হয়েছে।',
     'contact.eyebrow': 'উদ্যোক্তাদের জন্য', 'contact.h1': 'প্রপোজাল পাঠান',
+    'contact.t1Label': 'নির্দিষ্ট মেয়াদের অর্থায়ন', 'contact.t1Title': 'পুঁজি, নির্দিষ্ট সময়ে পরিশোধ',
+    'contact.t1Card': 'স্টক, কাঁচামাল, বা কনফার্ম হওয়া অর্ডারের জন্য পুঁজি দরকার। আপনার বিজনেসে আমাদের কোনো মালিকানা থাকে না।',
+    'contact.t1Meta': '৳৩ – ৭ লাখ · মুরাবাহা, মুদারাবা',
+    'contact.t2Label': 'অংশীদারিত্ব (মুশারাকা)', 'contact.t2Title': 'পুঁজি, একজন পার্টনার, আর মেন্টরশিপ',
+    'contact.t2Card': 'আপনার বিজনেস চলছে, এখন সেটাকে বড় করতে চান। আমরা একটা নির্ধারিত অংশীদারিত্ব নিই, আর আপনার পাশে থেকে কাজ করি।',
+    'contact.t2Meta': '৳১০ লাখ পর্যন্ত · মুশারাকা',
+    'contact.eqIntro': 'এই ট্র্যাকটা এমন বিজনেসের জন্য, যেটা ইতিমধ্যে দাঁড়িয়ে গেছে। আপনি এমন কাউকে খুঁজছেন না যে টাকা ধরিয়ে দিয়ে চলে যাবে — আপনি চান এমন একজন পার্টনার যে আপনার সাথে থাকবে, আর সেজন্য মালিকানার একটা অংশ ছাড়তেও রাজি আছেন।',
+    'contact.eqGetH2': 'একজন পার্টনার হিসেবে আপনি যা পাবেন',
+    'contact.eqP1Title': 'মার্কেটিং ও গ্রোথ', 'contact.eqP1Body': 'কাস্টমার অ্যাকুইজিশন, ডিজিটাল মার্কেটিং, আর সেলস সিস্টেম — আপনার সাথে বসে দাঁড় করানো হয়, রিপোর্ট ধরিয়ে দিয়ে চলে যাওয়া না।',
+    'contact.eqP2Title': 'সিস্টেম ও অপারেশন', 'contact.eqP2Body': 'প্রসেস, টিম স্ট্রাকচার, আর রিপোর্টিং ডিসিপ্লিন — যাতে বিজনেস বড় হতে গিয়ে ভেঙে না পড়ে।',
+    'contact.eqP3Title': 'প্রতি মাসে ওয়ান-অন-ওয়ান রিভিউ', 'contact.eqP3Body': 'প্রতি মাসে একটা ওয়ার্কিং সেশন — সামনে থাকে আসল নাম্বার, সিদ্ধান্ত হয় একসাথে, আর জবাবদিহিতায় আপনার পাশে একজন থাকে।',
+    'contact.eqP4Title': 'নেটওয়ার্ক ও পরিচয়', 'contact.eqP4Body': 'বায়ার, সাপ্লায়ার, আর অন্য বিজনেস ওনার — পরিচয় করানো হয় যেখানে সত্যিই কাজে লাগবে, নামমাত্র একটা লিস্ট ধরিয়ে দেওয়া না।',
+    'contact.eqTicketLabel': 'অংশীদারিত্বের আকার', 'contact.eqTicketValue': '৳১০ লাখ পর্যন্ত',
+    'contact.eqForTitle': '✓ আমরা যা খুঁজি', 'contact.eqForBody': 'চলমান বিজনেস, যেখানে সত্যিকারের রেভিনিউ আছে<br>এমন ওনার যিনি শুধু চেক না, একজন পার্টনার চান<br>স্কেল করতে আসলে কী লাগবে, তার স্পষ্ট পরিকল্পনা',
+    'contact.eqNotTitle': '✕ যা আমরা নিই না', 'contact.eqNotBody': 'আইডিয়া-স্টেজ বা রেভিনিউ শুরু হয়নি এমন বিজনেস<br>যারা শুধু টাকা চান, অংশীদারিত্ব না<br>এমন হিসাব যেটা খুলে যাচাই করা যায় না',
+    'contact.eqProcessH2': 'অংশীদারিত্ব যেভাবে দাঁড়ায়',
+    'contact.eqStep1Title': 'আপনি প্রপোজাল পাঠান', 'contact.eqStep1Body': 'আপনার বিজনেস, আপনার নাম্বার, আর স্কেল করতে কী লাগবে — সাথে পুঁজির বাইরে একজন পার্টনারের কাছে আপনি কী চান।',
+    'contact.eqStep2Title': 'যাচাই আর ভ্যালুয়েশন', 'contact.eqStep2Body': 'হিসাব, মালিকানা, আর শরিয়াহ সম্মতি সরাসরি যাচাই করা হয়। ভ্যালুয়েশন বের করা হয় একসাথে বসে, এমন পদ্ধতিতে যেটা আপনি নিজে দেখতে পাবেন।',
+    'contact.eqStep3Title': 'শর্ত লিখিত হয়', 'contact.eqStep3Body': 'অংশীদারিত্বের হার, মুনাফার অনুপাত, লোকসানের অনুপাত, আর অংশীদারিত্ব কীভাবে শেষ হতে পারে — সবই কাগজে ওঠে, টাকা নড়ার আগেই।',
+    'contact.eqStep4Title': 'কাজ শুরু', 'contact.eqStep4Body': 'পুঁজি ঢোকে, আর মেন্টরশিপ শুরু হয় — প্রথম মাস থেকেই মাসিক সেশন, সমস্যা হওয়ার পরে না।',
+    'contact.eqShariahTitle': 'শরিয়াহ ভিত্তি', 'contact.eqShariahBody': 'এখানে অংশীদারিত্ব মানে মুশারাকা। মুনাফা ভাগ হয় আগে থেকে লিখিতভাবে ঠিক করা অনুপাতে, টাকা নড়ার আগেই। আর লোকসান ভাগ হয় ঠিক পুঁজির অনুপাতে — এই নিয়মটা আলোচনার বিষয় না, কারণ শরিয়াহ এখানে ছাড় দেয় না।',
+    'contact.eqExitTitle': 'অংশীদারিত্ব কীভাবে শেষ হয়', 'contact.eqExitBody': 'এটা শুরুতেই ঠিক হয়ে যায়, পরে বানানো হয় না। দুইটা পথ খোলা: হয় আপনি সেদিনের ন্যায্য মূল্যে আমাদের অংশটা কিনে নেবেন, নয়তো আমরা দীর্ঘমেয়াদি পার্টনার হিসেবে থেকে মুনাফার ভাগ নেব। যেটা কখনোই করা হয় না, তা হলো আগে থেকে বাইব্যাকের দাম ফিক্স করে দেওয়া — সেটা করলে ওটা আর অংশীদারিত্ব থাকে না, পার্টনারশিপের পোশাক পরা একটা ঋণ হয়ে যায়।',
+    'contact.eqCapacityTitle': 'বছরে কয়টা নেওয়া হয়', 'contact.eqCapacityBody': 'বছরে এক বা দুইটা। মেন্টরশিপটা একজন মানুষের সত্যিকারের সময়, তাই এটা বাড়ানো যায় না — আর বাড়ানো যায় ভান করলে যারা আগে থেকে আছেন তাদেরই ঠকানো হয়। অংশীদারিত্বের হারটাও প্রতিটা ডিলে ভ্যালুয়েশনের সাথে মিলিয়ে ঠিক হয়, কোনো বাঁধাধরা পার্সেন্টেজ নেই।',
+    'contact.phRevenue': 'আনুমানিক মাসিক রেভিনিউ', 'contact.phPartner': 'পুঁজির বাইরে একজন পার্টনারের কাছে কী চান?',
     'contact.processH2': 'পুরো প্রক্রিয়াটা যেভাবে চলে',
     'contact.pStep1Title': 'আপনি প্রপোজাল পাঠান', 'contact.pStep1Body': 'আপনার বিজনেস, ক্যাশ ফ্লো, আর পুঁজিটা কীসের জন্য লাগবে — এসব জানান নিচের ফর্মে অথবা হোয়াটসঅ্যাপে।',
     'contact.pStep2Title': 'আমরা হাতে-কলমে যাচাই করি', 'contact.pStep2Body': 'ক্যাশ ফ্লো, মালিকানা, আর শরিয়াহ সম্মতি সরাসরি চেক করা হয় — তাড়াহুড়ো নেই, শর্টকাট নেই।',
     'contact.pStep3Title': 'শর্ত আগেই ঠিক হয়ে যায়', 'contact.pStep3Body': 'মুশারাকা, মুদারাবা, নাকি মুরাবাহা — যেটা আপনার বিজনেসের জন্য মানানসই, সেটাই ঠিক হয়, আর প্রতিটা শর্ত টাকা নড়ার আগেই চূড়ান্ত থাকে।',
     'contact.pStep4Title': 'পুঁজি বিনিয়োগ হয়', 'contact.pStep4Body': 'সম্মত সময়সূচি অনুযায়ী টাকা যায়, পরিশোধের শর্তও আগে থেকেই লক করা থাকে — পরে নতুন করে দরকষাকষির সুযোগ নেই।',
-    'contact.sub': 'নিচের criteria-তে আপনার বিজনেস মিললে, নির্দ্বিধায় প্রপোজাল পাঠাতে পারেন।',
+    'contact.sub': 'ফারিস ভেঞ্চারের সাথে কাজ করার দুইটা পথ আছে। আপনার বিজনেস এখন যে অবস্থায়, তার সাথে যেটা মেলে সেটা বেছে নিন।',
     'contact.forTitle': '✓ যা আমরা খুঁজি', 'contact.forBody': 'চলমান, যাচাই করা যায় এমন ক্যাশ ফ্লো<br>একটা শরিয়াহ-সম্মত বিজনেস মডেল<br>তহবিল কীভাবে ব্যবহার হবে তার স্পষ্ট পরিকল্পনা',
     'contact.notTitle': '✕ যা আমরা নিই না', 'contact.notBody': 'অ-শরিয়াহ-সম্মত সেক্টর (সুদভিত্তিক, জুয়া, ইত্যাদি)<br>প্রি-রেভিনিউ, শুধু আইডিয়া-স্টেজ প্রজেক্ট<br>অস্বচ্ছ বিজনেস স্ট্রাকচার',
     'contact.ticketLabel': 'টিকেট সাইজ', 'contact.ticketValue': '৳৩ – ৭ লাখ', 'contact.whatsapp': 'হোয়াটসঅ্যাপে মেসেজ করুন',
@@ -740,6 +914,16 @@ const faqs = [
     qBn: 'এখন কি এখানে বিনিয়োগ করা যায়?', aBn: 'না। এই মুহূর্তে ফারিস ভেঞ্চার একটা প্রাইভেট ফান্ড হিসেবে চলছে। সাধারণ বিনিয়োগকারীরা এখনো ঢুকতে পারবেন না। ভবিষ্যতে এই সুযোগ খুললে, সেটা এখানেই সবার আগে জানানো হবে।', open: true },
   { qEn: 'Who can submit a proposal?', aEn: 'Entrepreneurs running Shariah-compliant SMEs with ongoing, verifiable cash flow.',
     qBn: 'কারা প্রপোজাল জমা দিতে পারবেন?', aBn: 'যেসব উদ্যোক্তার হাতে চলমান, যাচাই করা যায় এমন ক্যাশ ফ্লো আছে, আর বিজনেসটা শরিয়াহ-সম্মত, তারাই আবেদন করতে পারবেন।', open: false },
+  { qEn: "What's the difference between financing and an equity partnership?", aEn: 'Financing is capital you repay on a fixed schedule, and we take no ownership — it suits stock, raw materials, or a confirmed order. An equity partnership means we put in capital, take an agreed share of the business, and work alongside you every month. The first is a transaction; the second is a partnership.',
+    qBn: 'অর্থায়ন আর অংশীদারিত্বের পার্থক্য কী?', aBn: 'অর্থায়ন মানে নির্দিষ্ট সময়সূচিতে পরিশোধ করা পুঁজি, যেখানে আমরা কোনো মালিকানা নিই না — স্টক, কাঁচামাল, বা কনফার্ম হওয়া অর্ডারের জন্য এটাই মানানসই। আর অংশীদারিত্ব মানে আমরা পুঁজি দিই, বিজনেসের একটা নির্ধারিত অংশ নিই, আর প্রতি মাসে আপনার সাথে কাজ করি। প্রথমটা একটা লেনদেন, দ্বিতীয়টা একটা অংশীদারিত্ব।', open: false },
+  { qEn: 'Is an equity partnership actually Shariah-compliant?', aEn: 'Yes — it is Musharaka, one of the oldest structures in Islamic finance and the one AAOIFI SS-12 covers. Profit is shared at a ratio agreed in writing beforehand. Loss is shared strictly in proportion to capital, which Shariah does not allow to be negotiated away.',
+    qBn: 'অংশীদারিত্ব কি আসলেই শরিয়াহ-সম্মত?', aBn: 'হ্যাঁ। এটা মুশারাকা, ইসলামি অর্থব্যবস্থার সবচেয়ে পুরোনো কাঠামোগুলোর একটা, আর AAOIFI SS-12 এটাই কভার করে। মুনাফা ভাগ হয় আগে থেকে লিখিতভাবে ঠিক করা অনুপাতে। আর লোকসান ভাগ হয় ঠিক পুঁজির অনুপাতে — এই জায়গাটায় শরিয়াহ কোনো দরকষাকষির সুযোগ রাখে না।', open: false },
+  { qEn: 'How much equity do you take?', aEn: 'There is no fixed percentage. The share is worked out per deal, alongside the valuation, and both are agreed in writing before any money moves.',
+    qBn: 'কতটুকু অংশীদারিত্ব নেওয়া হয়?', aBn: 'কোনো বাঁধাধরা পার্সেন্টেজ নেই। প্রতিটা ডিলে ভ্যালুয়েশনের সাথে মিলিয়ে অংশটা ঠিক করা হয়, আর দুটোই লিখিতভাবে চূড়ান্ত হয় টাকা নড়ার আগে।', open: false },
+  { qEn: 'How does Faris Venture exit an equity partnership?', aEn: 'Two ways, agreed at the start: you buy back our share at its fair value on the day, or we stay on long term and take a profit share. A buyback price is never fixed in advance — that would turn a partnership into a loan.',
+    qBn: 'অংশীদারিত্ব থেকে ফারিস ভেঞ্চার বের হয় কীভাবে?', aBn: 'দুইভাবে, আর সেটা শুরুতেই ঠিক হয়ে যায়: হয় আপনি সেদিনের ন্যায্য মূল্যে আমাদের অংশটা কিনে নেবেন, নয়তো আমরা দীর্ঘমেয়াদে থেকে মুনাফার ভাগ নেব। বাইব্যাকের দাম আগে থেকে কখনোই ফিক্স করা হয় না — করলে অংশীদারিত্বটা আসলে ঋণ হয়ে যায়।', open: false },
+  { qEn: 'How many partnerships do you take a year?', aEn: 'One or two. The mentorship is real time from one person, so it does not scale — and pretending otherwise would shortchange whoever is already in.',
+    qBn: 'বছরে কয়টা অংশীদারিত্ব নেওয়া হয়?', aBn: 'এক বা দুইটা। মেন্টরশিপটা একজন মানুষের সত্যিকারের সময়, তাই এটা বাড়ানো যায় না — আর বাড়ানো যায় বলে ভান করলে যারা আগে থেকে আছেন, তাদেরই ঠকানো হয়।', open: false },
   { qEn: 'What investment structures do you use?', aEn: 'Musharaka, Mudaraba, and Murabaha — determined by the nature of the business.',
     qBn: 'কোন বিনিয়োগ কাঠামো ব্যবহার করা হয়?', aBn: 'মুশারাকা, মুদারাবা, আর মুরাবাহা, তিনটাই। কোনটা লাগবে, সেটা নির্ভর করে বিজনেসের ধরনের ওপর।', open: false },
   { qEn: 'How long does the process take, from proposal to funding?', aEn: 'Diligence typically takes a few weeks — it depends on how quickly cash flow and ownership documents can be verified. There is no fixed timeline; a rushed review is not a real one.',
@@ -758,7 +942,12 @@ function dealCard(d, full, lang, i) {
   const structureWord = lang === 'bn' ? 'কাঠামো' : 'Structure';
   const investWord = lang === 'bn' ? 'বিনিয়োগ' : 'Investment';
   const photoWord = lang === 'bn' ? 'ছবি বসবে' : 'Photo placeholder';
-  const chip = `<span style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:${SECTOR_COLORS[d.sector]||'#8a8f98'}"></span>${sectorLabel}</span>`;
+  const sectorChip = `<span style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:${SECTOR_COLORS[d.sector]||'#8a8f98'}"></span>${sectorLabel}</span>`;
+  // Only equity deals get a track pill — financing is the default, so labelling it adds noise.
+  const trackPill = d.dealType === 'equity'
+    ? `<span style="font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:999px;background:#eef1ff;color:#2f3fa5;white-space:nowrap">${lang === 'bn' ? 'অংশীদারিত্ব' : 'PARTNERSHIP'}</span>`
+    : '';
+  const chip = `<span style="display:flex;align-items:center;gap:8px;min-width:0">${sectorChip}${trackPill}</span>`;
   const status = `<span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:#eafaf0;color:var(--green-dark)">${statusLabel}</span>`;
   const photo = h => d.imageUrl
     ? `<img src="${d.imageUrl}" alt="${nameLabel}" loading="lazy" style="width:100%;height:${h}px;object-fit:cover;display:block">`
@@ -993,7 +1182,7 @@ function renderDealDetail() {
     ${photoBlock}
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-top:28px;flex-wrap:wrap">
       <div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:${SECTOR_COLORS[d.sector]||'#8a8f98'}"></span>${sectorLabel}</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:${SECTOR_COLORS[d.sector]||'#8a8f98'}"></span>${sectorLabel}${d.dealType === 'equity' ? `<span style="font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:999px;background:#eef1ff;color:#2f3fa5;white-space:nowrap">${lang === 'bn' ? 'অংশীদারিত্ব' : 'PARTNERSHIP'}</span>` : ''}</div>
         <h1 class="serif" style="font-size:clamp(26px,3.6vw,34px);font-weight:500;margin:8px 0 0;letter-spacing:-.01em">${nameLabel}</h1>
       </div>
       <span style="font-size:11px;font-weight:600;padding:6px 14px;border-radius:999px;background:#eafaf0;color:var(--green-dark);white-space:nowrap">${statusLabel}</span>
@@ -1132,15 +1321,43 @@ function setupReveal() {
   document.querySelectorAll('.reveal:not(.reveal-in)').forEach(el => observer.observe(el));
 }
 
+// two funding tracks on the For Entrepreneurs page — financing vs equity partnership
+let currentTrack = 'financing';
+function setTrack(t) {
+  currentTrack = t === 'equity' ? 'equity' : 'financing';
+  document.querySelectorAll('[data-track-btn]').forEach(b => {
+    b.classList.toggle('active', b.dataset.trackBtn === currentTrack);
+  });
+  document.getElementById('track-financing').hidden = currentTrack !== 'financing';
+  document.getElementById('track-equity').hidden = currentTrack !== 'equity';
+  document.getElementById('proposal-track').value = currentTrack;
+  // The equity-only fields are required only while they're visible, otherwise
+  // a hidden required field would silently block the form from submitting.
+  document.querySelectorAll('#proposal-form .equity-only').forEach(el => {
+    const isEquity = currentTrack === 'equity';
+    el.style.display = isEquity ? '' : 'none';
+    el.required = isEquity;
+  });
+  setupReveal();
+}
+document.querySelectorAll('[data-track-btn]').forEach(btn => {
+  btn.addEventListener('click', () => setTrack(btn.dataset.trackBtn));
+});
+
 document.querySelectorAll('[data-nav]').forEach(el => {
   const p = el.dataset.nav;
   if (el.tagName === 'A') el.href = p === 'home' ? '/' : '/' + p;
-  el.addEventListener('click', e => { e.preventDefault(); setPage(p); });
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    if (el.dataset.track) setTrack(el.dataset.track);
+    setPage(p);
+  });
 });
 window.addEventListener('popstate', e => {
   const p = (e.state && e.state.page) || (location.pathname.replace(/^\/|\/$/g, '') || 'home');
   setPage(['home','about','portfolio','contact'].includes(p) ? p : 'home', false);
 });
+setTrack('financing');
 const startPage = (location.pathname.replace(/^\/|\/$/g, '') || 'home');
 setPage(['home','about','portfolio','contact'].includes(startPage) ? startPage : 'home', false);
 
@@ -1221,8 +1438,15 @@ document.getElementById('proposal-form').addEventListener('submit', e => {
   const business = (fd.get('business') || '').toString().trim();
   const sector = (fd.get('sector') || '').toString().trim();
   const message = (fd.get('message') || '').toString().trim();
-  const subject = `Proposal — ${business || name}`;
-  const body = `Name: ${name}\nBusiness: ${business}\nSector: ${sector}\n\n${message}`;
+  const isEquity = (fd.get('track') || '').toString() === 'equity';
+  const trackLabel = isEquity ? 'Equity Partnership' : 'Fixed-Term Financing';
+  const subject = `${trackLabel} proposal — ${business || name}`;
+  let body = `Track: ${trackLabel}\nName: ${name}\nBusiness: ${business}\nSector: ${sector}\n`;
+  if (isEquity) {
+    body += `Monthly revenue: ${(fd.get('revenue') || '').toString().trim()}\n`;
+    body += `\nWhat they want from a partner:\n${(fd.get('partner') || '').toString().trim()}\n`;
+  }
+  body += `\n${message}`;
   const mailto = `mailto:salam@farisventure.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.location.href = mailto;
   document.getElementById('proposal-form').style.display = 'none';

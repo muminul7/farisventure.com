@@ -59,8 +59,8 @@ app.get('/api/deals', (req, res) => {
 app.post('/api/deals', requireAuth, (req, res) => {
   const d = req.body || {};
   const stmt = db.prepare(`INSERT INTO deals
-    (sector, structure, structureBn, status, amountEn, amountBn, nameEn, nameBn, descEn, descBn, roi, overviewEn, overviewBn, useEn, useBn, sortOrder, imageUrl)
-    VALUES (@sector, @structure, @structureBn, @status, @amountEn, @amountBn, @nameEn, @nameBn, @descEn, @descBn, @roi, @overviewEn, @overviewBn, @useEn, @useBn, @sortOrder, @imageUrl)`);
+    (sector, structure, structureBn, status, amountEn, amountBn, nameEn, nameBn, descEn, descBn, roi, overviewEn, overviewBn, useEn, useBn, sortOrder, imageUrl, dealType)
+    VALUES (@sector, @structure, @structureBn, @status, @amountEn, @amountBn, @nameEn, @nameBn, @descEn, @descBn, @roi, @overviewEn, @overviewBn, @useEn, @useBn, @sortOrder, @imageUrl, @dealType)`);
   const info = stmt.run({
     sector: d.sector || '', structure: d.structure || '', structureBn: d.structureBn || '',
     status: d.status || 'Deployed', amountEn: d.amountEn || '', amountBn: d.amountBn || '',
@@ -69,6 +69,7 @@ app.post('/api/deals', requireAuth, (req, res) => {
     overviewEn: d.overviewEn || '', overviewBn: d.overviewBn || '',
     useEn: d.useEn || '', useBn: d.useBn || '', sortOrder: Number(d.sortOrder) || 0,
     imageUrl: d.imageUrl || null,
+    dealType: d.dealType === 'equity' ? 'equity' : 'financing',
   });
   res.json({ id: info.lastInsertRowid });
 });
@@ -78,7 +79,7 @@ app.put('/api/deals/:id', requireAuth, (req, res) => {
   db.prepare(`UPDATE deals SET sector=@sector, structure=@structure, structureBn=@structureBn,
     status=@status, amountEn=@amountEn, amountBn=@amountBn, nameEn=@nameEn, nameBn=@nameBn,
     descEn=@descEn, descBn=@descBn, roi=@roi, overviewEn=@overviewEn, overviewBn=@overviewBn,
-    useEn=@useEn, useBn=@useBn, sortOrder=@sortOrder, imageUrl=@imageUrl WHERE id=@id`).run({
+    useEn=@useEn, useBn=@useBn, sortOrder=@sortOrder, imageUrl=@imageUrl, dealType=@dealType WHERE id=@id`).run({
     id: Number(req.params.id),
     sector: d.sector || '', structure: d.structure || '', structureBn: d.structureBn || '',
     status: d.status || 'Deployed', amountEn: d.amountEn || '', amountBn: d.amountBn || '',
@@ -87,6 +88,7 @@ app.put('/api/deals/:id', requireAuth, (req, res) => {
     overviewEn: d.overviewEn || '', overviewBn: d.overviewBn || '',
     useEn: d.useEn || '', useBn: d.useBn || '', sortOrder: Number(d.sortOrder) || 0,
     imageUrl: d.imageUrl || null,
+    dealType: d.dealType === 'equity' ? 'equity' : 'financing',
   });
   res.json({ ok: true });
 });

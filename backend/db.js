@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS deals (
   useEn TEXT NOT NULL DEFAULT '',
   useBn TEXT NOT NULL DEFAULT '',
   sortOrder INTEGER NOT NULL DEFAULT 0,
-  imageUrl TEXT
+  imageUrl TEXT,
+  dealType TEXT NOT NULL DEFAULT 'financing'
 );
 
 CREATE TABLE IF NOT EXISTS track_record (
@@ -46,6 +47,12 @@ CREATE TABLE IF NOT EXISTS track_record (
 const dealsColumns = db.prepare("PRAGMA table_info(deals)").all().map(c => c.name);
 if (!dealsColumns.includes('imageUrl')) {
   db.exec('ALTER TABLE deals ADD COLUMN imageUrl TEXT');
+}
+
+// Migration for DBs created before the two funding tracks existed. Every deal
+// that predates the equity track is a financing deal.
+if (!dealsColumns.includes('dealType')) {
+  db.exec("ALTER TABLE deals ADD COLUMN dealType TEXT NOT NULL DEFAULT 'financing'");
 }
 
 // Migration for DBs created before amountEn/amountBn existed on track_record.

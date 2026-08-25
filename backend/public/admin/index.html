@@ -101,6 +101,15 @@
           <form id="deal-form" onsubmit="return saveDeal(event)">
             <input type="hidden" id="deal-id">
             <div class="row">
+              <div><label>Deal type</label>
+                <select id="deal-dealType">
+                  <option value="financing">Fixed-Term Financing</option>
+                  <option value="equity">Equity Partnership</option>
+                </select>
+              </div>
+              <div></div>
+            </div>
+            <div class="row">
               <div><label>Business name (EN)</label><input id="deal-nameEn" required></div>
               <div><label>Business name (BN)</label><input id="deal-nameBn" required></div>
             </div>
@@ -145,7 +154,7 @@
 
         <div class="card">
           <h2>Current deals</h2>
-          <table id="deals-table"><thead><tr><th></th><th>Name</th><th>Sector</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+          <table id="deals-table"><thead><tr><th></th><th>Name</th><th>Track</th><th>Sector</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
         </div>
       </section>
 
@@ -274,16 +283,19 @@ async function loadDeals() {
   tbody.innerHTML = rows.map(d => `
     <tr>
       <td>${d.imageUrl ? `<img class="thumb" src="${d.imageUrl}">` : '<div class="thumb"></div>'}</td>
-      <td>${d.nameEn}</td><td>${d.sector}</td><td>${d.amountEn}</td><td>${d.status}</td>
+      <td>${d.nameEn}</td>
+      <td>${d.dealType === 'equity' ? 'Partnership' : 'Financing'}</td>
+      <td>${d.sector}</td><td>${d.amountEn}</td><td>${d.status}</td>
       <td class="actions">
         <button class="btn btn-ghost" onclick='editDeal(${JSON.stringify(d)})'>Edit</button>
         <button class="btn btn-danger" onclick="deleteDeal(${d.id})">Delete</button>
       </td>
-    </tr>`).join('') || '<tr><td class="muted" colspan="6">No deals yet.</td></tr>';
+    </tr>`).join('') || '<tr><td class="muted" colspan="7">No deals yet.</td></tr>';
 }
 
 function editDeal(d) {
   document.getElementById('deal-id').value = d.id;
+  document.getElementById('deal-dealType').value = d.dealType === 'equity' ? 'equity' : 'financing';
   document.getElementById('deal-nameEn').value = d.nameEn;
   document.getElementById('deal-nameBn').value = d.nameBn;
   document.getElementById('deal-sector').value = d.sector;
@@ -313,6 +325,7 @@ async function saveDeal(e) {
   if (uploadedUrl) document.getElementById('deal-imageUrl').value = uploadedUrl;
   const body = {
     imageUrl: document.getElementById('deal-imageUrl').value || null,
+    dealType: document.getElementById('deal-dealType').value,
     nameEn: document.getElementById('deal-nameEn').value,
     nameBn: document.getElementById('deal-nameBn').value,
     sector: document.getElementById('deal-sector').value,
