@@ -1274,6 +1274,47 @@ function renderFaqs() {
   });
 }
 
+// Per-page SEO metadata — an SPA otherwise serves the same <title> and meta
+// description on every route. This keeps each page distinct for search
+// engines and for whatever preview card shows when a specific page is shared.
+const PAGE_META = {
+  home: {
+    en: { title: "Faris Venture — Halal Investment in Bangladesh's SMEs",
+          desc: "Faris Venture funds Bangladeshi SMEs through Shariah-compliant financing and equity partnerships — Musharaka, Mudaraba, Murabaha. Submit your business today." },
+    bn: { title: 'ফারিস ভেঞ্চার — বাংলাদেশের SME-তে হালাল বিনিয়োগ',
+          desc: 'ফারিস ভেঞ্চার শরিয়াহ-সম্মত অর্থায়ন আর অংশীদারিত্বের মাধ্যমে বাংলাদেশি SME-তে পুঁজি ঢালে — মুশারাকা, মুদারাবা, মুরাবাহা। আজই আপনার বিজনেস জমা দিন।' },
+  },
+  about: {
+    en: { title: 'About Faris Venture — Halal SME Investment, Dhaka',
+          desc: 'Meet the founder behind Faris Venture and the principles guiding every deal — Shariah-first, no guaranteed returns, full diligence before capital moves.' },
+    bn: { title: 'ফারিস ভেঞ্চার সম্পর্কে — হালাল SME বিনিয়োগ, ঢাকা',
+          desc: 'ফারিস ভেঞ্চারের পেছনের মানুষটা আর প্রতিটা ডিলের পেছনের নীতিগুলো জানুন — শরিয়াহ-প্রথম, কোনো গ্যারান্টিড রিটার্ন না, পুঁজি নড়ার আগে পূর্ণ যাচাই।' },
+  },
+  portfolio: {
+    en: { title: 'Funded Businesses & Track Record — Faris Venture',
+          desc: "See Faris Venture's active deals and the founder's historical track record — 12 halal SME investments across 6 businesses since 2023, ~13.5% average return." },
+    bn: { title: 'ফান্ডেড বিজনেস ও ট্র্যাক রেকর্ড — ফারিস ভেঞ্চার',
+          desc: 'ফারিস ভেঞ্চারের চলমান ডিল আর ফাউন্ডারের পুরোনো ট্র্যাক রেকর্ড দেখুন — ২০২৩ থেকে ৬টা বিজনেসে ১২টা হালাল SME বিনিয়োগ, গড়ে ~১৩.৫% রিটার্ন।' },
+  },
+  contact: {
+    en: { title: 'Submit a Proposal — Faris Venture SME Financing',
+          desc: 'Running a Shariah-compliant SME in Bangladesh? Submit a proposal for fixed-term financing (BDT 3-7 lakh) or an equity partnership up to BDT 10 lakh.' },
+    bn: { title: 'প্রপোজাল পাঠান — ফারিস ভেঞ্চার SME অর্থায়ন',
+          desc: 'বাংলাদেশে শরিয়াহ-সম্মত SME চালাচ্ছেন? নির্দিষ্ট মেয়াদের অর্থায়ন (৳৩-৭ লাখ) বা ৳১০ লাখ পর্যন্ত অংশীদারিত্বের জন্য প্রপোজাল পাঠান।' },
+  },
+};
+
+function updateMeta(page, lang) {
+  const m = (PAGE_META[page] || PAGE_META.home)[lang] || PAGE_META[page].en;
+  document.title = m.title;
+  const set = (sel, attr, val) => { const el = document.querySelector(sel); if (el) el.setAttribute(attr, val); };
+  set('meta[name="description"]', 'content', m.desc);
+  set('meta[property="og:title"]', 'content', m.title);
+  set('meta[property="og:description"]', 'content', m.desc);
+  set('meta[name="twitter:title"]', 'content', m.title);
+  set('meta[name="twitter:description"]', 'content', m.desc);
+}
+
 function applyLang(lang) {
   currentLang = lang;
   const dict = I18N[lang];
@@ -1296,7 +1337,7 @@ function applyLang(lang) {
     btn.classList.toggle('active', btn.dataset.langBtn === lang);
   });
   document.documentElement.lang = lang;
-  document.title = dict['title'];
+  updateMeta(currentPage, lang);
   renderDeals();
   renderFaqs();
   renderDealDetail();
@@ -1321,7 +1362,9 @@ hamburger.addEventListener('click', () => {
 });
 
 // nav / routing
+let currentPage = 'home';
 function setPage(p, push) {
+  currentPage = p;
   document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
   document.getElementById('page-' + p).classList.add('active');
   document.querySelectorAll('[data-navlink], [data-navlink-m]').forEach(a => {
@@ -1336,6 +1379,7 @@ function setPage(p, push) {
   }
   const canonical = document.querySelector('link[rel="canonical"]');
   if (canonical) canonical.href = 'https://farisventure.com' + path;
+  updateMeta(p, currentLang);
   mobileMenu.classList.remove('open');
   hamburger.classList.remove('open');
   hamburger.setAttribute('aria-expanded', 'false');
